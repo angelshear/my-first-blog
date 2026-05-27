@@ -187,6 +187,146 @@ body {
     border-left: 4px solid #ff9400;
 }
 
+/* =========================
+   YOUTUBE STYLE COMMENTS
+========================= */
+
+.comments-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.sort-select {
+
+    max-width: 180px;
+}
+
+.comment-form-wrapper {
+
+    margin-bottom: 30px;
+}
+
+.yt-comment {
+
+    margin-bottom: 35px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.comment-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+}
+
+.comment-author {
+
+    font-weight: bold;
+
+    color: #0f0f0f;
+}
+
+.comment-date {
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.comment-text {
+
+    margin-bottom: 10px;
+
+    line-height: 1.6;
+
+    color: #222;
+}
+
+.comment-actions {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+.comment-action-btn {
+
+    color: #606060;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.comment-action-btn:hover {
+
+    color: #ff9400;
+
+    text-decoration: none;
+}
+
+.delete-btn {
+
+    color: #cc0000;
+}
+
+.replies {
+
+    margin-left: 40px;
+
+    margin-top: 15px;
+}
+
+.yt-reply {
+
+    padding-left: 15px;
+
+    border-left: 2px solid #e5e5e5;
+
+    margin-bottom: 20px;
+}
+
+.reply-form {
+
+    margin-top: 15px;
+}
+
+.tag {
+
+    background: #eee;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    margin-right: 5px;
+
+    font-size: 12px;
+}
+
+.post-text {
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
 
 /* PAGINATION */
 
