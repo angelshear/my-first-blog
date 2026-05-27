@@ -186,7 +186,6 @@
         <span class="text-muted">
             • {{ comment.created_date|date:"d.m.Y" }}
         </span>
-        
         </p>
 
         <!-- COMMENT TEXT -->
@@ -251,12 +250,13 @@
                     padding-left: 15px;
                  ">
 
-                <p>
+                <p class="comment-meta">
                     <strong>{{ reply.author }}</strong>
-                </p>
 
-                <p class="date">
-                    {{ reply.created_date }}
+                <span class="text-muted">
+                    • {{ reply.created_date|date:"d.m.Y" }}
+                </span>
+
                 </p>
 
                 <p>
