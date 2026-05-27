@@ -124,6 +124,14 @@ def post_edit(request, pk):
 
     post = get_object_or_404(Post, pk=pk)
 
+    # Только автор может редактировать
+
+    if request.user != post.author:
+
+        return HttpResponseForbidden(
+            "You cannot edit someone else's post."
+        )
+
     if request.method == "POST":
 
         form = PostForm(
@@ -164,6 +172,14 @@ def post_edit(request, pk):
 def post_delete(request, pk):
 
     post = get_object_or_404(Post, pk=pk)
+
+    # Только автор может удалить
+
+    if request.user != post.author:
+
+        return HttpResponseForbidden(
+            "You cannot delete someone else's post."
+        )
 
     post.delete()
 
@@ -226,4 +242,32 @@ def add_comment(request, pk):
     return redirect(
         'post_detail',
         pk=pk
+    )
+
+# Удаление комментария
+@login_required
+def delete_comment(request, pk):
+
+    comment = get_object_or_404(Comment, pk=pk)
+
+    # Только автор комментария
+    # ИЛИ автор поста
+
+    if (
+        request.user != comment.author
+        and
+        request.user != comment.post.author
+    ):
+
+        return HttpResponseForbidden(
+            "You cannot delete this comment."
+        )
+
+    post_pk = comment.post.pk
+
+    comment.delete()
+
+    return redirect(
+        'post_detail',
+        pk=post_pk
     )

@@ -48,4 +48,11 @@ urlpatterns = [
         views.add_comment,
         name='add_comment'
     ),
+
+    # Удаление комментария
+    path(
+    'comment/<int:pk>/delete/',
+    views.delete_comment,
+    name='delete_comment'
+    ),
 ]
