@@ -178,17 +178,16 @@
     <div class="comment"
          style="margin-bottom: 30px;">
 
-        <!-- AUTHOR -->
+        <!-- AUTHOR and DATE -->
 
-        <p>
+        <p class="comment-meta">
             <strong>{{ comment.author }}</strong>
-        </p>
 
-        <!-- DATE -->
-
-        <span class="date">
+        <span class="text-muted">
             • {{ comment.created_date|date:"d.m.Y" }}
         </span>
+        
+        </p>
 
         <!-- COMMENT TEXT -->
 
