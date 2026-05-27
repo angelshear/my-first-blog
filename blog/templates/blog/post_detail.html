@@ -186,9 +186,9 @@
 
         <!-- DATE -->
 
-        <p class="date">
-            {{ comment.created_date }}
-        </p>
+        <span class="date">
+            • {{ comment.created_date|date:"d.m.Y" }}
+        </span>
 
         <!-- COMMENT TEXT -->
 
