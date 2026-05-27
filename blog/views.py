@@ -8,9 +8,13 @@ from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth import login
+
 from django.core.paginator import Paginator
 
 from django.db.models import Q
+
+from django.http import HttpResponseForbidden
 
 from .models import (
     Post,
@@ -24,7 +28,10 @@ from .forms import (
 )
 
 
-# Список постов + поиск + пагинация
+# =========================================================
+# POSTS LIST + SEARCH + PAGINATION
+# =========================================================
+
 def post_list(request):
 
     query = request.GET.get('q')
@@ -33,14 +40,25 @@ def post_list(request):
         published_date__lte=timezone.now()
     )
 
+    # SEARCH
+
     if query:
 
         posts = posts.filter(
+
             Q(title__icontains=query) |
+
             Q(text__icontains=query)
+
         )
 
-    posts = posts.order_by('-published_date')
+    # SORT POSTS
+
+    posts = posts.order_by(
+        '-published_date'
+    )
+
+    # PAGINATION
 
     paginator = Paginator(posts, 5)
 
@@ -49,53 +67,113 @@ def post_list(request):
     page_obj = paginator.get_page(page_number)
 
     return render(
+
         request,
+
         'blog/post_list.html',
+
         {
             'page_obj': page_obj,
             'query': query,
         }
+
     )
 
 
-# Детали поста
+# =========================================================
+# POST DETAIL + COMMENTS + SORTING
+# =========================================================
+
 def post_detail(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(
+        Post,
+        pk=pk
+    )
+
+    # SORTING
+
+    sort = request.GET.get(
+        'sort',
+        'new'
+    )
+
+    # ONLY ROOT COMMENTS
 
     comments = post.comments.filter(
         parent__isnull=True
-    ).order_by('-created_date')
+    )
+
+    # SORT COMMENTS
+
+    if sort == 'old':
+
+        comments = comments.order_by(
+            'created_date'
+        )
+
+    elif sort == 'popular':
+
+        comments = sorted(
+
+            comments,
+
+            key=lambda c: c.total_likes(),
+
+            reverse=True
+
+        )
+
+    else:
+
+        comments = comments.order_by(
+            '-created_date'
+        )
+
+    # COMMENT FORM
 
     comment_form = CommentForm()
 
     return render(
+
         request,
+
         'blog/post_detail.html',
+
         {
             'post': post,
             'comments': comments,
             'comment_form': comment_form,
+            'current_sort': sort,
         }
+
     )
 
 
-# Создание поста
+# =========================================================
+# CREATE POST
+# =========================================================
+
 @login_required
 def post_new(request):
 
     if request.method == "POST":
 
         form = PostForm(
+
             request.POST,
             request.FILES
+
         )
 
         if form.is_valid():
 
-            post = form.save(commit=False)
+            post = form.save(
+                commit=False
+            )
 
             post.author = request.user
+
             post.published_date = timezone.now()
 
             post.save()
@@ -103,8 +181,11 @@ def post_new(request):
             form.save_m2m()
 
             return redirect(
+
                 'post_detail',
+
                 pk=post.pk
+
             )
 
     else:
@@ -112,39 +193,58 @@ def post_new(request):
         form = PostForm()
 
     return render(
+
         request,
+
         'blog/post_edit.html',
-        {'form': form}
+
+        {
+            'form': form
+        }
+
     )
 
 
-# Редактирование поста
+# =========================================================
+# EDIT POST
+# =========================================================
+
 @login_required
 def post_edit(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(
+        Post,
+        pk=pk
+    )
 
-    # Только автор может редактировать
+    # ONLY AUTHOR
 
     if request.user != post.author:
 
         return HttpResponseForbidden(
+
             "You cannot edit someone else's post."
+
         )
 
     if request.method == "POST":
 
         form = PostForm(
+
             request.POST,
             request.FILES,
             instance=post
+
         )
 
         if form.is_valid():
 
-            post = form.save(commit=False)
+            post = form.save(
+                commit=False
+            )
 
             post.author = request.user
+
             post.published_date = timezone.now()
 
             post.save()
@@ -152,87 +252,147 @@ def post_edit(request, pk):
             form.save_m2m()
 
             return redirect(
+
                 'post_detail',
+
                 pk=post.pk
+
             )
 
     else:
 
-        form = PostForm(instance=post)
+        form = PostForm(
+            instance=post
+        )
 
     return render(
+
         request,
+
         'blog/post_edit.html',
-        {'form': form}
+
+        {
+            'form': form
+        }
+
     )
 
 
-# Удаление поста
+# =========================================================
+# DELETE POST
+# =========================================================
+
 @login_required
 def post_delete(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(
+        Post,
+        pk=pk
+    )
 
-    # Только автор может удалить
+    # ONLY AUTHOR
 
     if request.user != post.author:
 
         return HttpResponseForbidden(
+
             "You cannot delete someone else's post."
+
         )
 
     post.delete()
 
-    return redirect('post_list')
+    return redirect(
+        'post_list'
+    )
 
 
-# Регистрация пользователя
+# =========================================================
+# USER REGISTRATION
+# =========================================================
+
 def register(request):
 
     if request.method == 'POST':
 
-        form = RegisterForm(request.POST)
+        form = RegisterForm(
+            request.POST
+        )
 
         if form.is_valid():
 
-            form.save()
+            user = form.save()
 
-            return redirect('login')
+            # AUTO LOGIN AFTER REGISTER
+
+            login(
+                request,
+                user
+            )
+
+            return redirect(
+                'post_list'
+            )
 
     else:
 
         form = RegisterForm()
 
     return render(
+
         request,
+
         'registration/register.html',
-        {'form': form}
+
+        {
+            'form': form
+        }
+
     )
 
 
-# Добавление комментария
+# =========================================================
+# ADD COMMENT / REPLY
+# =========================================================
+
 @login_required
 def add_comment(request, pk):
 
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(
+        Post,
+        pk=pk
+    )
 
     if request.method == 'POST':
 
-        form = CommentForm(request.POST)
+        form = CommentForm(
+            request.POST
+        )
 
         if form.is_valid():
 
-            comment = form.save(commit=False)
+            comment = form.save(
+                commit=False
+            )
 
             comment.post = post
+
             comment.author = request.user
 
-            parent_id = request.POST.get('parent_id')
+            # REPLY
+
+            parent_id = request.POST.get(
+                'parent_id'
+            )
 
             if parent_id:
 
-                parent_comment = Comment.objects.get(
+                parent_comment = get_object_or_404(
+
+                    Comment,
+
                     id=parent_id
+
                 )
 
                 comment.parent = parent_comment
@@ -240,27 +400,46 @@ def add_comment(request, pk):
             comment.save()
 
     return redirect(
+
         'post_detail',
+
         pk=pk
+
     )
 
-# Удаление комментария
+
+# =========================================================
+# DELETE COMMENT
+# =========================================================
+
 @login_required
 def delete_comment(request, pk):
 
-    comment = get_object_or_404(Comment, pk=pk)
+    comment = get_object_or_404(
+        Comment,
+        pk=pk
+    )
 
-    # Только автор комментария
-    # ИЛИ автор поста
+    # AUTHOR / POST AUTHOR / ADMIN
 
     if (
+
         request.user != comment.author
+
         and
+
         request.user != comment.post.author
+
+        and
+
+        not request.user.is_staff
+
     ):
 
         return HttpResponseForbidden(
+
             "You cannot delete this comment."
+
         )
 
     post_pk = comment.post.pk
@@ -268,6 +447,147 @@ def delete_comment(request, pk):
     comment.delete()
 
     return redirect(
+
         'post_detail',
+
         pk=post_pk
+
+    )
+
+
+# =========================================================
+# EDIT COMMENT
+# =========================================================
+
+@login_required
+def edit_comment(request, pk):
+
+    comment = get_object_or_404(
+        Comment,
+        pk=pk
+    )
+
+    # ONLY AUTHOR
+
+    if request.user != comment.author:
+
+        return HttpResponseForbidden(
+
+            "You cannot edit this comment."
+
+        )
+
+    if request.method == 'POST':
+
+        form = CommentForm(
+
+            request.POST,
+
+            instance=comment
+
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect(
+
+                'post_detail',
+
+                pk=comment.post.pk
+
+            )
+
+    else:
+
+        form = CommentForm(
+            instance=comment
+        )
+
+    return render(
+
+        request,
+
+        'blog/edit_comment.html',
+
+        {
+            'form': form,
+            'comment': comment,
+        }
+
+    )
+
+
+# =========================================================
+# LIKE COMMENT
+# =========================================================
+
+@login_required
+def like_comment(request, pk):
+
+    comment = get_object_or_404(
+        Comment,
+        pk=pk
+    )
+
+    if request.user in comment.likes.all():
+
+        comment.likes.remove(
+            request.user
+        )
+
+    else:
+
+        comment.likes.add(
+            request.user
+        )
+
+        comment.dislikes.remove(
+            request.user
+        )
+
+    return redirect(
+
+        'post_detail',
+
+        pk=comment.post.pk
+
+    )
+
+
+# =========================================================
+# DISLIKE COMMENT
+# =========================================================
+
+@login_required
+def dislike_comment(request, pk):
+
+    comment = get_object_or_404(
+        Comment,
+        pk=pk
+    )
+
+    if request.user in comment.dislikes.all():
+
+        comment.dislikes.remove(
+            request.user
+        )
+
+    else:
+
+        comment.dislikes.add(
+            request.user
+        )
+
+        comment.likes.remove(
+            request.user
+        )
+
+    return redirect(
+
+        'post_detail',
+
+        pk=comment.post.pk
+
     )

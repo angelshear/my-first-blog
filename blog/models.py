@@ -13,7 +13,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -29,15 +29,6 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
 
     text = models.TextField()
-
-    created_date = models.DateTimeField(
-        default=timezone.now
-    )
-
-    published_date = models.DateTimeField(
-        blank=True,
-        null=True
-    )
 
     category = models.ForeignKey(
         Category,
@@ -57,20 +48,36 @@ class Post(models.Model):
         null=True
     )
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    created_date = models.DateTimeField(
+        default=timezone.now
+    )
+
+    published_date = models.DateTimeField(
+        blank=True,
+        null=True
+    )
+
+    def total_comments(self):
+
+        return self.comments.count()
 
     def __str__(self):
+
         return self.title
 
 
 class Comment(models.Model):
 
+    SORT_CHOICES = (
+        ('new', 'Newest'),
+        ('old', 'Oldest'),
+        ('popular', 'Popular'),
+    )
+
     post = models.ForeignKey(
         Post,
-        on_delete=models.CASCADE,
-        related_name='comments'
+        related_name='comments',
+        on_delete=models.CASCADE
     )
 
     author = models.ForeignKey(
@@ -78,19 +85,44 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
 
+    parent = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='replies',
+        on_delete=models.CASCADE
+    )
+
     text = models.TextField()
+
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='liked_comments',
+        blank=True
+    )
+
+    dislikes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='disliked_comments',
+        blank=True
+    )
 
     created_date = models.DateTimeField(
         auto_now_add=True
     )
 
-    parent = models.ForeignKey(
-        'self',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name='replies'
+    updated_date = models.DateTimeField(
+        auto_now=True
     )
 
+    def total_likes(self):
+
+        return self.likes.count()
+
+    def total_dislikes(self):
+
+        return self.dislikes.count()
+
     def __str__(self):
-        return f'{self.author}: {self.text[:30]}'
+
+        return f'{self.author} - {self.post}'

@@ -10,7 +10,7 @@
         </div>
     {% endif %}
 
-    <!-- Управление постом -->
+    <!-- POST CONTROLS -->
 
     {% if user == post.author %}
 
@@ -30,11 +30,11 @@
 
     {% endif %}
 
-    <!-- Заголовок -->
+    <!-- TITLE -->
 
     <h1>{{ post.title }}</h1>
 
-    <!-- Категория -->
+    <!-- CATEGORY -->
 
     {% if post.category %}
 
@@ -45,7 +45,7 @@
 
     {% endif %}
 
-    <!-- Теги -->
+    <!-- TAGS -->
 
     {% if post.tags.all %}
 
@@ -67,18 +67,18 @@
 
     {% endif %}
 
-    <!-- Изображение -->
+    <!-- IMAGE -->
 
     {% if post.image %}
 
         <img src="{{ post.image.url }}"
-             class="img-responsive">
+             class="img-responsive img-rounded">
 
         <br>
 
     {% endif %}
 
-    <!-- Текст поста -->
+    <!-- POST TEXT -->
 
     <p>{{ post.text|linebreaksbr }}</p>
 
@@ -86,11 +86,56 @@
 
 <hr>
 
-<!-- COMMENTS -->
+<!-- COMMENTS TITLE -->
 
-<h2>Comments</h2>
+<h2>
 
-<!-- Добавление комментария -->
+    Comments ({{ post.total_comments }})
+
+</h2>
+
+<!-- SORT COMMENTS -->
+
+<form method="GET"
+      style="margin-bottom: 20px;">
+
+    <select name="sort"
+            onchange="this.form.submit()"
+            class="form-control"
+            style="max-width: 200px;">
+
+        <option value="new"
+            {% if current_sort == 'new' %}
+                selected
+            {% endif %}>
+
+            Newest
+
+        </option>
+
+        <option value="old"
+            {% if current_sort == 'old' %}
+                selected
+            {% endif %}>
+
+            Oldest
+
+        </option>
+
+        <option value="popular"
+            {% if current_sort == 'popular' %}
+                selected
+            {% endif %}>
+
+            Popular
+
+        </option>
+
+    </select>
+
+</form>
+
+<!-- ADD COMMENT -->
 
 {% if user.is_authenticated %}
 
@@ -126,43 +171,86 @@
 
 <hr>
 
-<!-- Список комментариев -->
+<!-- COMMENTS LIST -->
 
 {% for comment in comments %}
 
-    <div class="comment">
+    <div class="comment"
+         style="margin-bottom: 30px;">
+
+        <!-- AUTHOR -->
 
         <p>
             <strong>{{ comment.author }}</strong>
         </p>
 
+        <!-- DATE -->
+
         <p class="date">
             {{ comment.created_date }}
         </p>
+
+        <!-- COMMENT TEXT -->
 
         <p>
             {{ comment.text|linebreaksbr }}
         </p>
 
-        <!-- Удаление комментария -->
+        <!-- LIKE / DISLIKE -->
 
-        {% if user == comment.author or user == post.author %}
+        <div style="margin-bottom: 10px;">
 
-            <a href="{% url 'delete_comment' pk=comment.pk %}"
-               class="btn btn-danger btn-sm">
+            <a href="{% url 'like_comment' pk=comment.pk %}"
+               class="btn btn-default btn-sm">
 
-                Delete Comment
+                👍 {{ comment.total_likes }}
+
+            </a>
+
+            <a href="{% url 'dislike_comment' pk=comment.pk %}"
+               class="btn btn-default btn-sm">
+
+                👎 {{ comment.total_dislikes }}
+
+            </a>
+
+        </div>
+
+        <!-- COMMENT CONTROLS -->
+
+        {% if user == comment.author %}
+
+            <a href="{% url 'edit_comment' pk=comment.pk %}"
+               class="btn btn-warning btn-sm">
+
+                Edit
 
             </a>
 
         {% endif %}
 
-        <!-- Replies -->
+        {% if user == comment.author or user == post.author or user.is_staff %}
+
+            <a href="{% url 'delete_comment' pk=comment.pk %}"
+               class="btn btn-danger btn-sm">
+
+                Delete
+
+            </a>
+
+        {% endif %}
+
+        <!-- REPLIES -->
 
         {% for reply in comment.replies.all %}
 
             <div class="comment"
-                 style="margin-left: 40px; margin-top: 20px;">
+                 style="
+                    margin-left: 40px;
+                    margin-top: 20px;
+                    border-left: 3px solid #ddd;
+                    padding-left: 15px;
+                 ">
 
                 <p>
                     <strong>{{ reply.author }}</strong>
@@ -176,14 +264,47 @@
                     {{ reply.text|linebreaksbr }}
                 </p>
 
-                <!-- Удаление reply -->
+                <!-- LIKE / DISLIKE REPLY -->
 
-                {% if user == reply.author or user == post.author %}
+                <div style="margin-bottom: 10px;">
+
+                    <a href="{% url 'like_comment' pk=reply.pk %}"
+                       class="btn btn-default btn-sm">
+
+                        👍 {{ reply.total_likes }}
+
+                    </a>
+
+                    <a href="{% url 'dislike_comment' pk=reply.pk %}"
+                       class="btn btn-default btn-sm">
+
+                        👎 {{ reply.total_dislikes }}
+
+                    </a>
+
+                </div>
+
+                <!-- EDIT REPLY -->
+
+                {% if user == reply.author %}
+
+                    <a href="{% url 'edit_comment' pk=reply.pk %}"
+                       class="btn btn-warning btn-sm">
+
+                        Edit
+
+                    </a>
+
+                {% endif %}
+
+                <!-- DELETE REPLY -->
+
+                {% if user == reply.author or user == post.author or user.is_staff %}
 
                     <a href="{% url 'delete_comment' pk=reply.pk %}"
                        class="btn btn-danger btn-sm">
 
-                        Delete Reply
+                        Delete
 
                     </a>
 
@@ -193,7 +314,7 @@
 
         {% endfor %}
 
-        <!-- Reply form -->
+        <!-- REPLY FORM -->
 
         {% if user.is_authenticated %}
 

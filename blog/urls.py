@@ -1,11 +1,18 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
 
+    # =====================================================
+    # POSTS
+    # =====================================================
+
     # Главная страница
-    path('', views.post_list, name='post_list'),
+    path(
+        '',
+        views.post_list,
+        name='post_list'
+    ),
 
     # Детали статьи
     path(
@@ -35,6 +42,10 @@ urlpatterns = [
         name='post_delete'
     ),
 
+    # =====================================================
+    # AUTH
+    # =====================================================
+
     # Регистрация
     path(
         'register/',
@@ -42,17 +53,47 @@ urlpatterns = [
         name='register'
     ),
 
-    # Добавление комментария
+    # =====================================================
+    # COMMENTS
+    # =====================================================
+
+    # Добавление комментария / reply
     path(
         'post/<int:pk>/comment/',
         views.add_comment,
         name='add_comment'
     ),
 
+    # Редактирование комментария
+    path(
+        'comment/<int:pk>/edit/',
+        views.edit_comment,
+        name='edit_comment'
+    ),
+
     # Удаление комментария
     path(
-    'comment/<int:pk>/delete/',
-    views.delete_comment,
-    name='delete_comment'
+        'comment/<int:pk>/delete/',
+        views.delete_comment,
+        name='delete_comment'
     ),
+
+    # =====================================================
+    # COMMENT REACTIONS
+    # =====================================================
+
+    # Like comment
+    path(
+        'comment/<int:pk>/like/',
+        views.like_comment,
+        name='like_comment'
+    ),
+
+    # Dislike comment
+    path(
+        'comment/<int:pk>/dislike/',
+        views.dislike_comment,
+        name='dislike_comment'
+    ),
+
 ]
