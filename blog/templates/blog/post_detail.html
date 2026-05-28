@@ -196,21 +196,53 @@
 
         <!-- LIKE / DISLIKE -->
 
-        <div style="margin-bottom: 10px;">
+        <div class="comment-actions">
 
-            <a href="{% url 'like_comment' pk=comment.pk %}"
-               class="btn btn-default btn-sm">
+            <!-- LIKE -->
 
-                👍 {{ comment.total_likes }}
+            <button
+               class="yt-like-btn like-btn
+               {% if user in comment.likes.all %}
+                   active-like
+               {% endif %}"
+               data-id="{{ comment.pk }}">
 
-            </a>
+                <i class="
+                    {% if user in comment.likes.all %}
+                        bi bi-hand-thumbs-up-fill
+                    {% else %}
+                        bi bi-hand-thumbs-up
+                    {% endif %}
+                "></i>
 
-            <a href="{% url 'dislike_comment' pk=comment.pk %}"
-               class="btn btn-default btn-sm">
+                <span class="like-count">
+                    {{ comment.total_likes }}
+                </span>
 
-                👎 {{ comment.total_dislikes }}
+            </button>
 
-            </a>
+            <!-- DISLIKE -->
+
+            <button
+               class="yt-like-btn dislike-btn
+               {% if user in comment.dislikes.all %}
+                   active-dislike
+               {% endif %}"
+               data-id="{{ comment.pk }}">
+
+                <i class="
+                    {% if user in comment.dislikes.all %}
+                        bi bi-hand-thumbs-down-fill
+                    {% else %}
+                        bi bi-hand-thumbs-down
+                    {% endif %}
+                "></i>
+
+                <span class="dislike-count">
+                    {{ comment.total_dislikes }}
+                </span>
+
+            </button>
 
         </div>
 
@@ -249,7 +281,7 @@
                     border-left: 3px solid #ddd;
                     padding-left: 15px;
                  ">
-
+                <!-- Отображение имени и даты у вложенных комментариев -->
                 <p class="comment-meta">
                     <strong>{{ reply.author }}</strong>
 
@@ -265,21 +297,53 @@
 
                 <!-- LIKE / DISLIKE REPLY -->
 
-                <div style="margin-bottom: 10px;">
+                <div class="comment-actions">
 
-                    <a href="{% url 'like_comment' pk=reply.pk %}"
-                       class="btn btn-default btn-sm">
+                    <!-- LIKE -->
 
-                        👍 {{ reply.total_likes }}
+                    <button
+                       class="yt-like-btn like-btn
+                       {% if user in reply.likes.all %}
+                           active-like
+                       {% endif %}"
+                       data-id="{{ reply.pk }}">
 
-                    </a>
+                        <i class="
+                            {% if user in reply.likes.all %}
+                                bi bi-hand-thumbs-up-fill
+                            {% else %}
+                                bi bi-hand-thumbs-up
+                            {% endif %}
+                        "></i>
 
-                    <a href="{% url 'dislike_comment' pk=reply.pk %}"
-                       class="btn btn-default btn-sm">
+                        <span class="like-count">
+                            {{ reply.total_likes }}
+                        </span>
 
-                        👎 {{ reply.total_dislikes }}
+                    </button>
 
-                    </a>
+                    <!-- DISLIKE -->
+
+                    <button
+                       class="yt-like-btn dislike-btn
+                       {% if user in reply.dislikes.all %}
+                           active-dislike
+                       {% endif %}"
+                       data-id="{{ reply.pk }}">
+
+                        <i class="
+                            {% if user in reply.dislikes.all %}
+                                bi bi-hand-thumbs-down-fill
+                            {% else %}
+                                bi bi-hand-thumbs-down
+                            {% endif %}
+                        "></i>
+
+                        <span class="dislike-count">
+                            {{ reply.total_dislikes }}
+                        </span>
+
+                    </button>
 
                 </div>
 
@@ -347,5 +411,101 @@
     <p>No comments yet.</p>
 
 {% endfor %}
+
+<script>
+
+document.querySelectorAll('.like-btn').forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        const commentId = this.dataset.id
+
+        fetch(`/comment/${commentId}/like/`)
+        .then(response => response.json())
+        .then(data => {
+
+            this.querySelector('.like-count').innerText = data.likes
+
+            if (data.liked) {
+
+                this.classList.add('active-like')
+
+                this.querySelector('i').className =
+                    'bi bi-hand-thumbs-up-fill'
+
+            } else {
+
+                this.classList.remove('active-like')
+
+                this.querySelector('i').className =
+                    'bi bi-hand-thumbs-up'
+
+            }
+
+            const dislikeBtn =
+                this.parentElement.querySelector('.dislike-btn')
+
+            dislikeBtn.classList.remove('active-dislike')
+
+            dislikeBtn.querySelector('i').className =
+                'bi bi-hand-thumbs-down'
+
+            dislikeBtn.querySelector('.dislike-count').innerText =
+                data.dislikes
+
+        })
+
+    })
+
+})
+
+
+document.querySelectorAll('.dislike-btn').forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        const commentId = this.dataset.id
+
+        fetch(`/comment/${commentId}/dislike/`)
+        .then(response => response.json())
+        .then(data => {
+
+            this.querySelector('.dislike-count').innerText =
+                data.dislikes
+
+            if (data.disliked) {
+
+                this.classList.add('active-dislike')
+
+                this.querySelector('i').className =
+                    'bi bi-hand-thumbs-down-fill'
+
+            } else {
+
+                this.classList.remove('active-dislike')
+
+                this.querySelector('i').className =
+                    'bi bi-hand-thumbs-down'
+
+            }
+
+            const likeBtn =
+                this.parentElement.querySelector('.like-btn')
+
+            likeBtn.classList.remove('active-like')
+
+            likeBtn.querySelector('i').className =
+                'bi bi-hand-thumbs-up'
+
+            likeBtn.querySelector('.like-count').innerText =
+                data.likes
+
+        })
+
+    })
+
+})
+
+</script>
 
 {% endblock %}
