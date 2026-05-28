@@ -200,10 +200,6 @@ body {
     align-items: center;
 
     margin-bottom: 25px;
-
-    font-size: 24px;
-
-    font-weight: bold;
 }
 
 .sort-select {
@@ -253,16 +249,14 @@ body {
     border: none;
     background: transparent;
 
-    font-size: inherit;
-    font-weight: inherit;
-
+    font-weight: 500;
     cursor: pointer;
 
-    padding: 0 12px;
-
+    padding: 8px 12px;
     border-radius: 20px;
 
     transition: background 0.2s ease;
+
 }
 
 .comments-sort-select:hover {
