@@ -259,7 +259,11 @@ body {
 
     display: flex;
 
+    align-items: center;
+
     gap: 15px;
+    
+    flex-wrap: nowrap;
 
     margin-bottom: 15px;
 }

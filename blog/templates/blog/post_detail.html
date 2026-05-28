@@ -345,6 +345,46 @@
 
                     </a>
 
+                    <!-- HIDDEN REPLY FORM -->
+
+                    <div class="reply-form-wrapper">
+
+                        <form method="POST"
+                              action="{% url 'add_comment' pk=post.pk %}">
+
+                            {% csrf_token %}
+
+                            <input type="hidden"
+                                   name="parent_id"
+                                   value="{{ comment.id }}">
+
+                            <input type="text"
+                                   name="text"
+                                   class="reply-input"
+                                   placeholder="Введите ответ..."
+                                   required>
+
+                            <div class="reply-actions">
+
+                                <a class="reply-cancel">
+
+                                    Отмена
+
+                                </a>
+
+                                <button type="submit"
+                                        class="reply-submit">
+
+                                    Ответить
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
                 </div>
 
                 <!-- EDIT REPLY -->
@@ -376,58 +416,6 @@
             </div>
 
         {% endfor %}
-
-        {% if user.is_authenticated %}
-
-            <!-- REPLY BUTTON -->
-
-            <a class="reply-toggle">
-
-                Ответить
-
-            </a>
-
-            <!-- HIDDEN REPLY FORM -->
-
-            <div class="reply-form-wrapper">
-
-                <form method="POST"
-                      action="{% url 'add_comment' pk=post.pk %}">
-
-                    {% csrf_token %}
-
-                    <input type="hidden"
-                           name="parent_id"
-                           value="{{ comment.id }}">
-
-                    <input type="text"
-                           name="text"
-                           class="reply-input"
-                           placeholder="Введите ответ..."
-                           required>
-
-                    <div class="reply-actions">
-
-                        <a class="reply-cancel">
-
-                            Отмена
-
-                        </a>
-
-                        <button type="submit"
-                                class="reply-submit">
-
-                            Ответить
-
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-        {% endif %}
 
         <hr>
 
