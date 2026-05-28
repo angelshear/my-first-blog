@@ -194,12 +194,15 @@ body {
 .comments-header {
 
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
 
+    gap: 20px;
+
+    font-size: 32px;
+    font-weight: bold;
+
     margin-bottom: 25px;
+
 }
 
 .sort-select {
@@ -249,10 +252,13 @@ body {
     border: none;
     background: transparent;
 
-    font-weight: 500;
+    font-size: inherit;
+    font-weight: inherit;
+
     cursor: pointer;
 
-    padding: 8px 12px;
+    padding: 0 12px;
+
     border-radius: 20px;
 
     transition: background 0.2s ease;
