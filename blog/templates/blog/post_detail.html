@@ -553,8 +553,11 @@ document.querySelectorAll('.reply-toggle').forEach(button => {
 
     button.addEventListener('click', function() {
 
+        const comment =
+            this.closest('.comment')
+
         const wrapper =
-            this.nextElementSibling
+            comment.querySelector('.reply-form-wrapper')
 
         wrapper.style.display = 'block'
 
@@ -577,7 +580,10 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
         wrapper.style.display = 'none'
 
-        wrapper.previousElementSibling.style.display =
+        const comment =
+            this.closest('.comment')
+            
+        comment.querySelector('.reply-toggle').style.display =
             'inline-flex'
 
     })
