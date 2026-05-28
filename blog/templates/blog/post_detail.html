@@ -86,54 +86,55 @@
 
 <hr>
 
-<!-- COMMENTS TITLE -->
+<!-- COMMENTS HEADER (COMMENTS TITLE and SORT COMMENTS) -->
 
-<h2>
+<div class="comments-header">
 
-    Comments ({{ post.total_comments }})
+    <h2 class="comments-title">
 
-</h2>
+        Comments ({{ post.total_comments }})
 
-<!-- SORT COMMENTS -->
+    </h2>
 
-<form method="GET"
-      style="margin-bottom: 20px;">
+    <form method="GET"
+          class="comments-sort-form">
 
-    <select name="sort"
-            onchange="this.form.submit()"
-            class="form-control"
-            style="max-width: 200px;">
+        <select name="sort"
+                onchange="this.form.submit()"
+                class="comments-sort-select">
 
-        <option value="new"
-            {% if current_sort == 'new' %}
-                selected
-            {% endif %}>
+            <option value="new"
+                {% if current_sort == 'new' %}
+                    selected
+                {% endif %}>
 
-            Newest
+                Newest
 
-        </option>
+            </option>
 
-        <option value="old"
-            {% if current_sort == 'old' %}
-                selected
-            {% endif %}>
+            <option value="old"
+                {% if current_sort == 'old' %}
+                    selected
+                {% endif %}>
 
-            Oldest
+                Oldest
 
-        </option>
+            </option>
 
-        <option value="popular"
-            {% if current_sort == 'popular' %}
-                selected
-            {% endif %}>
+            <option value="popular"
+                {% if current_sort == 'popular' %}
+                    selected
+                {% endif %}>
 
-            Popular
+                Popular
 
-        </option>
+            </option>
 
-    </select>
+        </select>
 
-</form>
+    </form>
+
+</div>
 
 <!-- ADD COMMENT -->
 
@@ -582,7 +583,7 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
         const comment =
             this.closest('.comment')
-            
+
         comment.querySelector('.reply-toggle').style.display =
             'inline-flex'
 
