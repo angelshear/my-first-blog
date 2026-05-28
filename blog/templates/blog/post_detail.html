@@ -345,18 +345,6 @@
 
                     </a>
 
-                    {% if user.is_authenticated %}
-
-                        <!-- REPLY BUTTON -->
-
-                        <a class="reply-toggle">
-
-                            Ответить
-
-                        </a>
-                        
-                    {% endif %}
-
                 </div>
 
                 <!-- EDIT REPLY -->
@@ -389,49 +377,57 @@
 
         {% endfor %}
 
-                {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
-                    <!-- HIDDEN REPLY FORM -->
+            <!-- REPLY BUTTON -->
 
-                    <div class="reply-form-wrapper">
+            <a class="reply-toggle">
 
-                        <form method="POST"
-                              action="{% url 'add_comment' pk=post.pk %}">
+                Ответить
 
-                            {% csrf_token %}
+            </a>
 
-                            <input type="hidden"
-                                   name="parent_id"
-                                   value="{{ comment.id }}">
+            <!-- HIDDEN REPLY FORM -->
 
-                            <input type="text"
-                                   name="text"
-                                   class="reply-input"
-                                   placeholder="Введите ответ..."
-                                   required>
+            <div class="reply-form-wrapper">
 
-                            <div class="reply-actions">
+                <form method="POST"
+                      action="{% url 'add_comment' pk=post.pk %}">
 
-                                <a class="reply-cancel">
+                    {% csrf_token %}
 
-                                    Отмена
+                    <input type="hidden"
+                           name="parent_id"
+                           value="{{ comment.id }}">
 
-                                </a>
+                    <input type="text"
+                           name="text"
+                           class="reply-input"
+                           placeholder="Введите ответ..."
+                           required>
 
-                                <button type="submit"
-                                        class="reply-submit">
+                    <div class="reply-actions">
 
-                                    Ответить
+                        <a class="reply-cancel">
 
-                                </button>
+                            Отмена
 
-                            </div>
+                        </a>
 
-                        </form>
+                        <button type="submit"
+                                class="reply-submit">
+
+                            Ответить
+
+                        </button>
 
                     </div>
 
-                {% endif %}
+                </form>
+
+            </div>
+
+        {% endif %}
 
         <hr>
 
@@ -554,7 +550,7 @@ document.querySelectorAll('.reply-toggle').forEach(button => {
     button.addEventListener('click', function() {
 
         const wrapper =
-            this.parentElement.nextElementSibling
+            this.nextElementSibling
 
         wrapper.style.display = 'block'
 
@@ -577,9 +573,8 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
         wrapper.style.display = 'none'
 
-        wrapper.previousElementSibling
-               .querySelector('.reply-toggle')
-               .style.display = 'inline-flex'
+        wrapper.previousElementSibling.style.display =
+            'inline-flex'
 
     })
 
