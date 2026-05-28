@@ -375,14 +375,14 @@ body {
     }
 }
 
---------------------------
-/* YOUTUBE LIKE BUTTONS */
---------------------------
+/*========================
+   YOUTUBE LIKE BUTTONS
+=========================*/
 .yt-like-btn {
 
     display: inline-flex;
 
-    align-items: center;
+    align-items: center; 
 
     gap: 6px;
 
