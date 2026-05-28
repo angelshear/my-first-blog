@@ -16,6 +16,8 @@ from django.db.models import Q
 
 from django.http import HttpResponseForbidden
 
+from django.http import JsonResponse
+
 from .models import (
     Post,
     Comment
@@ -526,34 +528,30 @@ def edit_comment(request, pk):
 @login_required
 def like_comment(request, pk):
 
-    comment = get_object_or_404(
-        Comment,
-        pk=pk
-    )
+    comment = get_object_or_404(Comment, pk=pk)
+
+    liked = False
 
     if request.user in comment.likes.all():
 
-        comment.likes.remove(
-            request.user
-        )
+        comment.likes.remove(request.user)
 
     else:
 
-        comment.likes.add(
-            request.user
-        )
+        comment.likes.add(request.user)
 
-        comment.dislikes.remove(
-            request.user
-        )
+        comment.dislikes.remove(request.user)
 
-    return redirect(
+        liked = True
 
-        'post_detail',
+    return JsonResponse({
 
-        pk=comment.post.pk
+        'likes': comment.total_likes(),
+        'dislikes': comment.total_dislikes(),
+        'liked': liked,
+        'disliked': False,
 
-    )
+    })
 
 
 # =========================================================
@@ -563,31 +561,27 @@ def like_comment(request, pk):
 @login_required
 def dislike_comment(request, pk):
 
-    comment = get_object_or_404(
-        Comment,
-        pk=pk
-    )
+    comment = get_object_or_404(Comment, pk=pk)
+
+    disliked = False
 
     if request.user in comment.dislikes.all():
 
-        comment.dislikes.remove(
-            request.user
-        )
+        comment.dislikes.remove(request.user)
 
     else:
 
-        comment.dislikes.add(
-            request.user
-        )
+        comment.dislikes.add(request.user)
 
-        comment.likes.remove(
-            request.user
-        )
+        comment.likes.remove(request.user)
 
-    return redirect(
+        disliked = True
 
-        'post_detail',
+    return JsonResponse({
 
-        pk=comment.post.pk
+        'likes': comment.total_likes(),
+        'dislikes': comment.total_dislikes(),
+        'liked': False,
+        'disliked': disliked,
 
-    )
+    })
