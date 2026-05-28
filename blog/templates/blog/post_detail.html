@@ -345,45 +345,48 @@
 
                     </a>
 
-                    <!-- HIDDEN REPLY FORM -->
+                    {% if user.is_authenticated %}
+                        <!-- HIDDEN REPLY FORM -->
 
-                    <div class="reply-form-wrapper">
+                        <div class="reply-form-wrapper">
 
-                        <form method="POST"
-                              action="{% url 'add_comment' pk=post.pk %}">
+                            <form method="POST"
+                                  action="{% url 'add_comment' pk=post.pk %}">
 
-                            {% csrf_token %}
+                                {% csrf_token %}
 
-                            <input type="hidden"
-                                   name="parent_id"
-                                   value="{{ comment.id }}">
+                                <input type="hidden"
+                                       name="parent_id"
+                                       value="{{ comment.id }}">
 
-                            <input type="text"
-                                   name="text"
-                                   class="reply-input"
-                                   placeholder="Введите ответ..."
-                                   required>
+                                <input type="text"
+                                       name="text"
+                                       class="reply-input"
+                                       placeholder="Введите ответ..."
+                                       required>
 
-                            <div class="reply-actions">
+                                <div class="reply-actions">
 
-                                <a class="reply-cancel">
+                                    <a class="reply-cancel">
 
-                                    Отмена
+                                        Отмена
 
-                                </a>
+                                    </a>
 
-                                <button type="submit"
-                                        class="reply-submit">
+                                    <button type="submit"
+                                            class="reply-submit">
 
-                                    Ответить
+                                        Ответить
 
-                                </button>
+                                    </button>
 
-                            </div>
+                                </div>
 
-                        </form>
+                            </form>
 
-                    </div>
+                        </div>
+
+                    {% endif %}
 
                 </div>
 
