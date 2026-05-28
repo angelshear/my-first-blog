@@ -346,47 +346,14 @@
                     </a>
 
                     {% if user.is_authenticated %}
-                        <!-- HIDDEN REPLY FORM -->
 
-                        <div class="reply-form-wrapper">
+                        <!-- REPLY BUTTON -->
 
-                            <form method="POST"
-                                  action="{% url 'add_comment' pk=post.pk %}">
+                        <a class="reply-toggle">
 
-                                {% csrf_token %}
+                            Ответить
 
-                                <input type="hidden"
-                                       name="parent_id"
-                                       value="{{ comment.id }}">
-
-                                <input type="text"
-                                       name="text"
-                                       class="reply-input"
-                                       placeholder="Введите ответ..."
-                                       required>
-
-                                <div class="reply-actions">
-
-                                    <a class="reply-cancel">
-
-                                        Отмена
-
-                                    </a>
-
-                                    <button type="submit"
-                                            class="reply-submit">
-
-                                        Ответить
-
-                                    </button>
-
-                                </div>
-
-                            </form>
-
-                        </div>
-
-                    {% endif %}
+                    </a>
 
                 </div>
 
@@ -419,6 +386,50 @@
             </div>
 
         {% endfor %}
+
+                {% if user.is_authenticated %}
+
+                    <!-- HIDDEN REPLY FORM -->
+
+                    <div class="reply-form-wrapper">
+
+                        <form method="POST"
+                              action="{% url 'add_comment' pk=post.pk %}">
+
+                            {% csrf_token %}
+
+                            <input type="hidden"
+                                   name="parent_id"
+                                   value="{{ comment.id }}">
+
+                            <input type="text"
+                                   name="text"
+                                   class="reply-input"
+                                   placeholder="Введите ответ..."
+                                   required>
+
+                            <div class="reply-actions">
+
+                                <a class="reply-cancel">
+
+                                    Отмена
+
+                                </a>
+
+                                <button type="submit"
+                                        class="reply-submit">
+
+                                    Ответить
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                {% endif %}
 
         <hr>
 
@@ -541,7 +552,7 @@ document.querySelectorAll('.reply-toggle').forEach(button => {
     button.addEventListener('click', function() {
 
         const wrapper =
-            this.nextElementSibling
+            this.parentElement.nextElementSibling
 
         wrapper.style.display = 'block'
 
@@ -564,8 +575,9 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
         wrapper.style.display = 'none'
 
-        wrapper.previousElementSibling.style.display =
-            'inline-flex'
+        wrapper.previousElementSibling
+               .querySelector('.reply-toggle')
+               .style.display = 'inline-flex'
 
     })
 
