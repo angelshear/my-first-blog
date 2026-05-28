@@ -377,28 +377,55 @@
 
         {% endfor %}
 
-        <!-- REPLY FORM -->
-
         {% if user.is_authenticated %}
 
-            <form method="POST"
-                  action="{% url 'add_comment' pk=post.pk %}"
-                  style="margin-top: 15px;">
+            <!-- REPLY BUTTON -->
 
-                {% csrf_token %}
+            <a class="reply-toggle">
 
-                <input type="hidden"
-                       name="parent_id"
-                       value="{{ comment.id }}">
+                Ответить
 
-                {{ comment_form.as_p }}
+            </a>
 
-                <button type="submit"
-                        class="btn btn-default btn-sm">
+            <!-- HIDDEN REPLY FORM -->
 
-                    Reply
-                </button>
-            </form>
+            <div class="reply-form-wrapper">
+
+                <form method="POST"
+                      action="{% url 'add_comment' pk=post.pk %}">
+
+                    {% csrf_token %}
+
+                    <input type="hidden"
+                           name="parent_id"
+                           value="{{ comment.id }}">
+
+                    <input type="text"
+                           name="text"
+                           class="reply-input"
+                           placeholder="Введите ответ..."
+                           required>
+
+                    <div class="reply-actions">
+
+                        <a class="reply-cancel">
+
+                            Отмена
+
+                        </a>
+
+                        <button type="submit"
+                                class="reply-submit">
+
+                            Ответить
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
 
         {% endif %}
 
@@ -505,6 +532,49 @@ document.querySelectorAll('.dislike-btn').forEach(button => {
                 data.likes
 
         })
+
+    })
+
+})
+
+</script>
+
+<script>
+
+/* =========================
+   OPEN REPLY FORM
+========================= */
+
+document.querySelectorAll('.reply-toggle').forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        const wrapper =
+            this.nextElementSibling
+
+        wrapper.style.display = 'block'
+
+        this.style.display = 'none'
+
+    })
+
+})
+
+/* =========================
+   CLOSE REPLY FORM
+========================= */
+
+document.querySelectorAll('.reply-cancel').forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        const wrapper =
+            this.closest('.reply-form-wrapper')
+
+        wrapper.style.display = 'none'
+
+        wrapper.previousElementSibling.style.display =
+            'inline-flex'
 
     })
 

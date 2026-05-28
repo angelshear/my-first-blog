@@ -434,3 +434,137 @@ body {
 
     color: #cc0000;
 }
+
+/* =========================
+   YOUTUBE REPLY BUTTON
+========================= */
+
+.reply-toggle {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    color: #606060;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+
+    cursor: pointer;
+}
+
+.reply-toggle:hover {
+
+    background: rgba(0,0,0,0.08);
+
+    color: #000;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   REPLY FORM
+========================= */
+
+.reply-form-wrapper {
+
+    display: none;
+
+    margin-top: 15px;
+}
+
+.reply-input {
+
+    width: 100%;
+
+    border: none;
+
+    border-bottom: 1px solid #ccc;
+
+    background: transparent;
+
+    padding: 8px 0;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.reply-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+/* CANCEL BUTTON */
+
+.reply-cancel {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: #606060;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    font-weight: 500;
+}
+
+.reply-cancel:hover {
+
+    background: rgba(0,0,0,0.08);
+
+    color: #000;
+}
+
+
+/* SUBMIT BUTTON */
+
+.reply-submit {
+
+    border: none;
+
+    background: #ff9400;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.reply-submit:hover {
+
+    opacity: 0.85;
+}
