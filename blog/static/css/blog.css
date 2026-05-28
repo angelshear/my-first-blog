@@ -410,6 +410,8 @@ body {
     background: rgba(0,0,0,0.08);
 
     color: #000;
+
+    text-decoration: none;
 }
 
 .yt-like-btn i {

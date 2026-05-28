@@ -200,7 +200,7 @@
 
             <!-- LIKE -->
 
-            <button
+            <a
                class="yt-like-btn like-btn
                {% if user in comment.likes.all %}
                    active-like
@@ -219,11 +219,11 @@
                     {{ comment.total_likes }}
                 </span>
 
-            </button>
+            </a>
 
             <!-- DISLIKE -->
 
-            <button
+            <a
                class="yt-like-btn dislike-btn
                {% if user in comment.dislikes.all %}
                    active-dislike
@@ -242,7 +242,7 @@
                     {{ comment.total_dislikes }}
                 </span>
 
-            </button>
+            </a>
 
         </div>
 
@@ -301,7 +301,7 @@
 
                     <!-- LIKE -->
 
-                    <button
+                    <a
                        class="yt-like-btn like-btn
                        {% if user in reply.likes.all %}
                            active-like
@@ -320,11 +320,11 @@
                             {{ reply.total_likes }}
                         </span>
 
-                    </button>
+                    </a>
 
                     <!-- DISLIKE -->
 
-                    <button
+                    <a
                        class="yt-like-btn dislike-btn
                        {% if user in reply.dislikes.all %}
                            active-dislike
@@ -343,7 +343,7 @@
                             {{ reply.total_dislikes }}
                         </span>
 
-                    </button>
+                    </a>
 
                 </div>
 
@@ -416,7 +416,9 @@
 
 document.querySelectorAll('.like-btn').forEach(button => {
 
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(event) {
+
+        event.preventDefault()
 
         const commentId = this.dataset.id
 
@@ -462,7 +464,9 @@ document.querySelectorAll('.like-btn').forEach(button => {
 
 document.querySelectorAll('.dislike-btn').forEach(button => {
 
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(event) {
+
+        event.preventDefault()
 
         const commentId = this.dataset.id
 
