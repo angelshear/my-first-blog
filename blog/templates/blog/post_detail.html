@@ -124,38 +124,27 @@
 
 {% if user.is_authenticated %}
 
-<div class="comment-form-wrapper">
+<div class="comment-input-wrapper">
 
-    <form method="POST"
-          action="{% url 'add_comment' pk=post.pk %}"
-          class="main-comment-form">
+    <textarea
+        name="text"
+        class="comment-input"
+        placeholder="Введите комментарий"
+        required></textarea>
 
-        {% csrf_token %}
+    <div class="comment-submit-actions">
 
-        <input type="text"
-               name="text"
-               class="main-comment-input"
-               placeholder="Введите комментарий"
-               required>
+        <button type="button"
+                class="comment-cancel">
+            Отмена
+        </button>
 
-        <div class="main-comment-actions">
+        <button type="submit"
+                class="comment-submit">
+            Оставить комментарий
+        </button>
 
-            <a class="main-comment-cancel">
-
-                Отмена
-
-            </a>
-
-            <button type="submit"
-                    class="main-comment-submit">
-
-                Оставить комментарий
-
-            </button>
-
-        </div>
-
-    </form>
+    </div>
 
 </div>
 
@@ -728,6 +717,44 @@ if (mainCancel) {
     })
 
 }
+
+</script>
+
+<script>
+
+const commentInput =
+    document.querySelector('.comment-input')
+
+const actions =
+    document.querySelector('.comment-submit-actions')
+
+commentInput.addEventListener('focus', () => {
+
+    actions.style.display = 'flex'
+
+})
+
+document.querySelector('.comment-cancel')
+.addEventListener('click', () => {
+
+    commentInput.value = ''
+
+    actions.style.display = 'none'
+
+})
+
+</script>
+
+<script>
+
+commentInput.addEventListener('input', function() {
+
+    this.style.height = 'auto'
+
+    this.style.height =
+        this.scrollHeight + 'px'
+
+})
 
 </script>
 
