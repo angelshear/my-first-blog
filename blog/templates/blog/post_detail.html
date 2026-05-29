@@ -91,48 +91,31 @@
 <div class="comments-header">
 
     <h2 class="comments-title">
-
         Comments ({{ post.total_comments }})
-
     </h2>
 
-    <form method="GET"
-          class="comments-sort-form">
+    <div class="comments-sort">
 
-        <select name="sort"
-                onchange="this.form.submit()"
-                class="comments-sort-select">
+        <button type="button"
+                class="sort-btn"
+                onclick="toggleSortMenu(event)">
 
-            <option value="new"
-                {% if current_sort == 'new' %}
-                    selected
-                {% endif %}>
+            <i class="bi bi-funnel"></i>
+            Упорядочить
 
-                Newest
+        </button>
 
-            </option>
+        <div class="sort-menu" id="sortMenu">
 
-            <option value="old"
-                {% if current_sort == 'old' %}
-                    selected
-                {% endif %}>
+            <a href="?sort=new">Сначала новые</a>
 
-                Oldest
+            <a href="?sort=old">Сначала старые</a>
 
-            </option>
+            <a href="?sort=popular">Популярные</a>
 
-            <option value="popular"
-                {% if current_sort == 'popular' %}
-                    selected
-                {% endif %}>
+        </div>
 
-                Popular
-
-            </option>
-
-        </select>
-
-    </form>
+    </div>
 
 </div>
 
@@ -588,6 +571,40 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
             'inline-flex'
 
     })
+
+})
+
+</script>
+
+<script>
+
+function toggleSortMenu(event) {
+
+    event.preventDefault()
+
+    document
+        .getElementById('sortMenu')
+        .classList.toggle('show')
+
+}
+
+document.addEventListener('click', function(event) {
+
+    const menu =
+        document.getElementById('sortMenu')
+
+    const button =
+        document.querySelector('.sort-btn')
+
+    if (
+        !menu.contains(event.target)
+        &&
+        !button.contains(event.target)
+    ) {
+
+        menu.classList.remove('show')
+
+    }
 
 })
 
