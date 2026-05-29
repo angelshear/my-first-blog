@@ -246,7 +246,12 @@ body {
 /* Кнопка "Упорядочить" */
 
 .sort-btn {
+    display: flex;
 
+    align-items: center;
+
+    gap: 8px;
+    
     border: none;
 
     background: transparent;
@@ -266,7 +271,7 @@ body {
 
 .sort-btn:hover {
 
-    background: #f2f2f2;
+    background: #e5e5e5;
 }
 
 /* Выпадающее меню */
