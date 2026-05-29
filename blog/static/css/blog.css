@@ -236,6 +236,9 @@ body {
 
     margin: 0;
 
+    font-size: 18px;
+
+    font-weight: 700;
 }
 
 .comments-sort {
@@ -246,32 +249,45 @@ body {
 /* Кнопка "Упорядочить" */
 
 .sort-btn {
-    display: flex;
+
+    display: inline-flex;
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
+
+    padding: 6px 12px;
 
     border: none;
 
     background: transparent;
 
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    color: #606060;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+
     cursor: pointer;
 
-    font-size: 20px; /* как h2 */
+    white-space: nowrap;
 
-    font-weight: 500;
-
-    padding: 8px 14px;
-
-    border-radius: 12px;
-
-    transition: 0.2s;
+    flex-shrink: 0;
 }
 
 .sort-btn:hover {
 
-    background: #e5e5e5;
+    background: #e6e6e6;
+
+    color: #000;
 }
 
 .sort-arrow {
