@@ -921,3 +921,84 @@ body {
 
     background: #f2f2f2;
 }
+
+.comment-input-wrapper {
+
+    margin-top: 15px;
+}
+
+.comment-input {
+
+    width: 100%;
+
+    border: none;
+
+    border-bottom: 1px solid #ccc;
+
+    background: transparent;
+
+    resize: none;
+    
+    height: 24px;
+
+    min-height: 24px;
+
+    padding: 0;
+
+    font-size: 14px;
+
+    line-height: 24px;
+    
+    outline: none;
+
+    overflow: hidden;
+}
+
+.comment-input:focus {
+
+    border-bottom: 2px solid #000;
+}
+
+.comment-submit-actions {
+
+    display: none;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.comment-cancel {
+
+    border: none;
+
+    background: transparent;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+}
+
+.comment-cancel:hover {
+
+    background: rgba(0,0,0,.08);
+}
+
+.comment-submit {
+
+    border: none;
+
+    background: #ff9400;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+}
