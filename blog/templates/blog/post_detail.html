@@ -124,33 +124,38 @@
 
 {% if user.is_authenticated %}
 
-<form method="POST"
-      action="{% url 'add_comment' pk=post.pk %}"
-      class="comment-input-wrapper">
+<div class="comment-form-wrapper">
 
-    {% csrf_token %}
+    <form method="POST"
+          action="{% url 'add_comment' pk=post.pk %}"
+          class="main-comment-form">
 
-    <textarea
-        name="text"
-        class="comment-input"
-        placeholder="Введите комментарий"
-        required></textarea>
+        {% csrf_token %}
 
-    <div class="comment-submit-actions">
+        <textarea
+            name="text"
+            class="main-comment-input"
+            placeholder="Введите комментарий"
+            required></textarea>
 
-        <button type="button"
-                class="comment-cancel">
-            Отмена
-        </button>
+        <div class="main-comment-actions">
 
-        <button type="submit"
-                class="comment-submit">
-            Оставить комментарий
-        </button>
+            <a class="main-comment-cancel">
+                Отмена
+            </a>
 
-    </div>
+            <button type="submit"
+                    class="main-comment-submit">
 
-</form>
+                Оставить комментарий
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
 
 {% else %}
 
@@ -689,11 +694,41 @@ document.addEventListener('click', function() {
 
 <script>
 
+const mainInput =
+    document.querySelector('.main-comment-input')
+
+const mainActions =
+    document.querySelector('.main-comment-actions')
+
+const mainCancel =
+    document.querySelector('.main-comment-cancel')
+
+if (mainInput) {
+
+    mainInput.addEventListener('focus', () => {
+
+        mainActions.style.display = 'flex'
+
+    })
+
+    mainInput.addEventListener('input', function() {
+
+        this.style.height = 'auto'
+
+        this.style.height =
+            this.scrollHeight + 'px'
+
+    })
+
+}
+
 if (mainCancel) {
 
     mainCancel.addEventListener('click', () => {
 
         mainInput.value = ''
+
+        mainInput.style.height = '40px'
 
         mainActions.style.display = 'none'
 
@@ -702,46 +737,6 @@ if (mainCancel) {
     })
 
 }
-
-</script>
-
-<script>
-
-const commentInput =
-    document.querySelector('.comment-input')
-
-const actions =
-    document.querySelector('.comment-submit-actions')
-
-commentInput.addEventListener('focus', () => {
-
-    actions.style.display = 'flex'
-
-})
-
-document.querySelector('.comment-cancel')
-.addEventListener('click', () => {
-
-    commentInput.value = ''
-    
-    commentInput.style.height = 'auto'
-
-    actions.style.display = 'none'
-
-})
-
-</script>
-
-<script>
-
-commentInput.addEventListener('input', function() {
-
-    this.style.height = 'auto'
-
-    this.style.height =
-        this.scrollHeight + 'px'
-
-})
 
 </script>
 
