@@ -345,7 +345,7 @@ body {
 
     background: transparent;
 
-    padding: 8px 0;
+    padding: 0;
 
     outline: none;
 
@@ -355,11 +355,11 @@ body {
 
     overflow: hidden;
 
-    min-height: 40px;
+    min-height: 24px;
 
     line-height: 24px;
 }
-}
+
 
 .main-comment-input:focus {
 
@@ -423,7 +423,7 @@ body {
     font-weight: 500;
 
     transition: 0.2s ease;
-    
+
     cursor: pointer;
 }
 

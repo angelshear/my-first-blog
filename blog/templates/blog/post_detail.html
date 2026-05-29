@@ -728,7 +728,9 @@ if (mainCancel) {
 
         mainInput.value = ''
 
-        mainInput.style.height = '40px'
+        mainInput.style.height = 'auto'
+
+        mainInput.style.height = mainInput.scrollHeight + 'px'
 
         mainActions.style.display = 'none'
 
