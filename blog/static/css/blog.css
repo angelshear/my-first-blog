@@ -152,7 +152,6 @@ body {
     margin-right: 20px;
 }
 
-
 /* SEARCH */
 
 .search-form {
@@ -171,25 +170,11 @@ body {
     border: 1px solid #ccc;
 }
 
+/* ====================================
+   СЧЕТЧИК И СОРТИРОВКА КОММЕНТАРИЕВ   
+==================================== */
 
-/* COMMENTS */
-
-.comment {
-
-    background: #fafafa;
-
-    padding: 15px;
-
-    border-radius: 8px;
-
-    margin-bottom: 20px;
-
-    border-left: 4px solid #ff9400;
-}
-
-/* =========================
-   YOUTUBE STYLE COMMENTS
-========================= */
+/* Контейнер для строки: Comments (15) Упорядочить */
 
 .comments-header {
 
@@ -202,35 +187,7 @@ body {
     margin-bottom: 25px;
 }
 
-.sort-select {
-
-    max-width: 180px;
-}
-
-.comment-form-wrapper {
-
-    margin-bottom: 30px;
-}
-
-.yt-comment {
-
-    margin-bottom: 35px;
-
-    padding-bottom: 20px;
-
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.comment-header {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 8px;
-}
+/* Счетчик комментариев */
 
 .comments-title {
 
@@ -240,6 +197,8 @@ body {
 
     font-weight: 700;
 }
+
+/* Отвечает за то, чтобы выпадающее меню открывалось относительно кнопки "Упорядочить", а не относительно всей страницы. */
 
 .comments-sort {
 
@@ -285,12 +244,16 @@ body {
     flex-shrink: 0;
 }
 
+/* Наведение на "Упорядочить" */
+
 .sort-btn:hover {
 
     background: #e6e6e6;
 
     color: #000;
 }
+
+/* Стрелка рядом с кнопкой "Упорядочить" */
 
 .sort-arrow {
 
@@ -336,10 +299,14 @@ body {
     z-index: 100;
 }
 
+/* Отображение меню */
+
 .sort-menu.show {
 
     display: block;
 }
+
+/* Оформление каждого пункта меню */
 
 .sort-menu a {
 
@@ -352,9 +319,60 @@ body {
     text-decoration: none;
 }
 
+/* Оформление каждого пункта меню при наведении */
+
 .sort-menu a:hover {
 
     background: #f2f2f2;
+}
+
+/* =========================
+   YOUTUBE STYLE COMMENTS
+========================= */
+
+/* COMMENTS */
+
+.comment {
+
+    background: #fafafa;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    border-left: 4px solid #ff9400;
+}
+
+.sort-select {
+
+    max-width: 180px;
+}
+
+.comment-form-wrapper {
+
+    margin-bottom: 30px;
+}
+
+.yt-comment {
+
+    margin-bottom: 35px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.comment-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
 }
 
 .comment-author {
