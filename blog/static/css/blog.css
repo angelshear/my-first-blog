@@ -327,6 +327,98 @@ body {
 }
 
 /* =========================
+  ФОРМА ВВОДА КОММЕНТАРИЕВ
+========================= */
+
+.main-comment-form {
+
+    margin-bottom: 30px;
+}
+
+.main-comment-input {
+
+    width: 100%;
+
+    border: none;
+
+    border-bottom: 1px solid #ccc;
+
+    background: transparent;
+
+    padding: 8px 0;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+.main-comment-input:focus {
+
+    border-bottom: 2px solid #000;
+}
+
+.main-comment-actions {
+
+    display: none;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.main-comment-cancel {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: #606060;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.main-comment-cancel:hover {
+
+    background: rgba(0,0,0,0.08);
+
+    color: #000;
+}
+
+.main-comment-submit {
+
+    border: none;
+
+    background: #ff9400;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.main-comment-submit:hover {
+
+    opacity: 0.85;
+}
+
+/* =========================
    YOUTUBE STYLE COMMENTS
 ========================= */
 
@@ -713,98 +805,6 @@ body {
 }
 
 .reply-submit:hover {
-
-    opacity: 0.85;
-}
-
-/* =========================
-   MAIN COMMENT FORM
-========================= */
-
-.main-comment-form {
-
-    margin-bottom: 30px;
-}
-
-.main-comment-input {
-
-    width: 100%;
-
-    border: none;
-
-    border-bottom: 1px solid #ccc;
-
-    background: transparent;
-
-    padding: 8px 0;
-
-    outline: none;
-
-    font-size: 15px;
-}
-
-.main-comment-input:focus {
-
-    border-bottom: 2px solid #000;
-}
-
-.main-comment-actions {
-
-    display: none;
-
-    justify-content: flex-end;
-
-    gap: 10px;
-
-    margin-top: 12px;
-}
-
-.main-comment-cancel {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    color: #606060;
-
-    cursor: pointer;
-
-    font-weight: 500;
-
-    transition: 0.2s ease;
-}
-
-.main-comment-cancel:hover {
-
-    background: rgba(0,0,0,0.08);
-
-    color: #000;
-}
-
-.main-comment-submit {
-
-    border: none;
-
-    background: #ff9400;
-
-    color: white;
-
-    padding: 8px 18px;
-
-    border-radius: 999px;
-
-    font-weight: 500;
-
-    transition: 0.2s ease;
-}
-
-.main-comment-submit:hover {
 
     opacity: 0.85;
 }
