@@ -355,9 +355,9 @@ body {
 
     overflow: hidden;
 
-    height: 38px;
+    min-height: 38px;
 
-    line-height: 19px;  
+    line-height: 18px;  
 
 }
 
