@@ -120,7 +120,7 @@
 
 </div>
 
-<!-- ОСТАВИТЬ КОММЕНТАРИЙ -->
+<!-- ФОРМА ВВОДА КОММЕНТАРИЕВ -->
 
 {% if user.is_authenticated %}
 
@@ -306,27 +306,36 @@
 
         {% endif %}
 
-        <!-- COMMENT CONTROLS EDIT and DELETE -->
+        <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ КОММЕНТАРИЕВ -->
 
-        {% if user == comment.author %}
+        {% if user == comment.author or user.is_staff %}
 
-            <a href="{% url 'edit_comment' pk=comment.pk %}"
-               class="btn btn-warning btn-sm">
+        <div class="comment-menu">
 
-                Edit
+            <button class="comment-menu-btn"
+                    onclick="toggleCommentMenu(event, this)">
 
-            </a>
+                <i class="bi bi-three-dots-vertical"></i>
 
-        {% endif %}
+            </button>
 
-        {% if user == comment.author or user == post.author or user.is_staff %}
+            <div class="comment-menu-dropdown">
 
-            <a href="{% url 'delete_comment' pk=comment.pk %}"
-               class="btn btn-danger btn-sm">
+                {% if user == comment.author %}
 
-                Delete
+                    <a href="{% url 'edit_comment' pk=comment.pk %}">
+                        Изменить
+                    </a>
 
-            </a>
+                {% endif %}
+
+                    <a href="{% url 'delete_comment' pk=comment.pk %}">
+                        Удалить
+                    </a>
+
+            </div>
+
+        </div>
 
         {% endif %}
 
@@ -407,29 +416,36 @@
 
                 </div>
 
-                <!-- EDIT REPLY -->
+                <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ ВЛОЖЕННЫХ КОММЕНТАРИЕВ -->
 
-                {% if user == reply.author %}
+                {% if user == reply.author or user.is_staff %}
 
-                    <a href="{% url 'edit_comment' pk=reply.pk %}"
-                       class="btn btn-warning btn-sm">
+                <div class="comment-menu">
 
-                        Edit
+                    <button class="comment-menu-btn"
+                            onclick="toggleCommentMenu(event, this)">
 
-                    </a>
+                        <i class="bi bi-three-dots-vertical"></i>
 
-                {% endif %}
+                    </button>
 
-                <!-- DELETE REPLY -->
+                    <div class="comment-menu-dropdown">
 
-                {% if user == reply.author or user == post.author or user.is_staff %}
+                        {% if user == reply.author %}
 
-                    <a href="{% url 'delete_comment' pk=reply.pk %}"
-                       class="btn btn-danger btn-sm">
+                            <a href="{% url 'edit_comment' pk=reply.pk %}">
+                                Изменить
+                            </a>
 
-                        Delete
+                        {% endif %}
 
-                    </a>
+                        <a href="{% url 'delete_comment' pk=reply.pk %}">
+                            Удалить
+                        </a>
+
+                    </div>
+
+                </div>
 
                 {% endif %}
 
@@ -596,7 +612,7 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
 </script>
 
-<!-- СОРТИРОВКА -->
+<!-- СОРТИРОВКА КОММЕНТАРИЕВ -->
 
 <script>
 
@@ -627,6 +643,50 @@ document.addEventListener('click', function(event) {
         menu.classList.remove('show')
 
     }
+
+})
+
+</script>
+
+<!-- МЕНЮ РЕДАКТИРОВАНИЯ КОММЕНТАРИЕВ -->
+
+<script>
+
+function toggleCommentMenu(event, button) {
+
+    event.stopPropagation()
+
+    document
+        .querySelectorAll('.comment-menu-dropdown')
+        .forEach(menu => {
+
+            if (
+                menu !==
+                button.nextElementSibling
+            ) {
+
+                menu.classList.remove('show')
+
+            }
+
+        })
+
+    button
+        .nextElementSibling
+        .classList
+        .toggle('show')
+
+}
+
+document.addEventListener('click', function() {
+
+    document
+        .querySelectorAll('.comment-menu-dropdown')
+        .forEach(menu => {
+
+            menu.classList.remove('show')
+
+        })
 
 })
 

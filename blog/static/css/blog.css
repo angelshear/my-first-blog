@@ -426,6 +426,8 @@ body {
 
 .comment {
 
+    position: relative;
+
     background: #fafafa;
 
     padding: 15px;
@@ -807,4 +809,89 @@ body {
 .reply-submit:hover {
 
     opacity: 0.85;
+}
+
+/* =========================
+   COMMENT MENU
+========================= */
+
+.comment-menu {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 12px;
+}
+
+.comment-menu-btn {
+
+    border: none;
+
+    background: transparent;
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    color: #606060;
+
+    transition: 0.2s ease;
+}
+
+.comment-menu-btn:hover {
+
+    background: #e6e6e6;
+
+    color: #000;
+}
+
+.comment-menu-dropdown {
+
+    display: none;
+
+    position: absolute;
+
+    top: 42px;
+
+    right: 0;
+
+    min-width: 140px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+
+    overflow: hidden;
+
+    z-index: 100;
+}
+
+.comment-menu-dropdown.show {
+
+    display: block;
+}
+
+.comment-menu-dropdown a {
+
+    display: block;
+
+    padding: 12px 16px;
+
+    text-decoration: none;
+
+    color: #000;
+}
+
+.comment-menu-dropdown a:hover {
+
+    background: #f2f2f2;
 }
