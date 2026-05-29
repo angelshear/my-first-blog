@@ -812,7 +812,7 @@ body {
 }
 
 /* =========================
-   МЕНЮ КОММЕНТАРИЕВ
+     МЕНЮ КОММЕНТАРИЕВ
 ========================= */
 
 .comment-menu {
@@ -850,6 +850,12 @@ body {
     background: #e6e6e6;
 
     color: #000;
+}
+
+.comment-menu-btn i {
+
+    font-size: 16px;
+
 }
 
 .comment-menu-dropdown {
