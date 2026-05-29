@@ -124,7 +124,11 @@
 
 {% if user.is_authenticated %}
 
-<div class="comment-input-wrapper">
+<form method="POST"
+      action="{% url 'add_comment' pk=post.pk %}"
+      class="comment-input-wrapper">
+
+    {% csrf_token %}
 
     <textarea
         name="text"
@@ -146,7 +150,7 @@
 
     </div>
 
-</div>
+</form>
 
 {% else %}
 
@@ -685,25 +689,6 @@ document.addEventListener('click', function() {
 
 <script>
 
-const mainInput =
-    document.querySelector('.main-comment-input')
-
-const mainActions =
-    document.querySelector('.main-comment-actions')
-
-const mainCancel =
-    document.querySelector('.main-comment-cancel')
-
-if (mainInput) {
-
-    mainInput.addEventListener('focus', () => {
-
-        mainActions.style.display = 'flex'
-
-    })
-
-}
-
 if (mainCancel) {
 
     mainCancel.addEventListener('click', () => {
@@ -738,6 +723,8 @@ document.querySelector('.comment-cancel')
 .addEventListener('click', () => {
 
     commentInput.value = ''
+    
+    commentInput.style.height = 'auto'
 
     actions.style.display = 'none'
 
