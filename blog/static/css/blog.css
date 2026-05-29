@@ -244,6 +244,8 @@ body {
 .comments-sort {
 
     position: relative;
+
+    display: inline-block;
 }
 
 /* Кнопка "Упорядочить" */
@@ -321,6 +323,8 @@ body {
 
     top: 100%;
 
+    width: 100%;
+
     margin-top: 8px;
 
     background: white;
@@ -328,8 +332,6 @@ body {
     border-radius: 12px;
 
     box-shadow: 0 2px 12px rgba(0,0,0,.15);
-
-    min-width: 200px;
 
     z-index: 100;
 }
