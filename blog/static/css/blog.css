@@ -251,14 +251,14 @@ body {
     align-items: center;
 
     gap: 8px;
-    
+
     border: none;
 
     background: transparent;
 
     cursor: pointer;
 
-    font-size: 24px; /* как h2 */
+    font-size: 16px; /* как h2 */
 
     font-weight: 500;
 
