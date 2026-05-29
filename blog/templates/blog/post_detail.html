@@ -120,25 +120,44 @@
 
 </div>
 
-<!-- ADD COMMENT -->
+<!-- ОСТАВИТЬ КОММЕНТАРИЙ -->
 
 {% if user.is_authenticated %}
 
+<div class="comment-form-wrapper">
+
     <form method="POST"
-          action="{% url 'add_comment' pk=post.pk %}">
+          action="{% url 'add_comment' pk=post.pk %}"
+          class="main-comment-form">
 
         {% csrf_token %}
 
-        {{ comment_form.as_p }}
+        <input type="text"
+               name="text"
+               class="main-comment-input"
+               placeholder="Введите комментарий"
+               required>
 
-        <button type="submit"
-                class="btn btn-primary">
+        <div class="main-comment-actions">
 
-            Add Comment
+            <a class="main-comment-cancel">
 
-        </button>
+                Отмена
+
+            </a>
+
+            <button type="submit"
+                    class="main-comment-submit">
+
+                Оставить комментарий
+
+            </button>
+
+        </div>
 
     </form>
+
+</div>
 
 {% else %}
 
@@ -577,6 +596,10 @@ document.querySelectorAll('.reply-cancel').forEach(button => {
 
 </script>
 
+/* =========================
+        СОРТИРОВКА
+========================= */
+
 <script>
 
 function toggleSortMenu(event) {
@@ -608,6 +631,47 @@ document.addEventListener('click', function(event) {
     }
 
 })
+
+</script>
+
+/* =========================
+  ФОРМА ВВОДА КОММЕНТАРИЕВ
+========================= */
+
+<script>
+
+const mainInput =
+    document.querySelector('.main-comment-input')
+
+const mainActions =
+    document.querySelector('.main-comment-actions')
+
+const mainCancel =
+    document.querySelector('.main-comment-cancel')
+
+if (mainInput) {
+
+    mainInput.addEventListener('focus', () => {
+
+        mainActions.style.display = 'flex'
+
+    })
+
+}
+
+if (mainCancel) {
+
+    mainCancel.addEventListener('click', () => {
+
+        mainInput.value = ''
+
+        mainActions.style.display = 'none'
+
+        mainInput.blur()
+
+    })
+
+}
 
 </script>
 
