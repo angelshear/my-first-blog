@@ -495,10 +495,6 @@ body {
 
 .comment-text {
 
-    white-space: pre-wrap;
-
-    font-family: monospace;
-    
     margin-bottom: 10px;
 
     line-height: 1.6;
