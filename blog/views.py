@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import (
     render,
     get_object_or_404,
@@ -14,9 +16,7 @@ from django.core.paginator import Paginator
 
 from django.db.models import Q
 
-from django.http import HttpResponseForbidden
-
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 
 from .models import (
     Post,
@@ -462,63 +462,34 @@ def delete_comment(request, pk):
 # =========================================================
 
 @login_required
-def edit_comment(request, pk):
+def edit_comment_inline(request, pk):
 
-    comment = get_object_or_404(
-        Comment,
-        pk=pk
-    )
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=400)
 
-    # ONLY AUTHOR
+    comment = get_object_or_404(Comment, pk=pk)
 
-    if request.user != comment.author:
+    # ONLY AUTHOR OR STAFF
+    if request.user != comment.author and not request.user.is_staff:
+        return HttpResponseForbidden("You cannot edit this comment.")
 
-        return HttpResponseForbidden(
+    try:
+        data = json.loads(request.body)
+        new_text = data.get("text", "").strip()
 
-            "You cannot edit this comment."
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
 
-        )
+    if not new_text:
+        return JsonResponse({"error": "Empty comment"}, status=400)
 
-    if request.method == 'POST':
+    comment.text = new_text
+    comment.save()
 
-        form = CommentForm(
-
-            request.POST,
-
-            instance=comment
-
-        )
-
-        if form.is_valid():
-
-            form.save()
-
-            return redirect(
-
-                'post_detail',
-
-                pk=comment.post.pk
-
-            )
-
-    else:
-
-        form = CommentForm(
-            instance=comment
-        )
-
-    return render(
-
-        request,
-
-        'blog/edit_comment.html',
-
-        {
-            'form': form,
-            'comment': comment,
-        }
-
-    )
+    return JsonResponse({
+        "success": True,
+        "text": comment.text
+    })
 
 
 # =========================================================

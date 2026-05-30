@@ -195,6 +195,24 @@
 
         <p class="comment-text">{{ comment.text }}</p>
 
+        <div class="edit-form-wrapper" style="display:none;">
+
+            <textarea class="edit-input">{{ comment.text }}</textarea>
+
+            <div class="edit-actions">
+
+                <button type="button" class="edit-cancel">
+                    Отмена
+                </button>
+
+                <button type="button" class="edit-save" data-id="{{ comment.id }}">
+                    Сохранить
+                </button>
+
+            </div>
+
+        </div>
+
         <!-- LIKE / DISLIKE -->
 
         <div class="comment-actions">
@@ -321,7 +339,7 @@
 
                 {% if user == comment.author %}
 
-                    <a href="{% url 'edit_comment' pk=comment.pk %}">
+                    <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
                         Изменить
                     </a>
 
@@ -795,6 +813,82 @@ document.querySelectorAll('.reply-input').forEach(textarea => {
     textarea.addEventListener('input', function () {
         this.style.height = '38px'
         this.style.height = this.scrollHeight + 'px'
+    })
+
+})
+
+</script>
+
+<!-- РЕДАКТИРОВАНИЕ КОММЕНТАРИЕВ -->
+
+<script>
+
+// включение режима редактирования
+document.querySelectorAll('.edit-toggle').forEach(btn => {
+
+    btn.addEventListener('click', function(e) {
+        e.preventDefault()
+
+        const comment = this.closest('.comment')
+
+        const textBlock = comment.querySelector('.comment-text')
+        const editBox = comment.querySelector('.edit-form-wrapper')
+        const textarea = comment.querySelector('.edit-input')
+
+        // скрыть текст
+        textBlock.style.display = 'none'
+
+        // показать редактор
+        editBox.style.display = 'block'
+
+        // скопировать текст
+        textarea.value = textBlock.innerText.trim()
+
+        textarea.focus()
+    })
+
+})
+
+// отмена редактирования
+document.querySelectorAll('.edit-cancel').forEach(btn => {
+
+    btn.addEventListener('click', function() {
+
+        const comment = this.closest('.comment')
+
+        comment.querySelector('.comment-text').style.display = 'block'
+        comment.querySelector('.edit-form-wrapper').style.display = 'none'
+    })
+
+})
+
+// сохранение изменений
+document.querySelectorAll('.edit-save').forEach(btn => {
+
+    btn.addEventListener('click', function() {
+
+        const comment = this.closest('.comment')
+        const id = this.dataset.id
+        const textarea = comment.querySelector('.edit-input')
+        const newText = textarea.value
+
+        fetch(`/comment/${id}/edit-inline/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ text: newText })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            comment.querySelector('.comment-text').innerText = data.text
+
+            comment.querySelector('.comment-text').style.display = 'block'
+            comment.querySelector('.edit-form-wrapper').style.display = 'none'
+        })
+
     })
 
 })

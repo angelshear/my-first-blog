@@ -66,9 +66,9 @@ urlpatterns = [
 
     # Редактирование комментария
     path(
-        'comment/<int:pk>/edit/',
-        views.edit_comment,
-        name='edit_comment'
+        'comment/<int:pk>/edit-inline/',
+        views.edit_comment_inline,
+        name='edit_comment_inline'
     ),
 
     # Удаление комментария

@@ -524,7 +524,7 @@ body {
     word-break: break-word;
 
     white-space: pre-wrap;
-    
+
 }
 
 .comment-actions {
@@ -983,4 +983,21 @@ body {
 .comment-menu-dropdown a:hover {
 
     background: #f2f2f2;
+}
+
+.edit-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
 }
