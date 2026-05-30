@@ -383,7 +383,7 @@ body {
     margin-top: 12px;
 }
 
-/* Кнопка [Отмена] */
+/* Дизайн кнопки [Отмена] */
 
 .main-comment-cancel {
 
@@ -423,7 +423,7 @@ body {
     color: #000;
 }
 
-/* Кнопка [Оставить комментарий] */
+/* Дизайн кнопки [Оставить комментарий] */
 
 .main-comment-submit {
 
@@ -793,7 +793,7 @@ body {
 }
 
 
-/* Кнопка [Отмена] для вложенных коммантариев */
+/* CANCEL BUTTON */
 
 .reply-cancel {
 
@@ -814,9 +814,6 @@ body {
     transition: 0.2s ease;
 
     font-weight: 500;
-
-    appearance: none;
-    
 }
 
 .reply-cancel:hover {
