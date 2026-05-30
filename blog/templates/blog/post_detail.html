@@ -194,8 +194,7 @@
         <!-- COMMENT TEXT -->
 
         <p class="comment-text"
-           data-original="{{ comment.text }}">
-            {{ comment.text }}
+           data-original="{{ comment.text }}">{{ comment.text }}
         </p>
 
         <div class="edit-form-wrapper">
@@ -385,6 +384,29 @@
                 </p>
 
                 <p class="comment-text">{{ reply.text }}</p>
+
+                <div class="edit-form-wrapper">
+
+                    <textarea
+                        class="edit-input"
+                        data-original="{{ comment.text }}">{{ reply.text }}</textarea>
+
+                    <div class="edit-actions">
+
+                        <button type="button"
+                                class="edit-cancel">
+                            Отмена
+                        </button>
+
+                        <button type="button"
+                                class="edit-save"
+                                data-id="{{ reply.id }}">
+                            Сохранить
+                        </button>
+
+                    </div>
+
+                </div>
 
                 <!-- LIKE / DISLIKE REPLY -->
 
@@ -889,6 +911,20 @@ document.querySelectorAll('.edit-toggle').forEach(btn => {
         textarea.style.height = '38px'
         textarea.style.height = textarea.scrollHeight + 'px'
         textarea.focus()
+    })
+
+})
+
+// включение режима редактирования для вложенных комментарие
+document.querySelectorAll('.edit-input').forEach(textarea => {
+
+    textarea.addEventListener('input', function() {
+
+        this.style.height = '38px'
+
+        this.style.height =
+            this.scrollHeight + 'px'
+
     })
 
 })
