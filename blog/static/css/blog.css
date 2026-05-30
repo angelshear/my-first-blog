@@ -405,9 +405,15 @@ body {
 
     transition: 0.2s ease;
 
-    border: none;
+    border: none !important;
 
     background: transparent;
+
+    text-decoration: none;
+
+    box-shadow: none;
+
+    outline: none;
 
 }
 
