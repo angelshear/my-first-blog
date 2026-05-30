@@ -447,7 +447,7 @@
 
                         {% if user == reply.author %}
 
-                            <a href="{% url 'edit_comment' pk=reply.pk %}">
+                            <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
                                 Изменить
                             </a>
 
