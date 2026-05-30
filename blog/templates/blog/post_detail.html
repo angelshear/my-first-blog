@@ -193,7 +193,10 @@
 
         <!-- COMMENT TEXT -->
 
-        <p class="comment-text">{{ comment.text }}</p>
+        <p class="comment-text"
+           data-original="{{ comment.text }}">
+            {{ comment.text }}
+        </p>
 
         <div class="edit-form-wrapper">
 
@@ -381,7 +384,7 @@
 
                 </p>
 
-                <p class="comment-text">{{ reply.text|linebreaksbr }}</p>
+                <p class="comment-text">{{ reply.text }}</p>
 
                 <!-- LIKE / DISLIKE REPLY -->
 
@@ -879,9 +882,12 @@ document.querySelectorAll('.edit-toggle').forEach(btn => {
         // показать редактор
         editBox.style.display = 'block'
 
-        // скопировать текст
-        textarea.value = textBlock.innerText.trim()
+        // загрузить исходный текст
+        textarea.value = textarea.dataset.original
 
+        // пересчитать высоту
+        textarea.style.height = '38px'
+        textarea.style.height = textarea.scrollHeight + 'px'
         textarea.focus()
     })
 
@@ -921,10 +927,17 @@ document.querySelectorAll('.edit-save').forEach(btn => {
         .then(res => res.json())
         .then(data => {
 
-            comment.querySelector('.comment-text').innerText = data.text
+                const textBlock =
+                    comment.querySelector('.comment-text')
 
-            comment.querySelector('.comment-text').style.display = 'block'
-            comment.querySelector('.edit-form-wrapper').style.display = 'none'
+                textBlock.textContent = data.text
+
+                textarea.dataset.original = data.text
+
+                textBlock.style.display = 'block'
+
+                comment.querySelector('.edit-form-wrapper').style.display =
+                    'none'
         })
 
     })
