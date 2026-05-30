@@ -335,6 +335,8 @@ body {
     margin-bottom: 30px;
 }
 
+/* Поле ввода комментария */
+
 .main-comment-input {
 
     width: 100%;
@@ -361,11 +363,14 @@ body {
 
 }
 
+/* Состояние при нажатии на поле ввода */
 
 .main-comment-input:focus {
 
     border-bottom: 2px solid #000;
 }
+
+/* Контейнер для кнопок: [Отмена] [Оставить комментарий] */
 
 .main-comment-actions {
 
@@ -377,6 +382,8 @@ body {
 
     margin-top: 12px;
 }
+
+/* Дизайн кнопки [Отмена] */
 
 .main-comment-cancel {
 
@@ -402,12 +409,16 @@ body {
 
 }
 
+/* Состояние кнопки [Отмена] при наведении мыши */
+
 .main-comment-cancel:hover {
 
     background: rgba(0,0,0,0.08);
 
     color: #000;
 }
+
+/* Дизайн кнопки [Оставить комментарий] */
 
 .main-comment-submit {
 
@@ -427,6 +438,8 @@ body {
 
     cursor: pointer;
 }
+
+/* Состояние кнопки [Оставить комментарий] при наведении мыши */
 
 .main-comment-submit:hover {
 
