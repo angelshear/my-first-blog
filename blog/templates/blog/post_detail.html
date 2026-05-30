@@ -195,17 +195,22 @@
 
         <p class="comment-text">{{ comment.text }}</p>
 
-        <div class="edit-form-wrapper" style="display:none;">
+        <div class="edit-form-wrapper">
 
-            <textarea class="edit-input">{{ comment.text }}</textarea>
+            <textarea
+                class="edit-input"
+                data-original="{{ comment.text }}">{{ comment.text }}</textarea>
 
             <div class="edit-actions">
 
-                <button type="button" class="edit-cancel">
+                <button type="button"
+                        class="edit-cancel">
                     Отмена
                 </button>
 
-                <button type="button" class="edit-save" data-id="{{ comment.id }}">
+                <button type="button"
+                        class="edit-save"
+                        data-id="{{ comment.id }}">
                     Сохранить
                 </button>
 
@@ -820,6 +825,39 @@ document.querySelectorAll('.reply-input').forEach(textarea => {
 </script>
 
 <!-- РЕДАКТИРОВАНИЕ КОММЕНТАРИЕВ -->
+
+<script>
+
+function getCookie(name) {
+
+    let cookieValue = null
+
+    if (document.cookie && document.cookie !== '') {
+
+        const cookies = document.cookie.split(';')
+
+        for (let i = 0; i < cookies.length; i++) {
+
+            const cookie = cookies[i].trim()
+
+            if (
+                cookie.substring(0, name.length + 1)
+                === (name + '=')
+            ) {
+
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                )
+
+                break
+            }
+        }
+    }
+
+    return cookieValue
+}
+
+</script>
 
 <script>
 
