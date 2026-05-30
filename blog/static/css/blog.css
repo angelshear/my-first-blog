@@ -764,6 +764,8 @@ body {
     margin-bottom: 15px;
 }
 
+/* Поле для ввода ответа на комментарий */
+
 .reply-input {
 
     width: 100%;
@@ -778,7 +780,23 @@ body {
 
     outline: none;
 
-    font-size: 14px;
+    font-size: 15px;
+
+    resize: none;
+
+    overflow: hidden;
+
+    height: 38px;
+
+    line-height: 19px; 
+
+}
+
+/* Состояние при нажатии на поле ввода */
+
+.reply-input:focus {
+
+    border-bottom: 2px solid #000;
 }
 
 .reply-actions {
@@ -822,7 +840,7 @@ body {
     transition: 0.2s ease;
 
     font-weight: 500;
-    
+
 }
 
 .reply-cancel:hover {
