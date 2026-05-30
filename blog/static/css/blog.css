@@ -985,19 +985,119 @@ body {
     background: #f2f2f2;
 }
 
+/* =========================
+   EDIT COMMENT
+========================= */
+
+.edit-form-wrapper {
+
+    display: none;
+
+    margin-top: 10px;
+}
+
 .edit-input {
+
     width: 100%;
+
     border: none;
+
     border-bottom: 1px solid #ccc;
+
+    background: transparent;
+
     padding: 8px 0;
+
     outline: none;
-    resize: none;
+
     font-size: 14px;
+
+    resize: none;
+
+    overflow: hidden;
+
+    min-height: 38px;
+
+    line-height: 19px;
+
+    white-space: pre-wrap;
+}
+
+.edit-input:focus {
+
+    border-bottom: 2px solid #000;
 }
 
 .edit-actions {
+
     display: flex;
+
     justify-content: flex-end;
+
     gap: 10px;
-    margin-top: 10px;
+
+    margin-top: 12px;
+}
+
+/* Отмена */
+
+.edit-cancel {
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: #606060;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+    transition: .2s ease;
+}
+
+.edit-cancel:hover {
+
+    background: rgba(0,0,0,.08);
+
+    color: #000;
+}
+
+/* Сохранить */
+
+.edit-save {
+
+    border: none;
+
+    background: #ff9400;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.edit-save:hover {
+
+    opacity: .85;
 }
