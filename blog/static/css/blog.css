@@ -387,10 +387,18 @@ body {
 
 .main-comment-cancel {
 
+    -webkit-appearance: none;
+    appearance: none;
+
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+
+    background: transparent;
+
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 8px 14px;
@@ -404,17 +412,6 @@ body {
     font-weight: 500;
 
     transition: 0.2s ease;
-
-    border: none !important;
-
-    background: transparent;
-
-    text-decoration: none;
-
-    box-shadow: none;
-
-    outline: none;
-
 }
 
 /* Состояние кнопки [Отмена] при наведении мыши */
