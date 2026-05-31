@@ -48,39 +48,39 @@
 
     {% endif %}
 
-    <!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА -->
+<!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА -->
 
-    <div class="delete-modal-overlay"
-         id="deletePostModal">
+<div class="delete-modal-overlay"
+     id="deletePostModal">
 
-        <div class="delete-modal">
+    <div class="delete-modal">
 
-            <h3>
-                Действительно удалить этот пост?
-            </h3>
+        <h3>
+            Действительно удалить этот пост?
+        </h3>
 
-            <div class="delete-modal-actions">
+        <div class="delete-modal-actions">
 
-                <button type="button"
-                        class="main-comment-cancel"
-                        id="cancelDeletePost">
+            <button type="button"
+                    class="main-comment-cancel"
+                    id="cancelDeletePost">
 
-                    Отмена
+                Отмена
 
-                </button>
+            </button>
 
-                <a href="{% url 'post_delete' pk=post.pk %}"
-                   class="main-comment-submit">
+            <a href="{% url 'post_delete' pk=post.pk %}"
+               class="main-comment-submit">
 
-                    Да
+                Да
 
-                </a>
-
-            </div>
+            </a>
 
         </div>
 
     </div>
+
+</div>
 
     <!-- TITLE -->
 
