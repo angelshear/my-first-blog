@@ -47,6 +47,8 @@ body {
     margin-bottom: 40px;
 
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    position: relative;
 }
 
 .post h1 a,
@@ -188,10 +190,7 @@ body {
         МЕНЮ РЕДАКТИРОВАНЯ ПОСТА   
 ==================================== */
 
-.post {
-
-    position: relative;
-}
+/* Контейнер для кнопки [⋮] и выпадающего меню */
 
 .post-menu {
 
@@ -201,6 +200,8 @@ body {
 
     right: 15px;
 }
+
+/* Кнопка [⋮] */
 
 .post-menu-btn {
 
@@ -228,6 +229,8 @@ body {
     color: #000;
 }
 
+/* Выпадающее меню ([Редактировать] / [Удалить]) */
+
 .post-menu-dropdown {
 
     display: none;
@@ -251,6 +254,8 @@ body {
     z-index: 100;
 }
 
+/* Включение меню ([Редактировать] / [Удалить]) */
+
 .post-menu-dropdown.show {
 
     display: block;
@@ -267,6 +272,8 @@ body {
     text-decoration: none;
 }
 
+/* Подсветка пункта меню при наведении */
+
 .post-menu-dropdown a:hover {
 
     background: #f2f2f2;
@@ -276,7 +283,7 @@ body {
  МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА   
 ========================================== */
 
-/* Модальное окно */
+/* Затемнение экрана + блокировка кликов по странице */
 
 .delete-modal-overlay {
 
@@ -301,8 +308,10 @@ body {
 
 .delete-modal-overlay.show {
 
-    display: flex;
+    display: flex !important;
 }
+
+/* Модальное окно */
 
 .delete-modal {
 
@@ -331,6 +340,8 @@ body {
 
     font-weight: 600;
 }
+
+/* Размещает кнопки: [Отмена] слева [Да] справа */
 
 .delete-modal-actions {
 
@@ -1291,7 +1302,8 @@ body {
 ========================= */
 
 .comment-menu-dropdown a:focus,
-.sort-menu a:focus {
+.sort-menu a:focus,
+.post-menu-dropdown a:focus {
 
     outline: none;
     box-shadow: none;
