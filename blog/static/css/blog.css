@@ -1101,3 +1101,9 @@ body {
 
     opacity: .85;
 }
+
+.edit-cancel:focus,
+.edit-save:focus {
+
+    outline: none;
+}
