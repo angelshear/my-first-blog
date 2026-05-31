@@ -513,7 +513,9 @@ body {
 
 .comment-text {
 
-    margin-bottom: 10px;
+    margin-top: 0;
+
+    margin-bottom: 6px;
 
     line-height: 1.6;
 
@@ -1016,9 +1018,9 @@ body {
 
     overflow: hidden;
 
-    min-height: 38px;
+    min-height: 40px;
 
-    line-height: 19px;
+    line-height: 1.6;
 
     white-space: pre-wrap;
 }

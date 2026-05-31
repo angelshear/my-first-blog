@@ -908,7 +908,7 @@ document.querySelectorAll('.edit-toggle').forEach(btn => {
         textarea.value = textarea.dataset.original
 
         // пересчитать высоту
-        textarea.style.height = '38px'
+        textarea.style.height = '40px'
         textarea.style.height = textarea.scrollHeight + 'px'
         textarea.focus()
     })
@@ -920,7 +920,7 @@ document.querySelectorAll('.edit-input').forEach(textarea => {
 
     textarea.addEventListener('input', function() {
 
-        this.style.height = '38px'
+        this.style.height = '40px'
 
         this.style.height =
             this.scrollHeight + 'px'
