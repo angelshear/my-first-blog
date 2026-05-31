@@ -1016,9 +1016,9 @@ body {
 
     overflow: hidden;
 
-    min-height: 38px;
+    min-height: 44px;
 
-    line-height: 19px;
+    line-height: 1.6;
 
     white-space: pre-wrap;
 }
