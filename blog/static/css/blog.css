@@ -321,7 +321,7 @@ body {
 
     border-radius: 16px;
 
-    width: 280px;
+    width: 400px;
 
     max-width: 90%;
 
@@ -334,9 +334,6 @@ body {
 
     text-align: center;
 
-    white-space: pre-line;
-
-    line-height: 1.4;
 }
 
 /* Размещает кнопки: [Отмена] слева [Да] справа */
