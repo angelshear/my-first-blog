@@ -1102,8 +1102,8 @@ body {
     opacity: .85;
 }
 
-.edit-cancel:focus,
-.edit-save:focus {
+.comment-menu-dropdown a:focus {
 
     outline: none;
+    box-shadow: none;
 }
