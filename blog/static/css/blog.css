@@ -347,11 +347,11 @@ body {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content: center;
 
     align-items: center;
 
-    width: 100%;
+    gap: 12px;
 }
 
 .delete-modal-actions .main-comment-submit {
