@@ -317,11 +317,11 @@ body {
 
     background: white;
 
-    padding: 24px;
+    padding: 20px;
 
     border-radius: 16px;
 
-    width: 400px;
+    width: 280px;
 
     max-width: 90%;
 
@@ -332,13 +332,11 @@ body {
 
 .delete-modal h3 {
 
-    margin: 0 0 25px 0;
-
     text-align: center;
 
-    font-size: 18px;
+    white-space: pre-line;
 
-    font-weight: 600;
+    line-height: 1.4;
 }
 
 /* Размещает кнопки: [Отмена] слева [Да] справа */
@@ -347,7 +345,9 @@ body {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content: center;
+
+    gap: 20px;
 
     align-items: center;
 
@@ -363,6 +363,11 @@ body {
     align-items: center;
 
     justify-content: center;
+}
+
+.delete-modal-actions button,
+.delete-modal-actions a {
+    flex: 0 0 auto;
 }
 
 /* ====================================
