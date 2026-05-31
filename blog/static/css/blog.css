@@ -753,6 +753,10 @@ body {
     text-decoration: none;
 }
 
+.no-comments {
+    color: #606060;
+}
+
 .delete-btn {
 
     color: #cc0000;
