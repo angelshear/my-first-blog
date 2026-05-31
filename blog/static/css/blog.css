@@ -62,6 +62,20 @@ body {
     color: #ff9400;
 }
 
+/* АВТОР ПОСТА */
+
+.post-meta {
+
+    margin-bottom: 15px;
+
+    font-size: 14px;
+}
+
+.post-meta strong {
+
+    color: #000;
+}
+
 .date {
 
     color: #828282;
@@ -1101,6 +1115,10 @@ body {
 
     opacity: .85;
 }
+
+/* =========================
+ УБИРАЕТ РАМКУ ПРИ НАЖАТИИ
+========================= */
 
 .comment-menu-dropdown a:focus,
 .sort-menu a:focus {
