@@ -185,6 +185,162 @@ body {
 }
 
 /* ====================================
+        МЕНЮ РЕДАКТИРОВАНЯ ПОСТА   
+==================================== */
+
+.post {
+
+    position: relative;
+}
+
+.post-menu {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+}
+
+.post-menu-btn {
+
+    border: none;
+
+    background: transparent;
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    color: #606060;
+
+    transition: .2s;
+}
+
+.post-menu-btn:hover {
+
+    background: #e6e6e6;
+
+    color: #000;
+}
+
+.post-menu-dropdown {
+
+    display: none;
+
+    position: absolute;
+
+    top: 42px;
+
+    right: 0;
+
+    min-width: 160px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+
+    overflow: hidden;
+
+    z-index: 100;
+}
+
+.post-menu-dropdown.show {
+
+    display: block;
+}
+
+.post-menu-dropdown a {
+
+    display: block;
+
+    padding: 12px 16px;
+
+    color: #000;
+
+    text-decoration: none;
+}
+
+.post-menu-dropdown a:hover {
+
+    background: #f2f2f2;
+}
+
+/* ==========================================
+ МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА   
+========================================== */
+
+.delete-modal-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.5);
+
+    z-index: 9999;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.delete-modal-overlay.show {
+
+    display: flex;
+}
+
+.delete-modal {
+
+    background: white;
+
+    padding: 24px;
+
+    border-radius: 16px;
+
+    width: 400px;
+
+    max-width: 90%;
+}
+
+.delete-modal h3 {
+
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    font-size: 18px;
+}
+
+.delete-modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+.delete-modal-actions .main-comment-submit {
+
+    text-decoration: none;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+/* ====================================
    СЧЕТЧИК И СОРТИРОВКА КОММЕНТАРИЕВ   
 ==================================== */
 

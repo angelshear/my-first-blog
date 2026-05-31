@@ -18,25 +18,69 @@
     </p>
     {% endif %}
 
-    <!-- POST CONTROLS -->
+    <!-- РЕДАКТИРОВАНЕ И УДАЛЕНИЕ ПОСТА -->
 
     {% if user == post.author %}
 
-        <a class="btn btn-default"
-           href="{% url 'post_edit' pk=post.pk %}">
+    <div class="post-menu">
 
-            <span class="glyphicon glyphicon-pencil"></span>
+        <button class="post-menu-btn"
+                onclick="togglePostMenu(event, this)">
 
-        </a>
+            <i class="bi bi-three-dots-vertical"></i>
 
-        <a class="btn btn-danger"
-           href="{% url 'post_delete' pk=post.pk %}">
+        </button>
 
-            Delete
+        <div class="post-menu-dropdown">
 
-        </a>
+            <a href="{% url 'post_edit' pk=post.pk %}">
+            Редактировать
+            </a>
+
+            <a href="#"
+               class="post-delete-btn">
+                Удалить
+            </a>
+
+        </div>
+
+    </div>
 
     {% endif %}
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА -->
+
+    <div class="delete-modal-overlay"
+         id="deletePostModal">
+
+        <div class="delete-modal">
+
+            <h3>
+                Действительно удалить этот пост?
+            </h3>
+
+            <div class="delete-modal-actions">
+
+                <button type="button"
+                        class="main-comment-cancel"
+                        id="cancelDeletePost">
+
+                    Отмена
+
+                </button>
+
+                <a href="{% url 'post_delete' pk=post.pk %}"
+                   class="main-comment-submit">
+
+                    Да
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- TITLE -->
 
@@ -189,7 +233,7 @@
     <div class="comment"
          style="margin-bottom: 30px;">
 
-        <!-- AUTHOR and DATE -->
+        <!-- АВТОР И ДАТА КОММЕНТАРИЯ -->
 
         <p class="comment-meta">
             <strong>{{ comment.author }}</strong>
@@ -984,6 +1028,81 @@ document.querySelectorAll('.edit-save').forEach(btn => {
         })
 
     })
+
+})
+
+</script>
+
+<!-- РЕДАКТИРОВАНИЕ ПОСТА -->
+
+<script>
+
+function togglePostMenu(event, button) {
+
+    event.stopPropagation()
+
+    document
+        .querySelectorAll('.post-menu-dropdown')
+        .forEach(menu => {
+
+            if (
+                menu !==
+                button.nextElementSibling
+            ) {
+
+                menu.classList.remove('show')
+            }
+
+        })
+
+    button
+        .nextElementSibling
+        .classList
+        .toggle('show')
+}
+
+document.addEventListener('click', function() {
+
+    document
+        .querySelectorAll('.post-menu-dropdown')
+        .forEach(menu => {
+
+            menu.classList.remove('show')
+        })
+
+})
+
+</script>
+
+<!-- Открытие окна удаления -->
+
+<script>
+
+const modal =
+    document.getElementById('deletePostModal')
+
+document
+.querySelector('.post-delete-btn')
+?.addEventListener('click', function(e) {
+
+    e.preventDefault()
+
+    modal.classList.add('show')
+})
+
+document
+.getElementById('cancelDeletePost')
+?.addEventListener('click', function() {
+
+    modal.classList.remove('show')
+})
+
+modal?.addEventListener('click', function(e) {
+
+    if (e.target === modal) {
+
+        modal.classList.remove('show')
+    }
 
 })
 
