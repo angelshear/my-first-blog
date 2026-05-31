@@ -27,11 +27,13 @@
           rel='stylesheet'
           type='text/css'>
 
-    <!-- Custom CSS -->
+    <!-- Icons -->
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    
+    <!-- Custom CSS -->
+    
     <link rel="stylesheet"
           href="{% static 'css/blog.css' %}">
 
@@ -73,104 +75,92 @@
 
                 <a href="{% url 'login' %}"
                    class="top-menu">
-
                     Login
-
                 </a>
 
                 <a href="{% url 'register' %}"
                    class="top-menu">
-
                     Register
-
                 </a>
 
             {% endif %}
 
         </div>
 
-
         <!-- SITE TITLE -->
 
         <h1>
-
             <a href="/">
-
                 Django Girls Blog
-
             </a>
-
         </h1>
 
     </div>
 
+<!-- MAIN CONTENT -->
 
-    <!-- MAIN CONTENT -->
+<div class="content container">
 
-    <div class="content container">
+    <div class="row">
 
-        <!-- SEARCH -->
+        <div class="col-md-8 col-md-offset-2">
 
-        <div class="search-form">
+            <!-- SEARCH -->
 
-            <form method="GET"
-                  action="{% url 'post_list' %}">
+            <div class="search-form">
 
-                <input type="text"
-                       name="q"
-                       placeholder="Search posts..."
-                       value="{{ request.GET.q }}">
+                <form method="GET"
+                      action="{% url 'post_list' %}">
 
-                <button type="submit"
-                        class="btn btn-default">
+                    <input type="text"
+                           name="q"
+                           placeholder="Search posts..."
+                           value="{{ request.GET.q }}">
 
-                    Search
+                    <button type="submit"
+                            class="btn btn-default">
 
-                </button>
+                        Search
 
-            </form>
+                    </button>
 
-        </div>
-
-
-        <!-- DJANGO MESSAGES -->
-
-        {% if messages %}
-
-            {% for message in messages %}
-
-                <div class="alert alert-info">
-
-                    {{ message }}
-
-                </div>
-
-            {% endfor %}
-
-        {% endif %}
-
-
-        <!-- CONTENT -->
-
-        <div class="row">
-
-            <div class="col-md-8 col-md-offset-2">
-
-                {% block content %}
-                {% endblock %}
+                </form>
 
             </div>
+
+            <!-- DJANGO MESSAGES -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert alert-info">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+            <!-- PAGE CONTENT -->
+
+            {% block content %}
+            {% endblock %}
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- Bootstrap JS -->
+<!-- Bootstrap JS -->
 
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+```
 
 </body>
 
