@@ -47,8 +47,6 @@ body {
     margin-bottom: 40px;
 
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
-    position: relative;
 }
 
 .post h1 a,
@@ -190,7 +188,10 @@ body {
         МЕНЮ РЕДАКТИРОВАНЯ ПОСТА   
 ==================================== */
 
-/* Контейнер для кнопки [⋮] и выпадающего меню */
+.post {
+
+    position: relative;
+}
 
 .post-menu {
 
@@ -200,8 +201,6 @@ body {
 
     right: 15px;
 }
-
-/* Кнопка [⋮] */
 
 .post-menu-btn {
 
@@ -229,8 +228,6 @@ body {
     color: #000;
 }
 
-/* Выпадающее меню ([Редактировать] / [Удалить]) */
-
 .post-menu-dropdown {
 
     display: none;
@@ -254,8 +251,6 @@ body {
     z-index: 100;
 }
 
-/* Включение меню ([Редактировать] / [Удалить]) */
-
 .post-menu-dropdown.show {
 
     display: block;
@@ -272,8 +267,6 @@ body {
     text-decoration: none;
 }
 
-/* Подсветка пункта меню при наведении */
-
 .post-menu-dropdown a:hover {
 
     background: #f2f2f2;
@@ -283,7 +276,7 @@ body {
  МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ПОСТА   
 ========================================== */
 
-/* Затемнение экрана + блокировка кликов по странице */
+/* Модальное окно */
 
 .delete-modal-overlay {
 
@@ -308,16 +301,14 @@ body {
 
 .delete-modal-overlay.show {
 
-    display: flex !important;
+    display: flex;
 }
-
-/* Модальное окно */
 
 .delete-modal {
 
     background: white;
 
-    padding: 20px;
+    padding: 24px;
 
     border-radius: 16px;
 
@@ -332,19 +323,20 @@ body {
 
 .delete-modal h3 {
 
+    margin: 0 0 25px 0;
+
     text-align: center;
 
-}
+    font-size: 18px;
 
-/* Размещает кнопки: [Отмена] слева [Да] справа */
+    font-weight: 600;
+}
 
 .delete-modal-actions {
 
     display: flex;
 
-    justify-content: center;
-
-    gap: 20px;
+    justify-content: space-between;
 
     align-items: center;
 
@@ -360,11 +352,6 @@ body {
     align-items: center;
 
     justify-content: center;
-}
-
-.delete-modal-actions button,
-.delete-modal-actions a {
-    flex: 0 0 auto;
 }
 
 /* ====================================
@@ -1304,8 +1291,7 @@ body {
 ========================= */
 
 .comment-menu-dropdown a:focus,
-.sort-menu a:focus,
-.post-menu-dropdown a:focus {
+.sort-menu a:focus {
 
     outline: none;
     box-shadow: none;
