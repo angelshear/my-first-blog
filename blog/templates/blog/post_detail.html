@@ -20,7 +20,7 @@
 
     <!-- РЕДАКТИРОВАНЕ И УДАЛЕНИЕ ПОСТА -->
 
-    {% if user == post.author %}
+    {% if user == post.author or user.is_superuser %}
 
     <div class="post-menu">
 
@@ -33,6 +33,7 @@
 
         <div class="post-menu-dropdown">
 
+            {% if user == post.author %}
             <a href="{% url 'post_edit' pk=post.pk %}">
             Редактировать
             </a>

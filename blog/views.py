@@ -292,9 +292,9 @@ def post_delete(request, pk):
         pk=pk
     )
 
-    # ONLY AUTHOR
+    # Свои посты могут удалять авторы и администратор
 
-    if request.user != post.author:
+    if request.user != post.author and not request.user.is_superuser:
 
         return HttpResponseForbidden(
 
