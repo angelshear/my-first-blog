@@ -41,61 +41,55 @@
 
 <body>
 
-    <!-- HEADER -->
+<!-- HEADER -->
 
-    <div class="page-header">
+<div class="page-header">
 
-        <!-- AUTH MENU -->
+    <!-- AUTH MENU -->
 
-        <div class="pull-right">
+    <div class="pull-right">
 
-            {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
-                <span class="top-menu">
+            <span class="top-menu">
+                Hello, {{ user.username }}
+            </span>
 
-                    Hello, {{ user.username }}
-
-                </span>
-
-                <a href="{% url 'logout' %}"
-                   class="top-menu">
-
-                    Logout
-
-                </a>
-
-                <a href="{% url 'post_new' %}"
-                   class="top-menu">
-
-                    <span class="glyphicon glyphicon-plus"></span>
-
-                </a>
-
-            {% else %}
-
-                <a href="{% url 'login' %}"
-                   class="top-menu">
-                    Login
-                </a>
-
-                <a href="{% url 'register' %}"
-                   class="top-menu">
-                    Register
-                </a>
-
-            {% endif %}
-
-        </div>
-
-        <!-- SITE TITLE -->
-
-        <h1>
-            <a href="/">
-                Django Girls Blog
+            <a href="{% url 'logout' %}"
+               class="top-menu">
+                Logout
             </a>
-        </h1>
+
+            <a href="{% url 'post_new' %}"
+               class="top-menu">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}"
+               class="top-menu">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}"
+               class="top-menu">
+                Register
+            </a>
+
+        {% endif %}
 
     </div>
+
+    <!-- SITE TITLE -->
+
+    <h1>
+        <a href="/">
+            Django Girls Blog
+        </a>
+    </h1>
+
+</div>
 
 <!-- MAIN CONTENT -->
 
@@ -160,7 +154,6 @@
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-```
 
 </body>
 
