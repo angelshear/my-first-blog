@@ -1102,7 +1102,8 @@ body {
     opacity: .85;
 }
 
-.comment-menu-dropdown a:focus {
+.comment-menu-dropdown a:focus,
+.sort-menu a:focus {
 
     outline: none;
     box-shadow: none;
