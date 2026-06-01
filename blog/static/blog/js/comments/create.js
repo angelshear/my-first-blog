@@ -1,15 +1,10 @@
-const commentForm =
-    document.getElementById('comment-form')
+document.addEventListener('DOMContentLoaded', () => {
 
-const mainInput =
-    document.querySelector('.main-comment-input')
+    const commentForm = document.getElementById('comment-form')
 
-const mainActions =
-    document.querySelector('.main-comment-actions')
+    if (!commentForm) return
 
-if (commentForm) {
-
-    commentForm.addEventListener('submit', function(e) {
+    commentForm.addEventListener('submit', function (e) {
 
         e.preventDefault()
 
@@ -26,7 +21,6 @@ if (commentForm) {
             body: formData
 
         })
-
         .then(response => {
 
             if (!response.ok) {
@@ -35,18 +29,14 @@ if (commentForm) {
 
             return response.json()
         })
-
         .then(data => {
 
             if (!data.success) {
-
                 console.log(data)
-
                 return
             }
 
-            const commentsContainer =
-                document.getElementById('comments-container')
+            const commentsContainer = document.getElementById('comments-container')
 
             const html = `
                 <div class="comment" style="margin-bottom:30px;">
@@ -58,61 +48,56 @@ if (commentForm) {
 
                     <p class="comment-text"></p>
 
-                    <hr>
-
                 </div>
             `
 
-            const noComments =
-                document.getElementById('no-comments')
+            const noComments = document.getElementById('no-comments')
 
             if (noComments) {
-
                 noComments.remove()
-
             }
 
             commentsContainer.insertAdjacentHTML('afterbegin', html)
 
-            const newComment =
-                commentsContainer.firstElementChild
+            const newComment = commentsContainer.firstElementChild
 
-            newComment.querySelector('.comment-text').textContent =
-                data.text
+            newComment.querySelector('.comment-text').textContent = data.text
 
-            const countElement =
-                document.getElementById('comments-count')
+            const countElement = document.getElementById('comments-count')
 
             if (countElement) {
 
-                const currentCount =
-                    parseInt(
-                        countElement.textContent.match(/\d+/)[0]
-                    )
+                const match = countElement.textContent.match(/\d+/)
 
-                countElement.textContent =
-                    `Комментарии (${currentCount + 1})`
+                if (match) {
+
+                    const currentCount = parseInt(match[0])
+
+                    countElement.textContent =
+                        `Комментарии (${currentCount + 1})`
+                }
             }
+
+            // reset form UI safely (без конфликтов)
+            const mainInput = document.querySelector('.main-comment-input')
+            const mainActions = document.querySelector('.main-comment-actions')
 
             commentForm.reset()
-
-            if (mainActions) {
-                mainActions.style.display = 'none'
-            }
 
             if (mainInput) {
                 mainInput.style.height = '38px'
                 mainInput.blur()
             }
 
+            if (mainActions) {
+                mainActions.style.display = 'none'
+            }
+
         })
-
         .catch(error => {
-
             console.error(error)
-
         })
 
     })
 
-}
+})
