@@ -1,49 +1,38 @@
-/* ==================================
-      ФОРМА ВВОДА КОММЕНТАРИЕВ
-================================== */
+document.addEventListener('DOMContentLoaded', () => {
 
-const mainInput =
-    document.querySelector('.main-comment-input')
+    const mainInput = document.querySelector('.main-comment-input')
+    const mainActions = document.querySelector('.main-comment-actions')
+    const mainCancel = document.querySelector('.main-comment-cancel')
 
-const mainActions =
-    document.querySelector('.main-comment-actions')
+    if (!mainInput || !mainActions) return
 
-const mainCancel =
-    document.querySelector('.main-comment-cancel')
-
-if (mainInput) {
-
-    mainInput.addEventListener('focus', () => {
-
+    const showActions = () => {
         mainActions.style.display = 'flex'
+    }
 
-    })
+    const hideActions = () => {
+        mainActions.style.display = 'none'
+    }
 
-    mainInput.addEventListener('input', function() {
+    mainInput.addEventListener('focus', showActions)
+
+    mainInput.addEventListener('input', function () {
+
+        showActions()
 
         this.style.height = '38px'
-
-        this.style.height =
-            this.scrollHeight + 'px'
-
+        this.style.height = this.scrollHeight + 'px'
     })
 
-}
-
-if (mainCancel) {
-
-    mainCancel.addEventListener('click', () => {
+    mainCancel?.addEventListener('click', () => {
 
         mainInput.value = ''
 
         mainInput.style.height = '38px'
 
-        mainInput.style.height = mainInput.scrollHeight + 'px'
-
-        mainActions.style.display = 'none'
+        hideActions()
 
         mainInput.blur()
-
     })
 
-}
+})
