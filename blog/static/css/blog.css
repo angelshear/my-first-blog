@@ -669,7 +669,7 @@ body {
 
 .comment-form-wrapper {
 
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .yt-comment {
@@ -690,8 +690,6 @@ body {
     gap: 10px;
 
     margin-bottom: 8px;
-
-    margin-top: 0;
 }
 
 .comment-author {
@@ -1313,16 +1311,4 @@ body {
 
     outline: none;
     box-shadow: none;
-}
-
-.comment,
-.comment-form-wrapper,
-.comments-header {
-    margin-bottom: 0;
-}
-
-#comments-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
