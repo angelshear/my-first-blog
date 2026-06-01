@@ -248,7 +248,8 @@
 
             <!-- COMMENT TEXT -->
 
-            <p class="comment-text"data-original="{{ comment.text }}">{{ comment.text }}</p>
+            <p class="comment-text"
+               data-original="{{ comment.text }}">{{ comment.text }}</p>
 
             <div class="edit-form-wrapper">
 
@@ -886,14 +887,10 @@ if (commentForm) {
 
                     <p class="comment-meta">
                         <strong>${data.author}</strong>
-                        <span class="text-muted">
-                            • ${data.date}
-                        </span>
+                        <span class="text-muted">• ${data.date}</span>
                     </p>
 
-                    <p class="comment-text">
-                        ${data.text}
-                    </p>
+                    <p class="comment-text"></p>
 
                     <hr>
 
@@ -909,10 +906,13 @@ if (commentForm) {
 
             }
 
-            commentsContainer.insertAdjacentHTML(
-                'afterbegin',
-                html
-            )
+            commentsContainer.insertAdjacentHTML('afterbegin', html)
+
+            const newComment =
+                commentsContainer.firstElementChild
+
+            newComment.querySelector('.comment-text').textContent =
+                data.text
 
             const countElement =
                 document.getElementById('comments-count')
