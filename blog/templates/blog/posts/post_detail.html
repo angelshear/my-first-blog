@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+{% include 'blog/posts/post_content.html' %}
+
+<hr>
+
+{% include 'blog/comments/comment_form.html' %}
+
+<hr>
+
+{% include 'blog/comments/comment_list.html' %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!-- ФОРМА ВВОДА КОММЕНТАРИЕВ -->
+
+{% if user.is_authenticated %}
+
+<div class="comment-form-wrapper">
+
+    <form id="comment-form"
+          method="POST"
+          action="{% url 'add_comment' pk=post.pk %}"
+          class="main-comment-form">
+
+        {% csrf_token %}
+
+        <textarea
+            name="text"
+            class="main-comment-input"
+            placeholder="Введите комментарий"
+            required></textarea>
+
+        <div class="main-comment-actions">
+
+            <button type="button"
+                    class="main-comment-cancel">
+                Отмена
+            </button>
+
+            <button type="submit"
+                    class="main-comment-submit">
+                Оставить комментарий
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% else %}
+
+    <p>
+
+        Please
+        <a href="{% url 'login' %}">
+            login
+        </a>
+        to comment.
+
+    </p>
+
+{% endif %}
