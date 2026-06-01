@@ -72,7 +72,7 @@ def post_list(request):
 
         request,
 
-        'blog/post_list.html',
+        'blog/posts/post_list.html',
 
         {
             'page_obj': page_obj,
@@ -140,7 +140,7 @@ def post_detail(request, pk):
 
         request,
 
-        'blog/post_detail.html',
+        'blog/posts/post_detail.html',
 
         {
             'post': post,
@@ -198,7 +198,7 @@ def post_new(request):
 
         request,
 
-        'blog/post_edit.html',
+        'blog/posts/post_edit.html',
 
         {
             'form': form
@@ -271,7 +271,7 @@ def post_edit(request, pk):
 
         request,
 
-        'blog/post_edit.html',
+        'blog/posts/post_edit.html',
 
         {
             'form': form
