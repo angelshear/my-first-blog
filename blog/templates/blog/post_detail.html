@@ -145,7 +145,7 @@
 
 <div class="comments-header">
 
-    <h2 class="comments-title" id="comments-count">
+    <h2 class="comments-title">
         Комментарии ({{ post.total_comments }})
     </h2>
 
@@ -180,8 +180,7 @@
 
 <div class="comment-form-wrapper">
 
-    <form id="comment-form"
-          method="POST"
+    <form method="POST"
           action="{% url 'add_comment' pk=post.pk %}"
           class="main-comment-form">
 
@@ -202,7 +201,9 @@
 
             <button type="submit"
                     class="main-comment-submit">
+
                 Оставить комментарий
+
             </button>
 
         </div>
@@ -229,338 +230,335 @@
 
 <!-- COMMENTS LIST -->
 
-<div id="comments-container">
+{% for comment in comments %}
 
-    {% for comment in comments %}
+    <div class="comment"
+         style="margin-bottom: 30px;">
 
-        <div class="comment"
-             style="margin-bottom: 30px;">
+        <!-- АВТОР И ДАТА КОММЕНТАРИЯ -->
 
-            <!-- АВТОР И ДАТА КОММЕНТАРИЯ -->
+        <p class="comment-meta">
+            <strong>{{ comment.author }}</strong>
 
-            <p class="comment-meta">
-                <strong>{{ comment.author }}</strong>
+        <span class="text-muted">
+            • {{ comment.created_date|date:"d.m.Y" }}
+        </span>
+        </p>
 
-            <span class="text-muted">
-                • {{ comment.created_date|date:"d.m.Y" }}
-            </span>
-            </p>
+        <!-- COMMENT TEXT -->
 
-            <!-- COMMENT TEXT -->
+        <p class="comment-text"
+           data-original="{{ comment.text }}">{{ comment.text }}</p>
 
-            <p class="comment-text"
-               data-original="{{ comment.text }}">{{ comment.text }}</p>
+        <div class="edit-form-wrapper">
 
-            <div class="edit-form-wrapper">
+            <textarea
+                class="edit-input"
+                data-original="{{ comment.text }}">{{ comment.text }}</textarea>
 
-                <textarea
-                    class="edit-input"
-                    data-original="{{ comment.text }}">{{ comment.text }}</textarea>
+            <div class="edit-actions">
 
-                <div class="edit-actions">
+                <button type="button"
+                        class="edit-cancel">
+                    Отмена
+                </button>
 
-                    <button type="button"
-                            class="edit-cancel">
-                        Отмена
-                    </button>
-
-                    <button type="button"
-                            class="edit-save"
-                            data-id="{{ comment.id }}">
-                        Сохранить
-                    </button>
-
-                </div>
+                <button type="button"
+                        class="edit-save"
+                        data-id="{{ comment.id }}">
+                    Сохранить
+                </button>
 
             </div>
 
-            <!-- LIKE / DISLIKE -->
+        </div>
 
-            <div class="comment-actions">
+        <!-- LIKE / DISLIKE -->
 
-                <!-- LIKE -->
+        <div class="comment-actions">
 
-                <a
-                    class="yt-like-btn like-btn
+            <!-- LIKE -->
+
+            <a
+               class="yt-like-btn like-btn
+               {% if user in comment.likes.all %}
+                   active-like
+               {% endif %}"
+               data-id="{{ comment.pk }}">
+
+                <i class="
                     {% if user in comment.likes.all %}
-                        active-like
-                    {% endif %}"
-                    data-id="{{ comment.pk }}">
+                        bi bi-hand-thumbs-up-fill
+                    {% else %}
+                        bi bi-hand-thumbs-up
+                    {% endif %}
+                "></i>
 
-                    <i class="
-                        {% if user in comment.likes.all %}
-                            bi bi-hand-thumbs-up-fill
-                        {% else %}
-                            bi bi-hand-thumbs-up
-                        {% endif %}
-                    "></i>
+                <span class="like-count">
+                    {{ comment.total_likes }}
+                </span>
 
-                    <span class="like-count">
-                        {{ comment.total_likes }}
-                    </span>
+            </a>
 
-                </a>
+            <!-- DISLIKE -->
 
-                <!-- DISLIKE -->
+            <a
+               class="yt-like-btn dislike-btn
+               {% if user in comment.dislikes.all %}
+                   active-dislike
+               {% endif %}"
+               data-id="{{ comment.pk }}">
 
-                <a
-                    class="yt-like-btn dislike-btn
+                <i class="
                     {% if user in comment.dislikes.all %}
-                        active-dislike
-                    {% endif %}"
-                    data-id="{{ comment.pk }}">
+                        bi bi-hand-thumbs-down-fill
+                    {% else %}
+                        bi bi-hand-thumbs-down
+                    {% endif %}
+                "></i>
 
-                    <i class="
-                        {% if user in comment.dislikes.all %}
-                            bi bi-hand-thumbs-down-fill
-                        {% else %}
-                            bi bi-hand-thumbs-down
-                        {% endif %}
-                    "></i>
+                <span class="dislike-count">
+                    {{ comment.total_dislikes }}
+                </span>
 
-                    <span class="dislike-count">
-                        {{ comment.total_dislikes }}
-                    </span>
+            </a>
+
+            <!-- REPLY BUTTON -->
+
+            {% if user.is_authenticated %}
+
+                <a class="reply-toggle">
+
+                    Ответить
 
                 </a>
 
-                <!-- REPLY BUTTON -->
+            {% endif %}
 
-                {% if user.is_authenticated %}
+        </div>
 
-                    <a class="reply-toggle">
-                        Ответить
+        {% if user.is_authenticated %}
+
+            <!-- HIDDEN REPLY FORM -->
+
+            <div class="reply-form-wrapper">
+
+                <form method="POST"
+                      action="{% url 'add_comment' pk=post.pk %}">
+
+                    {% csrf_token %}
+
+                    <input type="hidden"
+                           name="parent_id"
+                           value="{{ comment.id }}">
+
+                    <textarea
+                           name="text"
+                           class="reply-input"
+                           placeholder="Введите ответ..."
+                           required></textarea>
+
+                    <div class="reply-actions">
+
+                        <button type="button"
+                                class="reply-cancel">
+
+                            Отмена
+
+                        </button>
+
+                        <button type="submit"
+                                class="reply-submit">
+
+                            Ответить
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        {% endif %}
+
+        <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ КОММЕНТАРИЕВ -->
+
+        {% if user == comment.author or user.is_staff %}
+
+        <div class="comment-menu">
+
+            <button class="comment-menu-btn"
+                    onclick="toggleCommentMenu(event, this)">
+
+                <i class="bi bi-three-dots-vertical"></i>
+
+            </button>
+
+            <div class="comment-menu-dropdown">
+
+                {% if user == comment.author %}
+
+                    <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
+                        Изменить
                     </a>
+
+                {% endif %}
+
+                    <a href="{% url 'delete_comment' pk=comment.pk %}">
+                        Удалить
+                    </a>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        <!-- REPLIES -->
+
+        {% for reply in comment.replies.all %}
+
+            <div class="comment"
+                 style="
+                    margin-left: 40px;
+                    margin-top: 20px;
+                    border-left: 3px solid #ddd;
+                    padding-left: 15px;
+                 ">
+                <!-- Отображение имени и даты у вложенных комментариев -->
+                <p class="comment-meta">
+                    <strong>{{ reply.author }}</strong>
+
+                <span class="text-muted">
+                    • {{ reply.created_date|date:"d.m.Y" }}
+                </span>
+
+                </p>
+
+                <p class="comment-text">{{ reply.text }}</p>
+
+                <div class="edit-form-wrapper">
+
+                    <textarea
+                        class="edit-input"
+                        data-original="{{ reply.text }}">{{ reply.text }}</textarea>
+
+                    <div class="edit-actions">
+
+                        <button type="button"
+                                class="edit-cancel">
+                            Отмена
+                        </button>
+
+                        <button type="button"
+                                class="edit-save"
+                                data-id="{{ reply.id }}">
+                            Сохранить
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- LIKE / DISLIKE REPLY -->
+
+                <div class="comment-actions">
+
+                    <!-- LIKE -->
+
+                    <a
+                       class="yt-like-btn like-btn
+                       {% if user in reply.likes.all %}
+                           active-like
+                       {% endif %}"
+                       data-id="{{ reply.pk }}">
+
+                        <i class="
+                            {% if user in reply.likes.all %}
+                                bi bi-hand-thumbs-up-fill
+                            {% else %}
+                                bi bi-hand-thumbs-up
+                            {% endif %}
+                        "></i>
+
+                        <span class="like-count">
+                            {{ reply.total_likes }}
+                        </span>
+
+                    </a>
+
+                    <!-- DISLIKE -->
+
+                    <a
+                       class="yt-like-btn dislike-btn
+                       {% if user in reply.dislikes.all %}
+                           active-dislike
+                       {% endif %}"
+                       data-id="{{ reply.pk }}">
+
+                        <i class="
+                            {% if user in reply.dislikes.all %}
+                                bi bi-hand-thumbs-down-fill
+                            {% else %}
+                                bi bi-hand-thumbs-down
+                            {% endif %}
+                        "></i>
+
+                        <span class="dislike-count">
+                            {{ reply.total_dislikes }}
+                        </span>
+
+                    </a>
+
+                </div>
+
+                <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ ВЛОЖЕННЫХ КОММЕНТАРИЕВ -->
+
+                {% if user == reply.author or user.is_staff %}
+
+                <div class="comment-menu">
+
+                    <button class="comment-menu-btn"
+                            onclick="toggleCommentMenu(event, this)">
+
+                        <i class="bi bi-three-dots-vertical"></i>
+
+                    </button>
+
+                    <div class="comment-menu-dropdown">
+
+                        {% if user == reply.author %}
+
+                            <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
+                                Изменить
+                            </a>
+
+                        {% endif %}
+
+                        <a href="{% url 'delete_comment' pk=reply.pk %}">
+                            Удалить
+                        </a>
+
+                    </div>
+
+                </div>
 
                 {% endif %}
 
             </div>
 
-            {% if user.is_authenticated %}
+        {% endfor %}
 
-                <!-- HIDDEN REPLY FORM -->
+        <hr>
 
-                <div class="reply-form-wrapper">
+    </div>
 
-                    <form method="POST"
-                          action="{% url 'add_comment' pk=post.pk %}">
+{% empty %}
 
-                        {% csrf_token %}
+    <p class="no-comments">Нет комментариев</p>
 
-                        <input type="hidden"
-                               name="parent_id"
-                               value="{{ comment.id }}">
-
-                        <textarea
-                               name="text"
-                               class="reply-input"
-                               placeholder="Введите ответ..."
-                               required></textarea>
-
-                        <div class="reply-actions">
-
-                            <button type="button"
-                                    class="reply-cancel">
-                                Отмена
-                            </button>
-
-                            <button type="submit"
-                                    class="reply-submit">
-                                Ответить
-                            </button>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-            {% endif %}
-
-            <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ КОММЕНТАРИЕВ -->
-
-            {% if user == comment.author or user.is_staff %}
-
-            <div class="comment-menu">
-
-                <button class="comment-menu-btn"
-                        onclick="toggleCommentMenu(event, this)">
-
-                    <i class="bi bi-three-dots-vertical"></i>
-
-                </button>
-
-                <div class="comment-menu-dropdown">
-
-                    {% if user == comment.author %}
-
-                        <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
-                            Изменить
-                        </a>
-
-                    {% endif %}
-
-                        <a href="{% url 'delete_comment' pk=comment.pk %}">
-                            Удалить
-                        </a>
-
-                </div>
-
-            </div>
-
-            {% endif %}
-
-            <!-- REPLIES -->
-
-            {% for reply in comment.replies.all %}
-
-                <div class="comment"
-                     style="
-                        margin-left: 40px;
-                        margin-top: 20px;
-                        border-left: 3px solid #ddd;
-                        padding-left: 15px;
-                     ">
-
-                    <!-- Отображение имени и даты у вложенных комментариев -->
-
-                    <p class="comment-meta">
-                        <strong>{{ reply.author }}</strong>
-
-                    <span class="text-muted">
-                        • {{ reply.created_date|date:"d.m.Y" }}
-                    </span>
-
-                    </p>
-
-                    <p class="comment-text">{{ reply.text }}</p>
-
-                    <div class="edit-form-wrapper">
-
-                        <textarea
-                            class="edit-input"
-                            data-original="{{ reply.text }}">{{ reply.text }}</textarea>
-
-                        <div class="edit-actions">
-
-                            <button type="button"
-                                    class="edit-cancel">
-                                Отмена
-                            </button>
-
-                            <button type="button"
-                                    class="edit-save"
-                                    data-id="{{ reply.id }}">
-                                Сохранить
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <!-- LIKE / DISLIKE REPLY -->
-
-                    <div class="comment-actions">
-
-                        <!-- LIKE -->
-
-                        <a
-                           class="yt-like-btn like-btn
-                           {% if user in reply.likes.all %}
-                               active-like
-                           {% endif %}"
-                           data-id="{{ reply.pk }}">
-
-                            <i class="
-                                {% if user in reply.likes.all %}
-                                    bi bi-hand-thumbs-up-fill
-                                {% else %}
-                                    bi bi-hand-thumbs-up
-                                {% endif %}
-                            "></i>
-
-                            <span class="like-count">
-                                {{ reply.total_likes }}
-                            </span>
-
-                        </a>
-
-                        <!-- DISLIKE -->
-
-                        <a
-                           class="yt-like-btn dislike-btn
-                           {% if user in reply.dislikes.all %}
-                               active-dislike
-                           {% endif %}"
-                           data-id="{{ reply.pk }}">
-
-                            <i class="
-                                {% if user in reply.dislikes.all %}
-                                    bi bi-hand-thumbs-down-fill
-                                {% else %}
-                                    bi bi-hand-thumbs-down
-                                {% endif %}
-                            "></i>
-
-                            <span class="dislike-count">
-                                {{ reply.total_dislikes }}
-                            </span>
-
-                        </a>
-
-                    </div>
-
-                    <!-- УДАЛЕНИЕ И ИЗМЕНЕНИЕ ВЛОЖЕННЫХ КОММЕНТАРИЕВ -->
-
-                    {% if user == reply.author or user.is_staff %}
-
-                    <div class="comment-menu">
-
-                        <button class="comment-menu-btn"
-                                onclick="toggleCommentMenu(event, this)">
-
-                            <i class="bi bi-three-dots-vertical"></i>
-
-                        </button>
-
-                        <div class="comment-menu-dropdown">
-
-                            {% if user == reply.author %}
-
-                                <a href="#" class="edit-toggle" data-id="{{ comment.id }}">
-                                    Изменить
-                                </a>
-
-                            {% endif %}
-
-                            <a href="{% url 'delete_comment' pk=reply.pk %}">
-                                Удалить
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                    {% endif %}
-
-                </div>
-
-            {% endfor %}
-
-            <hr>
-
-        </div>
-
-    {% empty %}
-
-        <p class="no-comments"
-           id="no-comments">
-            Нет комментариев
-        </p>
-
-    {% endfor %}
-
-</div>
+{% endfor %}
 
 <script>
 
@@ -836,105 +834,6 @@ if (mainCancel) {
         mainActions.style.display = 'none'
 
         mainInput.blur()
-
-    })
-
-}
-
-</script>
-
-<script>
-
-const commentForm =
-    document.getElementById('comment-form')
-
-if (commentForm) {
-
-    commentForm.addEventListener('submit', function(e) {
-
-        e.preventDefault()
-
-        const formData = new FormData(this)
-
-        fetch(this.action, {
-
-            method: 'POST',
-
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-
-            body: formData
-
-        })
-
-        .then(response => response.json())
-
-        .then(data => {
-
-            if (!data.success) {
-
-                console.log(data)
-
-                return
-            }
-
-            const commentsContainer =
-                document.getElementById('comments-container')
-
-            const html = `
-                <div class="comment" style="margin-bottom:30px;">
-
-                    <p class="comment-meta">
-                        <strong>${data.author}</strong>
-                        <span class="text-muted">• ${data.date}</span>
-                    </p>
-
-                    <p class="comment-text"></p>
-
-                    <hr>
-
-                </div>
-            `
-
-            const noComments =
-                document.getElementById('no-comments')
-
-            if (noComments) {
-
-                noComments.remove()
-
-            }
-
-            commentsContainer.insertAdjacentHTML('afterbegin', html)
-
-            const newComment =
-                commentsContainer.firstElementChild
-
-            newComment.querySelector('.comment-text').textContent =
-                data.text
-
-            const countElement =
-                document.getElementById('comments-count')
-
-            if (countElement) {
-
-                const currentCount =
-                    parseInt(
-                        countElement.textContent.match(/\d+/)[0]
-                    )
-
-                countElement.textContent =
-                    `Комментарии (${currentCount + 1})`
-            }
-
-            commentForm.reset()
-
-            mainActions.style.display = 'none'
-
-            mainInput.style.height = '38px'
-
-        })
 
     })
 
