@@ -365,6 +365,44 @@ body {
     justify-content: center;
 }
 
+.delete-modal-cancel {
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+
+    background: transparent;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: #606060;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+/* Состояние кнопки [Отмена] при наведении мыши */
+
+.delete-modal-cancel:hover {
+
+    background: rgba(0,0,0,0.08);
+
+    color: #000;
+}
+
 /* ====================================
    СЧЕТЧИК И СОРТИРОВКА КОММЕНТАРИЕВ   
 ==================================== */
