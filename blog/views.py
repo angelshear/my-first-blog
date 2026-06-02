@@ -72,7 +72,7 @@ def post_list(request):
 
         request,
 
-        'blog/post_list.html',
+        'blog/posts/post_list.html',
 
         {
             'page_obj': page_obj,
@@ -140,7 +140,7 @@ def post_detail(request, pk):
 
         request,
 
-        'blog/post_detail.html',
+        'blog/posts/post_detail.html',
 
         {
             'post': post,
@@ -198,7 +198,7 @@ def post_new(request):
 
         request,
 
-        'blog/post_edit.html',
+        'blog/posts/post_edit.html',
 
         {
             'form': form
@@ -271,7 +271,7 @@ def post_edit(request, pk):
 
         request,
 
-        'blog/post_edit.html',
+        'blog/posts/post_edit.html',
 
         {
             'form': form
@@ -378,36 +378,60 @@ def add_comment(request, pk):
             )
 
             comment.post = post
-
             comment.author = request.user
 
             # REPLY
 
-            parent_id = request.POST.get(
-                'parent_id'
-            )
+            parent_id = request.POST.get('parent_id')
 
             if parent_id:
 
                 parent_comment = get_object_or_404(
-
                     Comment,
-
                     id=parent_id
-
                 )
 
                 comment.parent = parent_comment
 
             comment.save()
 
-    return redirect(
+            return JsonResponse({
 
-        'post_detail',
+                'success': True,
 
-        pk=pk
+                'id': comment.id,
 
-    )
+                'author': comment.author.username,
+
+                'text': comment.text,
+
+                'date': comment.created_date.strftime(
+                    '%d.%m.%Y %H:%M'
+                ),
+
+                'parent_id': (
+                    comment.parent.id
+                    if comment.parent
+                    else None
+                )
+
+            })
+
+        return JsonResponse({
+
+            'success': False,
+
+            'errors': form.errors
+
+        })
+
+    return JsonResponse({
+
+        'success': False,
+
+        'message': 'Invalid request'
+
+    })
 
 
 # =========================================================
