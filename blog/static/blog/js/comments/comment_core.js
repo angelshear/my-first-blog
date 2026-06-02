@@ -1,87 +1,94 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* ==================================
+      ФОРМА ВВОДА КОММЕНТАРИЕВ
+================================== */
 
-    // =========================
-    // ELEMENTS
-    // =========================
-    const form = document.getElementById('comment-form')
-    const input = document.querySelector('.main-comment-input')
-    const actions = document.querySelector('.main-comment-actions')
-    const cancelBtn = document.querySelector('.main-comment-cancel')
-    const container = document.getElementById('comments-container')
-    const countElement = document.getElementById('comments-count')
+const mainInput =
+    document.querySelector('.main-comment-input')
 
-    if (!form || !input || !actions) return
+const mainActions =
+    document.querySelector('.main-comment-actions')
 
-    // =========================
-    // UI HELPERS
-    // =========================
-    function showActions() {
-        actions.style.display = 'flex'
-    }
+const mainCancel =
+    document.querySelector('.main-comment-cancel')
 
-    function hideActions() {
-        actions.style.display = 'none'
-    }
+if (mainInput) {
 
-    function resetForm() {
-        form.reset()
-        input.style.height = '38px'
-        input.blur()
-        hideActions()
-    }
+    mainInput.addEventListener('focus', () => {
 
-    function autoResize() {
-        input.style.height = '38px'
-        input.style.height = input.scrollHeight + 'px'
-    }
+        mainActions.style.display = 'flex'
 
-    // =========================
-    // UI EVENTS
-    // =========================
-
-    input.addEventListener('focus', showActions)
-
-    input.addEventListener('input', () => {
-        showActions()
-        autoResize()
     })
 
-    cancelBtn?.addEventListener('click', (e) => {
-        e.preventDefault()
-        resetForm()
+    mainInput.addEventListener('input', function() {
+
+        this.style.height = '38px'
+
+        this.style.height =
+            this.scrollHeight + 'px'
+
     })
 
-    // =========================
-    // SUBMIT COMMENT
-    // =========================
-    form.addEventListener('submit', async (e) => {
+}
+
+if (mainCancel) {
+
+    mainCancel.addEventListener('click', () => {
+
+        mainInput.value = ''
+
+        mainInput.style.height = '38px'
+
+        mainInput.style.height = mainInput.scrollHeight + 'px'
+
+        mainActions.style.display = 'none'
+
+        mainInput.blur()
+
+    })
+
+}
+
+if (commentForm) {
+
+    commentForm.addEventListener('submit', function(e) {
+
         e.preventDefault()
 
-        const formData = new FormData(form)
+        const formData = new FormData(this)
 
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                body: formData
-            })
+        fetch(this.action, {
+
+            method: 'POST',
+
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+
+            body: formData
+
+        })
+
+        .then(response => {
 
             if (!response.ok) {
-                throw new Error('Server error')
+                throw new Error('Ошибка сервера')
             }
 
-            const data = await response.json()
+            return response.json()
+        })
+
+        .then(data => {
 
             if (!data.success) {
+
                 console.log(data)
+
                 return
             }
 
-            // =========================
-            // RENDER NEW COMMENT
-            // =========================
+            const commentsContainer =
+                document.getElementById('comments-container')
+
             const html = `
                 <div class="comment" style="margin-bottom:30px;">
 
@@ -92,36 +99,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <p class="comment-text"></p>
 
+                    <hr>
+
                 </div>
             `
 
-            const noComments = document.getElementById('no-comments')
-            if (noComments) noComments.remove()
+            const noComments =
+                document.getElementById('no-comments')
 
-            container.insertAdjacentHTML('afterbegin', html)
+            if (noComments) {
 
-            const newComment = container.firstElementChild
-            newComment.querySelector('.comment-text').textContent = data.text
+                noComments.remove()
 
-            // =========================
-            // UPDATE COUNT
-            // =========================
-            if (countElement) {
-                const match = countElement.textContent.match(/\d+/)
-                if (match) {
-                    const current = parseInt(match[0])
-                    countElement.textContent = `Комментарии (${current + 1})`
-                }
             }
 
-            // =========================
-            // RESET FORM
-            // =========================
-            resetForm()
+            commentsContainer.insertAdjacentHTML('afterbegin', html)
 
-        } catch (err) {
-            console.error(err)
-        }
+            const newComment =
+                commentsContainer.firstElementChild
+
+            newComment.querySelector('.comment-text').textContent =
+                data.text
+
+            const countElement =
+                document.getElementById('comments-count')
+
+            if (countElement) {
+
+                const currentCount =
+                    parseInt(
+                        countElement.textContent.match(/\d+/)[0]
+                    )
+
+                countElement.textContent =
+                    `Комментарии (${currentCount + 1})`
+            }
+
+            commentForm.reset()
+
+            if (mainActions) {
+                mainActions.style.display = 'none'
+            }
+
+            if (mainInput) {
+                mainInput.style.height = '38px'
+                mainInput.blur()
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(error)
+
+        })
+
     })
 
-})
+}
