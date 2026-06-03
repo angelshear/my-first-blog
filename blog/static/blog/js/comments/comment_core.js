@@ -149,6 +149,8 @@ document.addEventListener('click', function (e) {
     const likeBtn = e.target.closest('.like-btn')
     if (likeBtn) {
 
+        e.preventDefault()
+
         const id = likeBtn.dataset.id
 
         fetch(`/comment/${id}/like/`, {
@@ -161,13 +163,25 @@ document.addEventListener('click', function (e) {
         .then(r => r.json())
         .then(data => {
 
+            const comment = likeBtn.closest('.comment')
+
             likeBtn.querySelector('.like-count').textContent = data.likes
+
             likeBtn.classList.toggle('active-like', data.liked)
 
-            const icon = likeBtn.querySelector('i')
-            icon.className = data.liked
-                ? 'bi bi-hand-thumbs-up-fill'
-                : 'bi bi-hand-thumbs-up'
+            const dislikeBtn =
+                comment.querySelector('.dislike-btn')
+
+            if (dislikeBtn) {
+
+                dislikeBtn.querySelector('.dislike-count').textContent =
+                    data.dislikes
+
+                dislikeBtn.classList.remove('active-dislike')
+
+                dislikeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-down'
+            }
         })
 
     }
@@ -179,6 +193,8 @@ document.addEventListener('click', function (e) {
 
     const dislikeBtn = e.target.closest('.dislike-btn')
     if (dislikeBtn) {
+
+        e.preventDefault()
 
         const id = dislikeBtn.dataset.id
 
@@ -192,13 +208,29 @@ document.addEventListener('click', function (e) {
         .then(r => r.json())
         .then(data => {
 
-            dislikeBtn.querySelector('.dislike-count').textContent = data.dislikes
-            dislikeBtn.classList.toggle('active-dislike', data.disliked)
+            const comment = dislikeBtn.closest('.comment')
 
-            const icon = dislikeBtn.querySelector('i')
-            icon.className = data.disliked
-                ? 'bi bi-hand-thumbs-down-fill'
-                : 'bi bi-hand-thumbs-down'
+            dislikeBtn.querySelector('.dislike-count').textContent =
+                data.dislikes
+
+            dislikeBtn.classList.toggle(
+                'active-dislike',
+                data.disliked
+            )
+
+            const likeBtn =
+                comment.querySelector('.like-btn')
+
+            if (likeBtn) {
+
+                likeBtn.querySelector('.like-count').textContent =
+                    data.likes
+
+                likeBtn.classList.remove('active-like')
+
+                likeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-up'
+            }
         })
 
     }
