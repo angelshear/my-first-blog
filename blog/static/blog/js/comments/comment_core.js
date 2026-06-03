@@ -325,6 +325,11 @@ document.addEventListener('click', function (e) {
 
         const textarea = comment.querySelector('.edit-input')
         textarea.value = textarea.dataset.original
+
+        textarea.style.height = '44px'
+        textarea.style.height = textarea.scrollHeight + 'px'
+
+        textarea.focus()
     }
 
 
