@@ -397,19 +397,36 @@ def add_comment(request, pk):
 
             comment.save()
 
-            html = render_to_string(
+            if comment.parent:
 
-                'blog/comments/comment_item.html',
+                html = render_to_string(
 
-                {
-                    'comment': comment.parent or comment,
-                    'post': post,
-                    'user': request.user,
-                },
+                    'blog/comments/reply_item.html',
 
-                request=request
+                    {
+                        'reply': comment,
+                        'user': request.user,
+                    },
 
-            )
+                    request=request
+
+                )
+
+            else:
+
+                html = render_to_string(
+
+                    'blog/comments/comment_item.html',
+
+                    {
+                        'comment': comment,
+                        'post': post,
+                        'user': request.user,
+                    },
+
+                    request=request
+
+                )
 
             return JsonResponse({
 

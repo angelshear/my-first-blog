@@ -139,3 +139,246 @@ if (commentForm) {
     })
 
 }
+
+document.addEventListener('click', function (e) {
+
+    /* ==================================
+        LIKE / DISLIKE (динамические)
+    ================================== */
+
+    const likeBtn = e.target.closest('.like-btn')
+    if (likeBtn) {
+
+        const id = likeBtn.dataset.id
+
+        fetch(`/comment/${id}/like/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            likeBtn.querySelector('.like-count').textContent = data.likes
+            likeBtn.classList.toggle('active-like', data.liked)
+
+            const icon = likeBtn.querySelector('i')
+            icon.className = data.liked
+                ? 'bi bi-hand-thumbs-up-fill'
+                : 'bi bi-hand-thumbs-up'
+        })
+
+    }
+
+
+    /* ==================================
+        DISLIKE
+    ================================== */
+
+    const dislikeBtn = e.target.closest('.dislike-btn')
+    if (dislikeBtn) {
+
+        const id = dislikeBtn.dataset.id
+
+        fetch(`/comment/${id}/dislike/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            dislikeBtn.querySelector('.dislike-count').textContent = data.dislikes
+            dislikeBtn.classList.toggle('active-dislike', data.disliked)
+
+            const icon = dislikeBtn.querySelector('i')
+            icon.className = data.disliked
+                ? 'bi bi-hand-thumbs-down-fill'
+                : 'bi bi-hand-thumbs-down'
+        })
+
+    }
+
+
+    /* ==================================
+        REPLY OPEN
+    ================================== */
+
+    const replyToggle = e.target.closest('.reply-toggle')
+    if (replyToggle) {
+
+        const comment = replyToggle.closest('.comment')
+        const wrapper = comment.querySelector('.reply-form-wrapper')
+        const textarea = wrapper.querySelector('textarea')
+
+        wrapper.style.display = 'block'
+        replyToggle.style.display = 'none'
+
+        textarea.value = ''
+        textarea.style.height = '38px'
+        textarea.focus()
+    }
+
+
+    /* ==================================
+        REPLY CANCEL
+    ================================== */
+
+    const replyCancel = e.target.closest('.reply-cancel')
+    if (replyCancel) {
+
+        const wrapper = replyCancel.closest('.reply-form-wrapper')
+        const comment = replyCancel.closest('.comment')
+        const textarea = wrapper.querySelector('textarea')
+
+        wrapper.style.display = 'none'
+
+        textarea.value = ''
+        textarea.style.height = '38px'
+
+        const toggle = comment.querySelector('.reply-toggle')
+        if (toggle) toggle.style.display = 'inline-flex'
+    }
+
+    /* ==================================
+        COMMENT MENU (⋮)
+    ================================== */
+
+    const menuBtn = e.target.closest('.comment-menu-btn')
+    if (menuBtn) {
+
+        const dropdown = menuBtn.nextElementSibling
+        dropdown.classList.toggle('open')
+    }
+
+    /* ==================================
+        EDIT + SAVE
+    ================================== */
+
+    const editBtn = e.target.closest('.edit-toggle')
+    if (editBtn) {
+
+        e.preventDefault()
+
+        const comment = editBtn.closest('.comment')
+
+        comment.querySelector('.comment-text').style.display = 'none'
+        comment.querySelector('.edit-form-wrapper').style.display = 'block'
+
+        const textarea = comment.querySelector('.edit-input')
+        textarea.value = textarea.dataset.original
+    }
+
+
+    const cancelBtn = e.target.closest('.edit-cancel')
+    if (cancelBtn) {
+
+        const comment = cancelBtn.closest('.comment')
+
+        comment.querySelector('.comment-text').style.display = 'block'
+        comment.querySelector('.edit-form-wrapper').style.display = 'none'
+    }
+
+
+    const saveBtn = e.target.closest('.edit-save')
+    if (saveBtn) {
+
+        const comment = saveBtn.closest('.comment')
+        const id = saveBtn.dataset.id
+        const textarea = comment.querySelector('.edit-input')
+
+        fetch(`/comment/${id}/edit-inline/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ text: textarea.value })
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            const textBlock =
+                comment.querySelector('.comment-text')
+
+            textBlock.textContent = data.text
+
+            const textarea =
+                comment.querySelector('.edit-input')
+
+            textarea.dataset.original = data.text
+
+            textBlock.style.display = 'block'
+
+            comment.querySelector('.edit-form-wrapper').style.display = 'none'
+        })
+    }
+
+})
+
+document.addEventListener('submit', function (e) {
+
+    const form = e.target.closest('.reply-form-wrapper form')
+    if (!form) return
+
+    e.preventDefault()
+
+    const formData = new FormData(form)
+
+    fetch(form.action, {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+
+        if (!data.success) return
+
+        const wrapper = form.closest('.reply-form-wrapper')
+
+        // ❗ ВСТАВЛЯЕМ В ПРАВИЛЬНОЕ МЕСТО
+        const parentComment = form.closest('.comment')
+
+        let repliesContainer = parentComment.querySelector('.replies-container')
+
+        if (!repliesContainer) {
+            repliesContainer = document.createElement('div')
+            repliesContainer.classList.add('replies-container')
+            parentComment.appendChild(repliesContainer)
+        }
+
+        repliesContainer.insertAdjacentHTML('beforeend', data.html)
+
+        wrapper.style.display = 'none'
+        form.reset()
+
+        const toggle =
+            parentComment.querySelector('.reply-toggle')
+
+        if (toggle) {
+            toggle.style.display = 'inline-flex'
+        }
+    })
+
+})
+
+document.addEventListener('click', function (e) {
+
+    if (e.target.closest('.comment-menu-btn')) return
+
+    document
+        .querySelectorAll('.comment-menu-dropdown')
+        .forEach(menu => {
+
+            menu.classList.remove('open')
+
+        })
+
+})
