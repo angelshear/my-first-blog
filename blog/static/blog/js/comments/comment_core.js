@@ -11,6 +11,9 @@ const mainActions =
 const mainCancel =
     document.querySelector('.main-comment-cancel')
 
+const commentForm =
+    document.getElementById('comment-form')
+
 if (mainInput) {
 
     mainInput.addEventListener('focus', () => {
