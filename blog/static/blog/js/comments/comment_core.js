@@ -273,7 +273,7 @@ document.addEventListener('click', function (e) {
         replyToggle.style.display = 'none'
 
         textarea.value = ''
-        textarea.style.height = '38px'
+        textarea.style.height = '44px'
         textarea.focus()
     }
 
@@ -292,7 +292,7 @@ document.addEventListener('click', function (e) {
         wrapper.style.display = 'none'
 
         textarea.value = ''
-        textarea.style.height = '38px'
+        textarea.style.height = '44px'
 
         const toggle = comment.querySelector('.reply-toggle')
         if (toggle) toggle.style.display = 'inline-flex'
