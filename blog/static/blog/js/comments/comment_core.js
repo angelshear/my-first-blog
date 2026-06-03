@@ -337,6 +337,9 @@ document.addEventListener('click', function (e) {
     if (cancelBtn) {
 
         const comment = cancelBtn.closest('.comment')
+        const textarea = comment.querySelector('.edit-input')
+
+        textarea.style.height = '44px'
 
         comment.querySelector('.comment-text').style.display = 'block'
         comment.querySelector('.edit-form-wrapper').style.display = 'none'
@@ -439,5 +442,20 @@ document.addEventListener('click', function (e) {
             menu.classList.remove('show')
 
         })
+
+})
+
+/* ==================================
+    AUTO RESIZE EDIT TEXTAREA
+================================== */
+
+document.addEventListener('input', function (e) {
+
+    const textarea = e.target.closest('.edit-input')
+
+    if (!textarea) return
+
+    textarea.style.height = '44px'
+    textarea.style.height = textarea.scrollHeight + 'px'
 
 })
