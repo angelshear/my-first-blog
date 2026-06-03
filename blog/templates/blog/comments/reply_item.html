@@ -34,4 +34,32 @@
 
     </div>
 
+    {% if user == reply.author or user.is_staff %}
+
+    <div class="comment-menu">
+
+        <button class="comment-menu-btn">
+            <i class="bi bi-three-dots-vertical"></i>
+        </button>
+
+        <div class="comment-menu-dropdown">
+
+            {% if user == reply.author %}
+                <a href="#"
+                   class="edit-toggle"
+                   data-id="{{ reply.id }}">
+                    Изменить
+                </a>
+            {% endif %}
+
+            <a href="{% url 'delete_comment' pk=reply.pk %}">
+                Удалить
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
 </div>
