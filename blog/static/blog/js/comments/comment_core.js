@@ -306,7 +306,7 @@ document.addEventListener('click', function (e) {
     if (menuBtn) {
 
         const dropdown = menuBtn.nextElementSibling
-        dropdown.classList.toggle('open')
+        dropdown.classList.toggle('show')
     }
 
     /* ==================================
