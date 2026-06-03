@@ -703,6 +703,8 @@ body {
     margin-bottom: 20px;
 
     border-left: 4px solid #ff9400;
+
+    overflow: visible;
 }
 
 .comment-form-wrapper {
