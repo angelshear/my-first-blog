@@ -143,14 +143,11 @@ if (commentForm) {
 document.addEventListener('click', function (e) {
 
     /* ==================================
-        LIKE
+        LIKE / DISLIKE (динамические)
     ================================== */
 
     const likeBtn = e.target.closest('.like-btn')
-
     if (likeBtn) {
-
-        e.preventDefault()
 
         const id = likeBtn.dataset.id
 
@@ -164,51 +161,24 @@ document.addEventListener('click', function (e) {
         .then(r => r.json())
         .then(data => {
 
-            likeBtn.querySelector('.like-count').textContent =
-                data.likes
+            likeBtn.querySelector('.like-count').textContent = data.likes
+            likeBtn.classList.toggle('active-like', data.liked)
 
-            if (data.liked) {
-
-                likeBtn.classList.add('active-like')
-
-                likeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-up-fill'
-
-            } else {
-
-                likeBtn.classList.remove('active-like')
-
-                likeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-up'
-            }
-
-            const dislikeBtn =
-                likeBtn.parentElement.querySelector('.dislike-btn')
-
-            if (dislikeBtn) {
-
-                dislikeBtn.classList.remove('active-dislike')
-
-                dislikeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-down'
-
-                dislikeBtn.querySelector('.dislike-count').textContent =
-                    data.dislikes
-            }
+            const icon = likeBtn.querySelector('i')
+            icon.className = data.liked
+                ? 'bi bi-hand-thumbs-up-fill'
+                : 'bi bi-hand-thumbs-up'
         })
 
-        return
     }
+
 
     /* ==================================
         DISLIKE
     ================================== */
 
     const dislikeBtn = e.target.closest('.dislike-btn')
-
     if (dislikeBtn) {
-
-        e.preventDefault()
 
         const id = dislikeBtn.dataset.id
 
@@ -222,41 +192,17 @@ document.addEventListener('click', function (e) {
         .then(r => r.json())
         .then(data => {
 
-            dislikeBtn.querySelector('.dislike-count').textContent =
-                data.dislikes
+            dislikeBtn.querySelector('.dislike-count').textContent = data.dislikes
+            dislikeBtn.classList.toggle('active-dislike', data.disliked)
 
-            if (data.disliked) {
-
-                dislikeBtn.classList.add('active-dislike')
-
-                dislikeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-down-fill'
-
-            } else {
-
-                dislikeBtn.classList.remove('active-dislike')
-
-                dislikeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-down'
-            }
-
-            const likeBtn =
-                dislikeBtn.parentElement.querySelector('.like-btn')
-
-            if (likeBtn) {
-
-                likeBtn.classList.remove('active-like')
-
-                likeBtn.querySelector('i').className =
-                    'bi bi-hand-thumbs-up'
-
-                likeBtn.querySelector('.like-count').textContent =
-                    data.likes
-            }
+            const icon = dislikeBtn.querySelector('i')
+            icon.className = data.disliked
+                ? 'bi bi-hand-thumbs-down-fill'
+                : 'bi bi-hand-thumbs-down'
         })
 
-        return
     }
+
 
     /* ==================================
         REPLY OPEN
