@@ -92,21 +92,6 @@ if (commentForm) {
             const commentsContainer =
                 document.getElementById('comments-container')
 
-            const html = `
-                <div class="comment" style="margin-bottom:30px;">
-
-                    <p class="comment-meta">
-                        <strong>${data.author}</strong>
-                        <span class="text-muted">• ${data.date}</span>
-                    </p>
-
-                    <p class="comment-text"></p>
-
-                    <hr>
-
-                </div>
-            `
-
             const noComments =
                 document.getElementById('no-comments')
 
@@ -116,13 +101,7 @@ if (commentForm) {
 
             }
 
-            commentsContainer.insertAdjacentHTML('afterbegin', html)
-
-            const newComment =
-                commentsContainer.firstElementChild
-
-            newComment.querySelector('.comment-text').textContent =
-                data.text
+            commentsContainer.insertAdjacentHTML('afterbegin', data.html)
 
             const countElement =
                 document.getElementById('comments-count')

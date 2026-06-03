@@ -18,6 +18,8 @@ from django.db.models import Q
 
 from django.http import HttpResponseForbidden, JsonResponse
 
+from django.template.loader import render_to_string
+
 from .models import (
     Post,
     Comment
@@ -395,19 +397,25 @@ def add_comment(request, pk):
 
             comment.save()
 
+            html = render_to_string(
+
+                'blog/comments/comment_item.html',
+
+                {
+                    'comment': comment.parent or comment,
+                    'post': post,
+                    'user': request.user,
+                },
+
+                request=request
+
+            )
+
             return JsonResponse({
 
                 'success': True,
 
-                'id': comment.id,
-
-                'author': comment.author.username,
-
-                'text': comment.text,
-
-                'date': comment.created_date.strftime(
-                    '%d.%m.%Y %H:%M'
-                ),
+                'html': html,
 
                 'parent_id': (
                     comment.parent.id
