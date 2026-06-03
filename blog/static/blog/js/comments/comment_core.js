@@ -143,6 +143,122 @@ if (commentForm) {
 document.addEventListener('click', function (e) {
 
     /* ==================================
+        LIKE
+    ================================== */
+
+    const likeBtn = e.target.closest('.like-btn')
+
+    if (likeBtn) {
+
+        e.preventDefault()
+
+        const id = likeBtn.dataset.id
+
+        fetch(`/comment/${id}/like/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            likeBtn.querySelector('.like-count').textContent =
+                data.likes
+
+            if (data.liked) {
+
+                likeBtn.classList.add('active-like')
+
+                likeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-up-fill'
+
+            } else {
+
+                likeBtn.classList.remove('active-like')
+
+                likeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-up'
+            }
+
+            const dislikeBtn =
+                likeBtn.parentElement.querySelector('.dislike-btn')
+
+            if (dislikeBtn) {
+
+                dislikeBtn.classList.remove('active-dislike')
+
+                dislikeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-down'
+
+                dislikeBtn.querySelector('.dislike-count').textContent =
+                    data.dislikes
+            }
+        })
+
+        return
+    }
+
+    /* ==================================
+        DISLIKE
+    ================================== */
+
+    const dislikeBtn = e.target.closest('.dislike-btn')
+
+    if (dislikeBtn) {
+
+        e.preventDefault()
+
+        const id = dislikeBtn.dataset.id
+
+        fetch(`/comment/${id}/dislike/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            dislikeBtn.querySelector('.dislike-count').textContent =
+                data.dislikes
+
+            if (data.disliked) {
+
+                dislikeBtn.classList.add('active-dislike')
+
+                dislikeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-down-fill'
+
+            } else {
+
+                dislikeBtn.classList.remove('active-dislike')
+
+                dislikeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-down'
+            }
+
+            const likeBtn =
+                dislikeBtn.parentElement.querySelector('.like-btn')
+
+            if (likeBtn) {
+
+                likeBtn.classList.remove('active-like')
+
+                likeBtn.querySelector('i').className =
+                    'bi bi-hand-thumbs-up'
+
+                likeBtn.querySelector('.like-count').textContent =
+                    data.likes
+            }
+        })
+
+        return
+    }
+
+    /* ==================================
         REPLY OPEN
     ================================== */
 
@@ -318,101 +434,5 @@ document.addEventListener('click', function (e) {
             menu.classList.remove('open')
 
         })
-
-})
-
-document.querySelectorAll('.like-btn').forEach(button => {
-
-    button.addEventListener('click', function(event) {
-
-        event.preventDefault()
-
-        const commentId = this.dataset.id
-
-        fetch(`/comment/${commentId}/like/`)
-        .then(response => response.json())
-        .then(data => {
-
-            this.querySelector('.like-count').innerText = data.likes
-
-            if (data.liked) {
-
-                this.classList.add('active-like')
-
-                this.querySelector('i').className =
-                    'bi bi-hand-thumbs-up-fill'
-
-            } else {
-
-                this.classList.remove('active-like')
-
-                this.querySelector('i').className =
-                    'bi bi-hand-thumbs-up'
-
-            }
-
-            const dislikeBtn =
-                this.parentElement.querySelector('.dislike-btn')
-
-            dislikeBtn.classList.remove('active-dislike')
-
-            dislikeBtn.querySelector('i').className =
-                'bi bi-hand-thumbs-down'
-
-            dislikeBtn.querySelector('.dislike-count').innerText =
-                data.dislikes
-
-        })
-
-    })
-
-})
-
-
-document.querySelectorAll('.dislike-btn').forEach(button => {
-
-    button.addEventListener('click', function(event) {
-
-        event.preventDefault()
-
-        const commentId = this.dataset.id
-
-        fetch(`/comment/${commentId}/dislike/`)
-        .then(response => response.json())
-        .then(data => {
-
-            this.querySelector('.dislike-count').innerText =
-                data.dislikes
-
-            if (data.disliked) {
-
-                this.classList.add('active-dislike')
-
-                this.querySelector('i').className =
-                    'bi bi-hand-thumbs-down-fill'
-
-            } else {
-
-                this.classList.remove('active-dislike')
-
-                this.querySelector('i').className =
-                    'bi bi-hand-thumbs-down'
-
-            }
-
-            const likeBtn =
-                this.parentElement.querySelector('.like-btn')
-
-            likeBtn.classList.remove('active-like')
-
-            likeBtn.querySelector('i').className =
-                'bi bi-hand-thumbs-up'
-
-            likeBtn.querySelector('.like-count').innerText =
-                data.likes
-
-        })
-
-    })
 
 })
