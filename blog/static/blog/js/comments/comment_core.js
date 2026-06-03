@@ -431,7 +431,7 @@ document.addEventListener('click', function (e) {
         .querySelectorAll('.comment-menu-dropdown')
         .forEach(menu => {
 
-            menu.classList.remove('open')
+            menu.classList.remove('show')
 
         })
 
