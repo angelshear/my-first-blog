@@ -459,3 +459,18 @@ document.addEventListener('input', function (e) {
     textarea.style.height = textarea.scrollHeight + 'px'
 
 })
+
+/* ==================================
+    AUTO RESIZE REPLY TEXTAREA
+================================== */
+
+document.addEventListener('input', function (e) {
+
+    const textarea = e.target.closest('.reply-input')
+
+    if (!textarea) return
+
+    textarea.style.height = '38px'
+    textarea.style.height = textarea.scrollHeight + 'px'
+
+})
