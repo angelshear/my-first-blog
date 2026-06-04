@@ -1343,6 +1343,7 @@ body {
  УБИРАЕТ РАМКУ ПРИ НАЖАТИИ
 ========================= */
 
+.delete-modal-actions a:focus,
 .comment-menu-dropdown a:focus,
 .sort-menu a:focus,
 .post-menu-dropdown a:focus {
