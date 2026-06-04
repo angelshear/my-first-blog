@@ -438,8 +438,7 @@ document.addEventListener('submit', function (e) {
             toggle.style.display = 'inline-flex'
         }
 
-        const countElement =
-            document.getElementById('comments-count')
+        const countElement = document.getElementById('comments-count')
 
         if (countElement) {
 
@@ -552,11 +551,20 @@ document.addEventListener('click', function (e) {
             const countElement = document.getElementById('comments-count')
 
             if (countElement) {
-                const match = countElement.textContent.match(/\d+/)
+
+                const match =
+                    countElement.textContent.match(/\d+/)
+
                 if (match) {
-                    const current = parseInt(match[0])
+
+                    const currentCount =
+                        parseInt(match[0])
+
                     countElement.textContent =
-                        `Комментарии (${Math.max(0, current - 1)})`
+                        `Комментарии (${Math.max(
+                            0,
+                            currentCount - data.deleted_count
+                        )})`
                 }
             }
 

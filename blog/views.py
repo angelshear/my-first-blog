@@ -281,7 +281,6 @@ def post_edit(request, pk):
 
     )
 
-
 # =========================================================
 # DELETE POST
 # =========================================================
@@ -354,6 +353,20 @@ def register(request):
 
     )
 
+# =========================================================
+# COMMENT COUNTER
+# =========================================================
+
+def get_replies_count(comment):
+
+    total = 0
+
+    for reply in comment.replies.all():
+
+        total += 1
+        total += get_replies_count(reply)
+
+    return total
 
 # =========================================================
 # ADD COMMENT / REPLY
@@ -486,8 +499,11 @@ def delete_comment(request, pk):
 
     comment.delete()
 
+    deleted_count = 1 + get_replies_count(comment)
+
     return JsonResponse({
-        'success': True
+        'success': True,
+        'deleted_count': deleted_count,
     })
 
 
