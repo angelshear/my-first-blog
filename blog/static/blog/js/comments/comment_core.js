@@ -273,7 +273,7 @@ document.addEventListener('click', function (e) {
         replyToggle.style.display = 'none'
 
         textarea.value = ''
-        textarea.style.height = 'auto'
+        textarea.style.height = '44px'
         textarea.focus()
     }
 
@@ -292,7 +292,7 @@ document.addEventListener('click', function (e) {
         wrapper.style.display = 'none'
 
         textarea.value = ''
-        textarea.style.height = 'auto'
+        textarea.style.height = '44px'
 
         const toggle = comment.querySelector('.reply-toggle')
         if (toggle) toggle.style.display = 'inline-flex'
@@ -326,7 +326,7 @@ document.addEventListener('click', function (e) {
         const textarea = comment.querySelector('.edit-input')
         textarea.value = textarea.dataset.original
 
-        textarea.style.height = 'auto'
+        textarea.style.height = '0px'
         textarea.style.height = textarea.scrollHeight + 'px'
 
         textarea.focus()
@@ -339,7 +339,7 @@ document.addEventListener('click', function (e) {
         const comment = cancelBtn.closest('.comment')
         const textarea = comment.querySelector('.edit-input')
 
-        textarea.style.height = 'auto'
+        textarea.style.height = '44px'
 
         comment.querySelector('.comment-text').style.display = 'block'
         comment.querySelector('.edit-form-wrapper').style.display = 'none'
@@ -455,7 +455,7 @@ document.addEventListener('input', function (e) {
 
     if (!textarea) return
 
-    textarea.style.height = 'auto'
+    textarea.style.height = '44px'
     textarea.style.height = textarea.scrollHeight + 'px'
 
 })
@@ -470,7 +470,7 @@ document.addEventListener('input', function (e) {
 
     if (!textarea) return
 
-    textarea.style.height = 'auto'
+    textarea.style.height = '44px'
     textarea.style.height = textarea.scrollHeight + 'px'
 
 })
