@@ -14,7 +14,7 @@ from django.contrib.auth import login
 
 from django.core.paginator import Paginator
 
-from django.db.models import Q
+from django.db.models import Q, Count, F, FloatField, ExpressionWrapper
 
 from django.http import HttpResponseForbidden, JsonResponse
 
@@ -90,68 +90,49 @@ def post_list(request):
 
 def post_detail(request, pk):
 
-    post = get_object_or_404(
-        Post,
-        pk=pk
+    post = get_object_or_404(Post, pk=pk)
+
+    sort = request.GET.get('sort', 'new')
+
+    # 1. БАЗОВЫЙ QUERYSET (только корневые комментарии)
+    comments = post.comments.filter(parent__isnull=True)
+
+    # 2. АННОТАЦИИ (делаются один раз для всех режимов)
+    comments = comments.annotate(
+        likes_count=Count('likes', distinct=True),
+        dislikes_count=Count('dislikes', distinct=True),
+        replies_count=Count('replies', distinct=True),
     )
 
-    # SORTING
-
-    sort = request.GET.get(
-        'sort',
-        'new'
-    )
-
-    # ONLY ROOT COMMENTS
-
-    comments = post.comments.filter(
-        parent__isnull=True
-    )
-
-    # SORT COMMENTS
-
+    # 3. СОРТИРОВКА
     if sort == 'old':
 
-        comments = comments.order_by(
-            'created_date'
-        )
+        comments = comments.order_by('created_date')
 
     elif sort == 'popular':
 
-        comments = sorted(
-
-            comments,
-
-            key=lambda c: c.total_likes(),
-
-            reverse=True
-
-        )
+        comments = comments.annotate(
+            score=ExpressionWrapper(
+                F('likes_count')
+                - F('dislikes_count')
+                + F('replies_count') * 0.2,
+                output_field=FloatField()
+            )
+        ).order_by('-score', '-created_date')
 
     else:
 
-        comments = comments.order_by(
-            '-created_date'
-        )
+        comments = comments.order_by('-created_date')
 
-    # COMMENT FORM
-
+    # 4. FORM
     comment_form = CommentForm()
 
-    return render(
-
-        request,
-
-        'blog/posts/post_detail.html',
-
-        {
-            'post': post,
-            'comments': comments,
-            'comment_form': comment_form,
-            'current_sort': sort,
-        }
-
-    )
+    return render(request, 'blog/posts/post_detail.html', {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+        'current_sort': sort,
+    })
 
 
 # =========================================================
