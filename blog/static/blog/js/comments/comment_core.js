@@ -433,6 +433,28 @@ document.addEventListener('submit', function (e) {
         if (toggle) {
             toggle.style.display = 'inline-flex'
         }
+
+        if (toggle) {
+            toggle.style.display = 'inline-flex'
+        }
+
+        const countElement =
+            document.getElementById('comments-count')
+
+        if (countElement) {
+
+            const match =
+                countElement.textContent.match(/\d+/)
+
+            if (match) {
+
+                const currentCount =
+                    parseInt(match[0])
+
+                countElement.textContent =
+                    `Комментарии (${currentCount + 1})`
+            }
+        }
     })
 
 })
