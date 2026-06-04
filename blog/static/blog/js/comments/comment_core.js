@@ -140,8 +140,6 @@ if (commentForm) {
 
 }
 
-let commentToDelete = null
-
 document.addEventListener('click', function (e) {
 
     /* ==================================
@@ -382,25 +380,6 @@ document.addEventListener('click', function (e) {
         })
     }
 
-    /* ==================================
-        DELETE COMMENT
-    ================================== */
-
-    const deleteBtn = e.target.closest('.delete-comment')
-
-    if (deleteBtn) {
-
-        e.preventDefault()
-
-        commentToDelete = deleteBtn
-
-        document
-            .getElementById('deleteCommentModal')
-            .classList.add('show')
-
-        return
-    }
-
 })
 
 /* ==================================
@@ -507,18 +486,26 @@ document.addEventListener('input', function (e) {
 
 })
 
+document.addEventListener('click', function (e) {
 
-const confirmBtn = document.getElementById('confirmDeleteComment')
-const cancelBtnModal = document.getElementById('cancelDeleteComment')
+    const deleteBtn = e.target.closest('.delete-comment')
+    if (!deleteBtn) return
 
-if (confirmBtn) {
+    e.preventDefault()
 
-    confirmBtn.addEventListener('click', function () {
+    const comment = deleteBtn.closest('.comment')
+    const id = deleteBtn.dataset.id
 
-        if (!commentToDelete) return
+    const modal = document.getElementById('deleteCommentModal')
+    modal.classList.add('show')
 
-        const id = commentToDelete.dataset.id
-        const comment = commentToDelete.closest('.comment')
+    const confirmBtn = document.getElementById('confirmDeleteComment')
+
+    // очистка старых обработчиков
+    const newConfirm = confirmBtn.cloneNode(true)
+    confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn)
+
+    newConfirm.addEventListener('click', function () {
 
         fetch(`/comment/${id}/delete/`, {
             method: 'POST',
@@ -532,52 +519,30 @@ if (confirmBtn) {
 
             if (!data.success) return
 
-            const repliesContainer = comment.nextElementSibling
+            const replies = comment.nextElementSibling
 
-            if (
-                repliesContainer &&
-                repliesContainer.classList.contains('replies-container')
-            ) {
-                repliesContainer.remove()
+            if (replies?.classList.contains('replies-container')) {
+                replies.remove()
             }
 
             comment.remove()
 
-            const countElement =
-                document.getElementById('comments-count')
+            const countElement = document.getElementById('comments-count')
 
             if (countElement) {
-
-                const match =
-                    countElement.textContent.match(/\d+/)
-
+                const match = countElement.textContent.match(/\d+/)
                 if (match) {
-
-                    const currentCount =
-                        parseInt(match[0])
-
+                    const current = parseInt(match[0])
                     countElement.textContent =
-                        `Комментарии (${Math.max(0, currentCount - 1)})`
+                        `Комментарии (${Math.max(0, current - 1)})`
                 }
             }
+
+            modal.classList.remove('show')
         })
-
-        document
-            .getElementById('deleteCommentModal')
-            .classList.remove('show')
-
-        commentToDelete = null
     })
-}
 
-if (cancelBtnModal) {
-
-    cancelBtnModal.addEventListener('click', function () {
-
-        document
-            .getElementById('deleteCommentModal')
-            .classList.remove('show')
-
-        commentToDelete = null
-    })
-}
+    document.getElementById('cancelDeleteComment').onclick = () => {
+        modal.classList.remove('show')
+    }
+})
