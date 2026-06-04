@@ -354,32 +354,15 @@ body {
     gap: 20px;
 }
 
-.delete-modal-actions {
+.delete-modal-actions .main-comment-submit {
 
-    border: none;
+    text-decoration: none;
 
-    background: #ff9400;
+    display: inline-flex;
 
-    color: white;
+    align-items: center;
 
-    padding: 8px 18px;
-
-    border-radius: 999px;
-
-    font-weight: 500;
-
-    transition: 0.2s ease;
-
-    cursor: pointer;
-}
-
-.delete-modal-actions:hover {
-
-    background: #e68600;
-
-    color: #fff !important;
-
-    text-decoration: none !important;
+    justify-content: center;
 }
 
 .delete-modal-cancel {
