@@ -35,14 +35,10 @@ document.addEventListener('click', function() {
 
 })
 
-// Открытие окна удаления
-
-const modal =
-    document.getElementById('deletePostModal')
-
-const deletePostBtn = document.getElementById('deletePostBtn')
+// ОТКРЫТИЕ ОКНА УДАЛЕНИЯ ПОСТА
 
 const modal = document.getElementById('deletePostModal')
+const deletePostBtn = document.getElementById('deletePostBtn')
 
 if (deletePostBtn && modal) {
 
@@ -54,18 +50,21 @@ if (deletePostBtn && modal) {
     })
 }
 
+// ОТМЕНА УДАЛЕНИЯ ПОСТА
+
 document
 .getElementById('cancelDeletePost')
-?.addEventListener('click', function() {
+?.addEventListener('click', function () {
 
-    modal.classList.remove('show')
+    modal?.classList.remove('show')
 })
 
-modal?.addEventListener('click', function(e) {
+// КЛИК ПО ФОНУ МОДАЛКИ
+
+modal?.addEventListener('click', function (e) {
 
     if (e.target === modal) {
 
         modal.classList.remove('show')
     }
-
 })
