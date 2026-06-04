@@ -140,6 +140,8 @@ if (commentForm) {
 
 }
 
+let commentToDelete = null
+
 document.addEventListener('click', function (e) {
 
     /* ==================================
@@ -384,65 +386,17 @@ document.addEventListener('click', function (e) {
         DELETE COMMENT
     ================================== */
 
-    const deleteBtn =
-        e.target.closest('.delete-comment')
+    const deleteBtn = e.target.closest('.delete-comment')
 
     if (deleteBtn) {
 
         e.preventDefault()
 
-        if (!confirm('Удалить комментарий?')) {
-            return
-        }
+        commentToDelete = deleteBtn
 
-        const id = deleteBtn.dataset.id
-
-        const comment =
-            deleteBtn.closest('.comment')
-
-        fetch(`/comment/${id}/delete/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(r => r.json())
-        .then(data => {
-
-            if (!data.success) return
-
-            const repliesContainer =
-                comment.nextElementSibling
-
-            if (
-                repliesContainer &&
-                repliesContainer.classList.contains('replies-container')
-            ) {
-                repliesContainer.remove()
-            }
-
-            comment.remove()
-
-            const countElement =
-                document.getElementById('comments-count')
-
-            if (countElement) {
-
-                const match =
-                    countElement.textContent.match(/\d+/)
-
-                if (match) {
-
-                    const currentCount =
-                        parseInt(match[0])
-
-                    countElement.textContent =
-                        `Комментарии (${Math.max(0, currentCount - 1)})`
-                }
-            }
-
-        })
+        document
+            .getElementById('deleteCommentModal')
+            .classList.add('show')
 
         return
     }
@@ -552,3 +506,78 @@ document.addEventListener('input', function (e) {
     textarea.style.height = textarea.scrollHeight + 'px'
 
 })
+
+
+const confirmBtn = document.getElementById('confirmDeleteComment')
+const cancelBtnModal = document.getElementById('cancelDeleteComment')
+
+if (confirmBtn) {
+
+    confirmBtn.addEventListener('click', function () {
+
+        if (!commentToDelete) return
+
+        const id = commentToDelete.dataset.id
+        const comment = commentToDelete.closest('.comment')
+
+        fetch(`/comment/${id}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            if (!data.success) return
+
+            const repliesContainer = comment.nextElementSibling
+
+            if (
+                repliesContainer &&
+                repliesContainer.classList.contains('replies-container')
+            ) {
+                repliesContainer.remove()
+            }
+
+            comment.remove()
+
+            const countElement =
+                document.getElementById('comments-count')
+
+            if (countElement) {
+
+                const match =
+                    countElement.textContent.match(/\d+/)
+
+                if (match) {
+
+                    const currentCount =
+                        parseInt(match[0])
+
+                    countElement.textContent =
+                        `Комментарии (${Math.max(0, currentCount - 1)})`
+                }
+            }
+        })
+
+        document
+            .getElementById('deleteCommentModal')
+            .classList.remove('show')
+
+        commentToDelete = null
+    })
+}
+
+if (cancelBtnModal) {
+
+    cancelBtnModal.addEventListener('click', function () {
+
+        document
+            .getElementById('deleteCommentModal')
+            .classList.remove('show')
+
+        commentToDelete = null
+    })
+}

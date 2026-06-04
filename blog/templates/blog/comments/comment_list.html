@@ -14,3 +14,34 @@
     {% endfor %}
 
 </div>
+
+<!-- МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ КОММЕНТАРИЯ -->
+
+<div class="delete-modal-overlay"
+     id="deleteCommentModal">
+
+    <div class="delete-modal">
+
+        <h3>
+            Действительно удалить комментарий?
+        </h3>
+
+        <div class="delete-modal-actions">
+
+            <button type="button"
+                    class="delete-modal-cancel"
+                    id="cancelDeleteComment">
+                Отмена
+            </button>
+
+            <button type="button"
+                    class="main-comment-submit"
+                    id="confirmDeleteComment">
+                Удалить
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
