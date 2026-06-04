@@ -365,6 +365,15 @@ body {
     justify-content: center;
 }
 
+.delete-modal-actions .main-comment-submit:hover {
+
+    background: #e68600;
+
+    color: #fff !important;
+
+    text-decoration: none !important;
+}
+
 .delete-modal-cancel {
 
     -webkit-appearance: none;
