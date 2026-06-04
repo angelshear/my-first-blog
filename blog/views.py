@@ -490,18 +490,6 @@ def delete_comment(request, pk):
         'success': True
     })
 
-    post_pk = comment.post.pk
-
-    comment.delete()
-
-    return redirect(
-
-        'post_detail',
-
-        pk=post_pk
-
-    )
-
 
 # =========================================================
 # EDIT COMMENT
