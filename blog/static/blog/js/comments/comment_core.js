@@ -124,7 +124,7 @@ if (commentForm) {
             }
 
             if (mainInput) {
-                mainInput.style.height = '0px'
+                mainInput.style.height = '38px'
                 mainInput.blur()
             }
 
@@ -339,7 +339,7 @@ document.addEventListener('click', function (e) {
         const comment = cancelBtn.closest('.comment')
         const textarea = comment.querySelector('.edit-input')
 
-        textarea.style.height = '0px'
+        textarea.style.height = '44px'
 
         comment.querySelector('.comment-text').style.display = 'block'
         comment.querySelector('.edit-form-wrapper').style.display = 'none'
