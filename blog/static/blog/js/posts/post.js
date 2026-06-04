@@ -40,14 +40,19 @@ document.addEventListener('click', function() {
 const modal =
     document.getElementById('deletePostModal')
 
-document
-.querySelector('.post-delete-btn')
-?.addEventListener('click', function(e) {
+const deletePostBtn = document.getElementById('deletePostBtn')
 
-    e.preventDefault()
+const modal = document.getElementById('deletePostModal')
 
-    modal.classList.add('show')
-})
+if (deletePostBtn && modal) {
+
+    deletePostBtn.addEventListener('click', function (e) {
+
+        e.preventDefault()
+
+        modal.classList.add('show')
+    })
+}
 
 document
 .getElementById('cancelDeletePost')
