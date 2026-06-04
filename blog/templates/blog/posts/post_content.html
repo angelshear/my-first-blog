@@ -62,14 +62,17 @@
                 <button type="button"
                         class="delete-modal-cancel"
                         id="cancelDeletePost">
+
                     Отмена
+
                 </button>
 
-                <button type="button"
-                        class="main-comment-submit"
-                        id="deletePostBtn">
+                <a href="{% url 'post_delete' pk=post.pk %}"
+                   class="main-comment-submit">
+
                     Удалить
-                </button>
+
+                </a>
 
             </div>
 
