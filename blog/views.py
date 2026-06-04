@@ -497,9 +497,9 @@ def delete_comment(request, pk):
             status=403
         )
 
-    comment.delete()
-
     deleted_count = 1 + get_replies_count(comment)
+
+    comment.delete()
 
     return JsonResponse({
         'success': True,
