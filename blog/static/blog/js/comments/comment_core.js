@@ -124,7 +124,7 @@ if (commentForm) {
             }
 
             if (mainInput) {
-                mainInput.style.height = '38px'
+                mainInput.style.height = '0px'
                 mainInput.blur()
             }
 
