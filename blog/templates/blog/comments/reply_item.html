@@ -52,7 +52,9 @@
                 </a>
             {% endif %}
 
-            <a href="{% url 'delete_comment' pk=reply.pk %}">
+            <a href="#"
+               class="delete-comment"
+               data-id="{{ reply.pk }}">
                 Удалить
             </a>
 

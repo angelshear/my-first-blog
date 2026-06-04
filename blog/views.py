@@ -474,24 +474,21 @@ def delete_comment(request, pk):
     # AUTHOR / POST AUTHOR / ADMIN
 
     if (
-
         request.user != comment.author
-
-        and
-
-        request.user != comment.post.author
-
-        and
-
-        not request.user.is_staff
-
+        and request.user != comment.post.author
+        and not request.user.is_staff
     ):
 
-        return HttpResponseForbidden(
-
-            "You cannot delete this comment."
-
+        return JsonResponse(
+            {'success': False},
+            status=403
         )
+
+    comment.delete()
+
+    return JsonResponse({
+        'success': True
+    })
 
     post_pk = comment.post.pk
 

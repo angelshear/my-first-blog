@@ -299,7 +299,7 @@ document.addEventListener('click', function (e) {
     }
 
     /* ==================================
-        COMMENT MENU (⋮)
+        COMMENT MENU [⋮]
     ================================== */
 
     const menuBtn = e.target.closest('.comment-menu-btn')
@@ -380,7 +380,78 @@ document.addEventListener('click', function (e) {
         })
     }
 
+    /* ==================================
+        DELETE COMMENT
+    ================================== */
+
+    const deleteBtn =
+        e.target.closest('.delete-comment')
+
+    if (deleteBtn) {
+
+        e.preventDefault()
+
+        if (!confirm('Удалить комментарий?')) {
+            return
+        }
+
+        const id = deleteBtn.dataset.id
+
+        const comment =
+            deleteBtn.closest('.comment')
+
+        fetch(`/comment/${id}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            if (!data.success) return
+
+            const repliesContainer =
+                comment.nextElementSibling
+
+            if (
+                repliesContainer &&
+                repliesContainer.classList.contains('replies-container')
+            ) {
+                repliesContainer.remove()
+            }
+
+            comment.remove()
+
+            const countElement =
+                document.getElementById('comments-count')
+
+            if (countElement) {
+
+                const match =
+                    countElement.textContent.match(/\d+/)
+
+                if (match) {
+
+                    const currentCount =
+                        parseInt(match[0])
+
+                    countElement.textContent =
+                        `Комментарии (${Math.max(0, currentCount - 1)})`
+                }
+            }
+
+        })
+
+        return
+    }
+
 })
+
+/* ==================================
+    AJAX REPLY SUBMIT
+================================== */
 
 document.addEventListener('submit', function (e) {
 
@@ -405,11 +476,13 @@ document.addEventListener('submit', function (e) {
 
         const wrapper = form.closest('.reply-form-wrapper')
 
-        // ❗ ВСТАВЛЯЕМ В ПРАВИЛЬНОЕ МЕСТО
+        // родительский комментарий, под которым должен появиться ответ
         const parentComment = form.closest('.comment')
 
+        // контейнер вложенных комментариев
         let repliesContainer = parentComment.querySelector('.replies-container')
 
+        // создать контейнер, если его ещё нет
         if (!repliesContainer) {
             repliesContainer = document.createElement('div')
             repliesContainer.classList.add('replies-container')
@@ -431,10 +504,15 @@ document.addEventListener('submit', function (e) {
 
 })
 
+/* ==================================
+    CLOSE COMMENT MENU [⋮}
+================================== */
+
 document.addEventListener('click', function (e) {
 
     if (e.target.closest('.comment-menu-btn')) return
 
+    // закрыть все открытые выпадающие меню
     document
         .querySelectorAll('.comment-menu-dropdown')
         .forEach(menu => {
