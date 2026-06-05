@@ -1009,19 +1009,43 @@ body {
 
 .toggle-replies {
     display: inline-block;
-    margin-left: 8px;
     color: #333;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border-radius: 999px;
     padding: 6px 12px;
+
+    position: relative;
+    margin-left: 40px;
+    margin-top: -10px;
+    z-index: 2;
 }
 
 .toggle-replies:hover {
     background: rgba(0,0,0,0.08);
     color: #000;
     text-decoration: none;
+}
+
+.toggle-arrow {
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    transform: rotate(-45deg);
+
+    display: inline-block;
+
+    margin-right: 8px;
+
+    transition: transform 0.2s ease;
+}
+
+.toggle-replies.open .toggle-arrow {
+    transform: rotate(45deg);
 }
 
 /* =========================
