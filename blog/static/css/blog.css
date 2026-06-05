@@ -1004,7 +1004,7 @@ body {
 ============================= */
 
 .hidden-replies {
-    display: none;
+    display: none !important;
 }
 
 .toggle-replies {
