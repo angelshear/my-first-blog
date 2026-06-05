@@ -390,11 +390,8 @@ document.addEventListener('click', function (e) {
 
         e.preventDefault()
 
-        const comment =
-            toggleReplies.closest('.comment')
-
         const repliesContainer =
-            comment.nextElementSibling
+            toggleReplies.nextElementSibling
 
         if (
             repliesContainer &&
@@ -403,16 +400,18 @@ document.addEventListener('click', function (e) {
 
             repliesContainer.classList.toggle('hidden-replies')
 
+            toggleReplies.classList.toggle('open')
+
             const isHidden =
                 repliesContainer.classList.contains('hidden-replies')
 
             const count =
                 repliesContainer.querySelectorAll('.comment.reply').length
 
-            toggleReplies.textContent =
+            toggleReplies.innerHTML =
                 isHidden
-                    ? `Ответы (${count})`
-                    : `Скрыть ответы`
+                    ? `<span class="toggle-arrow"></span> Ответы (${count})`
+                    : `<span class="toggle-arrow"></span> Скрыть ответы`
         }
 
         return
