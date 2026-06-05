@@ -99,10 +99,14 @@
 
     </div>
 
+    <!-- Скрытие вложенных комментариев -->
+
     {% if comment.replies.count %}
         <button type="button" class="toggle-replies">
             <span class="toggle-arrow"></span>
-            Ответы ({{ comment.replies.count }})
+            <span class="toggle-text">
+                Ответы ({{ comment.replies.count }})
+            </span>
         </button>
     {% endif %}
 

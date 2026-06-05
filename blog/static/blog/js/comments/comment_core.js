@@ -403,16 +403,21 @@ document.addEventListener('click', function (e) {
 
             repliesContainer.classList.toggle('hidden-replies')
 
+            toggleReplies.classList.toggle('open')
+
             const isHidden =
                 repliesContainer.classList.contains('hidden-replies')
 
             const count =
                 repliesContainer.querySelectorAll('.comment.reply').length
 
-            toggleReplies.textContent =
+            const text =
+                toggleReplies.querySelector('.toggle-text')
+
+            text.textContent =
                 isHidden
                     ? `Ответы (${count})`
-                    : `Скрыть ответы`
+                    : 'Скрыть ответы'
         }
 
         return
