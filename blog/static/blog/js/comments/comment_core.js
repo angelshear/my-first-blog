@@ -413,13 +413,20 @@ document.addEventListener('submit', function (e) {
         const parentComment = form.closest('.comment')
 
         // контейнер вложенных комментариев
-        let repliesContainer = parentComment.querySelector('.replies-container')
+        let repliesContainer = parentComment.nextElementSibling
 
         // создать контейнер, если его ещё нет
-        if (!repliesContainer) {
+        if (
+            !repliesContainer ||
+            !repliesContainer.classList.contains('replies-container')
+        ) {
             repliesContainer = document.createElement('div')
             repliesContainer.classList.add('replies-container')
-            parentComment.appendChild(repliesContainer)
+
+            parentComment.insertAdjacentElement(
+                'afterend',
+                repliesContainer
+            )
         }
 
         repliesContainer.insertAdjacentHTML('beforeend', data.html)
