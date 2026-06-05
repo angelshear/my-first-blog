@@ -6,8 +6,11 @@
 
         <div class="post">
 
+            <!-- АВТОР И ДАТА ПОСТА -->
+
             <div class="date">
-                {{ post.published_date }}
+                {{ post.author.username }}
+                | {{ post.published_date|date:"d.m.Y" }}
             </div>
 
             <h1>
