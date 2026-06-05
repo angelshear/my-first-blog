@@ -403,7 +403,7 @@ document.addEventListener('click', function (e) {
 
             repliesContainer.classList.toggle('hidden-replies')
 
-            toggleReplies.classList.toggle('open')
+            toggleReplies.classList.toggle('show')
 
             const isHidden =
                 repliesContainer.classList.contains('hidden-replies')
