@@ -409,10 +409,10 @@ document.addEventListener('click', function (e) {
             const count =
                 repliesContainer.querySelectorAll('.comment.reply').length
 
-            toggleReplies.innerHTML =
+            toggleReplies.textContent =
                 isHidden
-                    ? `<span class="toggle-arrow"></span> Ответы (${count})`
-                    : `<span class="toggle-arrow"></span> Скрыть ответы`
+                    ? `Ответы (${count})`
+                    : `Скрыть ответы`
         }
 
         return
