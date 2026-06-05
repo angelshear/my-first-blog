@@ -6,12 +6,15 @@
 
         <div class="post">
 
-            <!-- АВТОР И ДАТА ПОСТА -->
+            <p class="post-meta">
 
-            <div class="date">
-                {{ post.author.username }}
-                | {{ post.published_date|date:"d.m.Y" }}
-            </div>
+                <strong>{{ post.author }}</strong>
+
+                <span class="text-muted">
+                    • {{ post.published_date|date:"d.m.Y" }}
+                </span>
+
+            </p>
 
             <h1>
                 <a href="{% url 'post_detail' pk=post.pk %}">
