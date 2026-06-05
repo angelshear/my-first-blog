@@ -1008,7 +1008,6 @@ body {
 }
 
 .toggle-replies {
-    display: inline-block;
     color: #333;
     cursor: pointer;
     font-size: 14px;
@@ -1016,9 +1015,11 @@ body {
     border-radius: 999px;
     padding: 6px 12px;
 
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     margin-left: 40px;
-    margin-top: -10px;
     z-index: 2;
 }
 

@@ -174,17 +174,21 @@
 
 </div>
 
-<!-- Скрытие вложенных комментариев -->
+<div class="replies-section">
+    
+    <!-- Скрытие вложенных комментариев -->
 
-{% if comment.replies.count %}
-    <button type="button" class="toggle-replies">
-        <span class="toggle-arrow"></span>
-        Ответы ({{ comment.replies.count }})
-    </button>
-{% endif %}
+    {% if comment.replies.count %}
+        <button type="button" class="toggle-replies">
+            <span class="toggle-arrow"></span>
+            Ответы ({{ comment.replies.count }})
+        </button>
+    {% endif %}
 
-<div class="replies-container hidden-replies">
-    {% for reply in comment.replies.all|dictsortreversed:"created_date" %}
-        {% include "blog/comments/reply_item.html" %}
-    {% endfor %}
+    <div class="replies-container hidden-replies">
+        {% for reply in comment.replies.all|dictsortreversed:"created_date" %}
+            {% include "blog/comments/reply_item.html" %}
+        {% endfor %}
+    </div>
+
 </div>
