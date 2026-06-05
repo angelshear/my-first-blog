@@ -471,6 +471,8 @@ document.addEventListener('submit', function (e) {
 
         repliesContainer.classList.remove('hidden-replies')
 
+        toggleReplies.classList.toggle('open')
+
         wrapper.style.display = 'none'
         form.reset()
 

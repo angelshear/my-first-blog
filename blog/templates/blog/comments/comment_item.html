@@ -100,10 +100,10 @@
     </div>
 
     {% if comment.replies.count %}
-        <a href="#"
-           class="toggle-replies">
+        <button type="button" class="toggle-replies">
+            <span class="toggle-arrow"></span>
             Ответы ({{ comment.replies.count }})
-        </a>
+        </button>
     {% endif %}
 
     {% if user.is_authenticated %}
