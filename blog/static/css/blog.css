@@ -1007,22 +1007,20 @@ body {
     display: none;
 }
 
-.replies-section {
-    margin-left: 40px;
-}
-
 .toggle-replies {
-    border: none;
-    background: transparent;
-    color: #065fd4;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 6px 12px;
 
     display: flex;
     align-items: center;
     gap: 8px;
 
-    cursor: pointer;
-
-    padding: 6px 0;
+    margin-left: 40px;
+    z-index: 2;
 }
 
 .toggle-replies:hover {
