@@ -476,7 +476,12 @@ document.addEventListener('submit', function (e) {
 
         repliesContainer.classList.remove('hidden-replies')
 
-        toggleReplies.classList.toggle('open')
+        const repliesToggle =
+            parentComment.querySelector('.toggle-replies')
+
+        if (repliesToggle) {
+            repliesToggle.classList.add('open')
+        }
 
         wrapper.style.display = 'none'
         form.reset()
