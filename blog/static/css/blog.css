@@ -1004,19 +1004,21 @@ body {
 ============================= */
 
 .hidden-replies {
-    display: none !important;
+    display: none;
 }
 
 .toggle-replies {
     display: inline-block;
     margin-top: 8px;
-    color: #065fd4;
+    color: #333;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
 }
 
 .toggle-replies:hover {
+    background: rgba(0,0,0,0.08);
+    color: #000;
     text-decoration: none;
 }
 
