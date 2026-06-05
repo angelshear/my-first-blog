@@ -380,6 +380,44 @@ document.addEventListener('click', function (e) {
         })
     }
 
+    /* ============================================
+        Выпадающее меню к вложенным комментариям
+    ============================================ */
+
+    const toggleReplies = e.target.closest('.toggle-replies')
+
+    if (toggleReplies) {
+
+        e.preventDefault()
+
+        const comment =
+            toggleReplies.closest('.comment')
+
+        const repliesContainer =
+            comment.nextElementSibling
+
+        if (
+            repliesContainer &&
+            repliesContainer.classList.contains('replies-container')
+        ) {
+
+            repliesContainer.classList.toggle('hidden-replies')
+
+            const isHidden =
+                repliesContainer.classList.contains('hidden-replies')
+
+            const count =
+                repliesContainer.querySelectorAll('.comment.reply').length
+
+            toggleReplies.textContent =
+                isHidden
+                    ? `Ответы (${count})`
+                    : `Скрыть ответы`
+        }
+
+        return
+    }
+
 })
 
 /* ==================================
@@ -430,6 +468,8 @@ document.addEventListener('submit', function (e) {
         }
 
         repliesContainer.insertAdjacentHTML('beforeend', data.html)
+
+        repliesContainer.classList.remove('hidden-replies')
 
         wrapper.style.display = 'none'
         form.reset()

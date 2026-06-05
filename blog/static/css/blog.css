@@ -999,6 +999,26 @@ body {
     text-decoration: none;
 }
 
+/* =============================
+ СКРЫТИЕ ВЛОЖЕННЫХ КОММЕНТАРИЕВ
+============================= */
+
+.hidden-replies {
+    display: none;
+}
+
+.toggle-replies {
+    display: inline-block;
+    margin-top: 8px;
+    color: #065fd4;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.toggle-replies:hover {
+    text-decoration: none;
+}
 
 /* =========================
    ВЛОЖЕННЫЕ КОММЕНТАРИИ

@@ -99,6 +99,13 @@
 
     </div>
 
+    {% if comment.replies.count %}
+        <a href="#"
+           class="toggle-replies">
+            Ответы ({{ comment.replies.count }})
+        </a>
+    {% endif %}
+
     {% if user.is_authenticated %}
 
         <!-- HIDDEN REPLY FORM -->
@@ -174,7 +181,7 @@
 
 </div>
 
-<div class="replies-container">
+<div class="replies-container hidden-replies">
     {% for reply in comment.replies.all|dictsortreversed:"created_date" %}
         {% include "blog/comments/reply_item.html" %}
     {% endfor %}
