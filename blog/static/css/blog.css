@@ -1013,10 +1013,18 @@ body {
 
     margin-left: 40px;
 
-    margin-top: -10px;
+    padding-top: 20px;
 }
 
 .toggle-replies {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    transform: translateY(-50%);
 
     display: inline-flex;
     align-items: center;
@@ -1033,6 +1041,8 @@ body {
     font-weight: 600;
 
     cursor: pointer;
+
+    z-index: 2;
 }
 
 .toggle-arrow {
