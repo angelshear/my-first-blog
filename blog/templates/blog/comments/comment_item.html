@@ -102,7 +102,11 @@
     <!-- Скрытие вложенных комментариев -->
 
     {% if comment.replies.count %}
-        <button type="button" class="toggle-replies">
+        <button
+            type="button"
+            class="toggle-replies"
+            data-count="{{ comment.replies.count }}"
+        >
             <span class="toggle-arrow"></span>
             <span class="toggle-text">
                 Ответы ({{ comment.replies.count }})

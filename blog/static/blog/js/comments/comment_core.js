@@ -483,15 +483,24 @@ document.addEventListener('submit', function (e) {
             repliesToggle.classList.add('open')
         }
 
+        if (repliesToggle) {
+
+            const count =
+                repliesContainer.querySelectorAll('.comment.reply').length
+
+            const text =
+                repliesToggle.querySelector('.toggle-text')
+
+            if (text) {
+                text.textContent = `Скрыть ответы`
+            }
+        }
+
         wrapper.style.display = 'none'
         form.reset()
 
         const toggle =
             parentComment.querySelector('.reply-toggle')
-
-        if (toggle) {
-            toggle.style.display = 'inline-flex'
-        }
 
         if (toggle) {
             toggle.style.display = 'inline-flex'
