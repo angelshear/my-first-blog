@@ -480,20 +480,22 @@ document.addEventListener('submit', function (e) {
             parentComment.querySelector('.toggle-replies')
 
         if (repliesToggle) {
-            repliesToggle.classList.add('open')
-        }
 
-        if (repliesToggle) {
+            repliesToggle.classList.remove('hidden')
 
             const count =
                 repliesContainer.querySelectorAll('.comment.reply').length
+
+            repliesToggle.dataset.count = count
 
             const text =
                 repliesToggle.querySelector('.toggle-text')
 
             if (text) {
-                text.textContent = `Скрыть ответы`
+                text.textContent = 'Скрыть ответы'
             }
+
+            repliesToggle.classList.add('open')
         }
 
         wrapper.style.display = 'none'

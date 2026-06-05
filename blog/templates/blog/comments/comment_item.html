@@ -101,18 +101,17 @@
 
     <!-- Скрытие вложенных комментариев -->
 
-    {% if comment.replies.count %}
-        <button
-            type="button"
-            class="toggle-replies"
-            data-count="{{ comment.replies.count }}"
-        >
-            <span class="toggle-arrow"></span>
-            <span class="toggle-text">
-                Ответы ({{ comment.replies.count }})
-            </span>
-        </button>
-    {% endif %}
+    <button
+        type="button"
+        class="toggle-replies {% if not comment.replies.count %}hidden{% endif %}"
+        data-count="{{ comment.replies.count }}"
+    >
+        <span class="toggle-arrow"></span>
+
+        <span class="toggle-text">
+            Ответы ({{ comment.replies.count }})
+        </span>
+    </button>
 
     {% if user.is_authenticated %}
 
