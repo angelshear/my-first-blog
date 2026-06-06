@@ -6,6 +6,68 @@
 
         <div class="post">
 
+            <!-- УДАЛЕНИЕ И РЕДАКТИРОВАНИЕ ПОСТА -->
+
+            {% if user == post.author or user.is_superuser %}
+
+            <div class="post-menu">
+
+                <button class="post-menu-btn"
+                        onclick="togglePostMenu(event, this)">
+
+                    <i class="bi bi-three-dots-vertical"></i>
+
+                </button>
+
+                <div class="post-menu-dropdown">
+
+                    {% if user == post.author %}
+                    <a href="{% url 'post_edit' pk=post.pk %}">
+                        Редактировать
+                    </a>
+                    {% endif %}
+
+                    <a href="#"
+                       class="post-delete-btn"
+                       data-post-id="{{ post.pk }}">
+                        Удалить
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+            <!-- МОДАЛЬНОЕ ОКНО УДАЛЕНИЕ ПОСТА -->
+
+            <div class="delete-modal-overlay"
+                 id="deletePostModal-{{ post.pk }}">
+
+                <div class="delete-modal">
+
+                    <h3>
+                        Действительно удалить этот пост?
+                    </h3>
+
+                    <div class="delete-modal-actions">
+
+                        <button type="button"
+                                class="delete-modal-cancel">
+                            Отмена
+                        </button>
+
+                        <a href="{% url 'post_delete' pk=post.pk %}"
+                           class="main-comment-submit">
+                            Удалить
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             <p class="post-meta">
 
                 <strong>{{ post.author }}</strong>
