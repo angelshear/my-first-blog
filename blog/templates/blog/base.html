@@ -45,9 +45,37 @@
 
 <div class="page-header">
 
-    <!-- AUTH MENU -->
+    <!-- ЛОГО -->
 
-    <div class="pull-right">
+    <div class="header-logo">
+        <a href="/">
+            Django Girls Blog
+        </a>
+    </div>
+
+    <!-- ПОИСК -->
+
+    <div class="header-search">
+
+        <form method="GET"
+              action="{% url 'post_list' %}">
+
+            <input type="text"
+                   name="q"
+                   placeholder="Поиск..."
+                   value="{{ request.GET.q }}">
+
+            <button type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- МЕНЮ -->
+
+    <div class="header-menu">
 
         {% if user.is_authenticated %}
 
@@ -55,14 +83,14 @@
                 Hello, {{ user.username }}
             </span>
 
+            <a href="{% url 'post_new' %}"
+               class="top-menu">
+                <i class="bi bi-plus-lg"></i>
+            </a>
+
             <a href="{% url 'logout' %}"
                class="top-menu">
                 Logout
-            </a>
-
-            <a href="{% url 'post_new' %}"
-               class="top-menu">
-                <span class="glyphicon glyphicon-plus"></span>
             </a>
 
         {% else %}
@@ -81,14 +109,6 @@
 
     </div>
 
-    <!-- SITE TITLE -->
-
-    <h1>
-        <a href="/">
-            Django Girls Blog
-        </a>
-    </h1>
-
 </div>
 
 <!-- MAIN CONTENT -->
@@ -98,29 +118,6 @@
     <div class="row">
 
         <div class="col-md-8 col-md-offset-2">
-
-            <!-- SEARCH -->
-
-            <div class="search-form">
-
-                <form method="GET"
-                      action="{% url 'post_list' %}">
-
-                    <input type="text"
-                           name="q"
-                           placeholder="Search posts..."
-                           value="{{ request.GET.q }}">
-
-                    <button type="submit"
-                            class="btn btn-default">
-
-                        Search
-
-                    </button>
-
-                </form>
-
-            </div>
 
             <!-- DJANGO MESSAGES -->
 
