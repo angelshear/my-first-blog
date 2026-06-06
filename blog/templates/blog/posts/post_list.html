@@ -29,7 +29,7 @@
 
                     <a href="#"
                        class="post-delete-btn"
-                       data-post-id="{{ post.pk }}">
+                       data-post-id="{% url 'post_delete' pk=post.pk %}">
                         Удалить
                     </a>
 
@@ -38,35 +38,6 @@
             </div>
 
             {% endif %}
-
-            <!-- МОДАЛЬНОЕ ОКНО УДАЛЕНИЕ ПОСТА -->
-
-            <div class="delete-modal-overlay"
-                 id="deletePostModal-{{ post.pk }}">
-
-                <div class="delete-modal">
-
-                    <h3>
-                        Действительно удалить этот пост?
-                    </h3>
-
-                    <div class="delete-modal-actions">
-
-                        <button type="button"
-                                class="delete-modal-cancel">
-                            Отмена
-                        </button>
-
-                        <a href="{% url 'post_delete' pk=post.pk %}"
-                           class="main-comment-submit">
-                            Удалить
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
 
             <p class="post-meta">
 

@@ -37,6 +37,12 @@ document.addEventListener('click', function() {
 
 // Открытие окна удаления
 
+const modal =
+    document.getElementById('deletePostModal')
+
+const confirmBtn =
+    document.getElementById('confirmDeletePost')
+
 document.addEventListener('click', function(e) {
 
     const deleteBtn =
@@ -46,41 +52,25 @@ document.addEventListener('click', function(e) {
 
     e.preventDefault()
 
-    const postId =
-        deleteBtn.dataset.postId
+    const deleteUrl =
+        deleteBtn.dataset.deleteUrl
 
-    const modal =
-        document.getElementById(
-            `deletePostModal-${postId}`
-        )
+    confirmBtn.href = deleteUrl
 
-    if (modal) {
-        modal.classList.add('show')
-    }
+    modal.classList.add('show')
 })
 
-document.addEventListener('click', function(e) {
+document
+.getElementById('cancelDeletePost')
+?.addEventListener('click', function() {
 
-    if (
-        e.target.classList.contains(
-            'delete-modal-cancel'
-        )
-    ) {
+    modal.classList.remove('show')
+})
 
-        const modal =
-            e.target.closest(
-                '.delete-modal-overlay'
-            )
+modal?.addEventListener('click', function(e) {
+
+    if (e.target === modal) {
 
         modal.classList.remove('show')
-    }
-
-    if (
-        e.target.classList.contains(
-            'delete-modal-overlay'
-        )
-    ) {
-
-        e.target.classList.remove('show')
     }
 })
