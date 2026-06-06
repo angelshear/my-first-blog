@@ -79,10 +79,6 @@
 
         {% if user.is_authenticated %}
 
-            <span class="top-menu">
-                Hello, {{ user.username }}
-            </span>
-
             <a href="{% url 'post_new' %}"
                class="top-menu">
                 <i class="bi bi-plus-lg"></i>
@@ -92,6 +88,10 @@
                class="top-menu">
                 Logout
             </a>
+
+            <span class="top-menu">
+                Hello, {{ user.username }}
+            </span>
 
         {% else %}
 
