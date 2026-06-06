@@ -109,16 +109,20 @@ body {
 
 .top-menu {
 
-    color: #333;
+    color: white;
 
     text-decoration: none;
 
-    font-weight: 500;
+    font-size: 16px;
+
+    font-weight: 600;
 }
 
 .top-menu:hover {
 
-    color: #ff9400;
+    color: white;
+
+    opacity: .8;
 
     text-decoration: none;
 }
