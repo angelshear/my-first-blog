@@ -21,6 +21,7 @@ class Tag(models.Model):
     slug = models.SlugField(
         unique=True,
         blank=True,
+        null=True
     )
 
     def save(self, *args, **kwargs):
