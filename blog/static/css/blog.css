@@ -148,10 +148,11 @@ body {
     text-decoration: none;
 }
 
-.top-menu a:focus {
-
-    border: 0;
-    outline: 0;
+.top-menu:focus,
+.top-menu:active {
+    outline: none;
+    border: none;
+    box-shadow: none;
 }
 
 /* CONTENT */
