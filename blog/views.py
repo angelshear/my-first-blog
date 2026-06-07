@@ -204,15 +204,12 @@ def post_new(request):
         form = PostForm()
 
     return render(
-
         request,
-
         'blog/posts/post_edit.html',
-
         {
-            'form': form
+            'form': form,
+            'title': 'Новый пост'
         }
-
     )
 
 
@@ -277,15 +274,13 @@ def post_edit(request, pk):
         )
 
     return render(
-
         request,
-
         'blog/posts/post_edit.html',
-
         {
-            'form': form
+            'form': form,
+            'post': post,
+            'title': 'Редактирование поста'
         }
-
     )
 
 # =========================================================
