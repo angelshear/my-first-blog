@@ -191,6 +191,12 @@ body {
     color: #ff9400;
 }
 
+.page-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* АВТОР ПОСТА */
 
 .post-meta {
