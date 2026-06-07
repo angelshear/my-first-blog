@@ -41,12 +41,13 @@ class Post(models.Model):
         on_delete=models.CASCADE
     )
 
-    title = models.CharField(max_length=200)
+    title = models.CharField("Заголовок", max_length=200)
 
-    text = models.TextField()
+    text = models.TextField("Содержание")
 
     category = models.ForeignKey(
         Category,
+        verbose_name="Категория",
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -54,10 +55,12 @@ class Post(models.Model):
 
     tags = models.ManyToManyField(
         Tag,
+        verbose_name="Теги",
         blank=True
     )
 
     image = models.ImageField(
+        "Изображение",
         upload_to='posts/',
         blank=True,
         null=True
