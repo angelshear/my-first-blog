@@ -22,7 +22,8 @@ from django.template.loader import render_to_string
 
 from .models import (
     Post,
-    Comment
+    Comment,
+    Tag
 )
 
 from .forms import (
@@ -134,6 +135,31 @@ def post_detail(request, pk):
         'current_sort': sort,
     })
 
+
+# =========================================================
+# SEARCH BY TAG
+# =========================================================
+
+def posts_by_tag(request, slug):
+
+    tag = get_object_or_404(
+        Tag,
+        slug=slug
+    )
+
+    posts = Post.objects.filter(
+        tags=tag,
+        published_date__isnull=False
+    ).order_by('-published_date')
+
+    return render(
+        request,
+        'blog/post_list.html',
+        {
+            'page_obj': posts,
+            'selected_tag': tag
+        }
+    )
 
 # =========================================================
 # CREATE POST

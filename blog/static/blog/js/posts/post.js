@@ -35,7 +35,7 @@ document.addEventListener('click', function() {
 
 })
 
-// Открытие окна удаления
+// МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ ПОСТА
 
 const modal =
     document.getElementById('deletePostModal')
@@ -59,6 +59,8 @@ document.addEventListener('click', function(e) {
 
     modal.classList.add('show')
 })
+
+// ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА
 
 document
 .getElementById('cancelDeletePost')
