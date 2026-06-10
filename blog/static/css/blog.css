@@ -250,7 +250,7 @@ body {
 
 /* КНОПКА ДЕЙСТВИЯ */
 
-.action-button-abc {
+.action-btn {
 
     border: none;
 
@@ -269,7 +269,7 @@ body {
     cursor: pointer;
 }
 
-.action-button-abc:hover {
+.action-btn:hover {
 
     opacity: 0.85;
 }
@@ -832,8 +832,8 @@ body {
 
     border: none;
 
-    background: #ff9400;
-
+    background: #0600ff;
+    
     color: white;
 
     padding: 8px 18px;
