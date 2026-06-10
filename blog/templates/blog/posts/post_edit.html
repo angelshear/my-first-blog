@@ -12,13 +12,15 @@
 
         {{ form.as_p }}
 
-        <button type="submit" class="action-btn">
-            {% if post %}
-                Сохранить изменения
-            {% else %}
-                Создать пост
-            {% endif %}
-        </button>
+        <div class="form-actions">
+            <button type="submit" class="action-btn">
+                {% if post %}
+                    Сохранить изменения
+                {% else %}
+                    Создать пост
+                {% endif %}
+            </button>
+        </div>
 
     </form>
 

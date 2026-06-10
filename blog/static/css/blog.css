@@ -274,6 +274,11 @@ body {
     opacity: 0.85;
 }
 
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /* BUTTONS */
 
 .save {
@@ -832,8 +837,8 @@ body {
 
     border: none;
 
-    background: #0600ff;
-    
+    background: #ff9400;
+
     color: white;
 
     padding: 8px 18px;
