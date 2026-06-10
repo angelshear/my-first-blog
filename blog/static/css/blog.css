@@ -248,12 +248,37 @@ body {
     border-radius: 5px;
 }
 
+/* КНОПКА ДЕЙСТВИЯ */
+
+.action-btn {
+
+    border: none;
+
+    background: #ff9400;
+
+    color: white;
+
+    padding: 8px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+
+    cursor: pointer;
+}
+
+.action-btn:hover {
+
+    opacity: 0.85;
+}
+
+/* BUTTONS */
+
 .save {
     float: right;
 }
-
-
-/* BUTTONS */
 
 .btn {
 
@@ -477,7 +502,7 @@ body {
     font-weight: 600;
 }
 
-/* Размещает кнопки: [Отмена] слева [Да] справа */
+/* Размещает кнопки: [Отмена] слева [Удалить] справа */
 
 .delete-modal-actions {
 
