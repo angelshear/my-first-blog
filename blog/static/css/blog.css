@@ -250,7 +250,7 @@ body {
 
 /* КНОПКА ДЕЙСТВИЯ */
 
-.action-btn {
+.action-button-abc {
 
     border: none;
 
@@ -269,7 +269,7 @@ body {
     cursor: pointer;
 }
 
-.action-btn:hover {
+.action-button-abc:hover {
 
     opacity: 0.85;
 }
