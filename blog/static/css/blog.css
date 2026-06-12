@@ -147,9 +147,6 @@ body {
     outline: none;
     border: none;
     box-shadow: none;
-}
-
-.top-menu a:focus {
     color: #333
 }
 
