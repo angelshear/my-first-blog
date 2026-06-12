@@ -2,16 +2,17 @@ function toggleUserMenu(event) {
 
     event.stopPropagation()
 
-    document
-        .querySelector('.user-menu-dropdown')
-        ?.classList
-        .toggle('show')
+    const menu =
+        event.currentTarget
+            .parentElement
+            .querySelector('.user-menu-dropdown')
+
+    menu.classList.toggle('show')
 }
 
-document.addEventListener('click', function() {
+document.addEventListener('click', function () {
 
     document
-        .querySelector('.user-menu-dropdown')
-        ?.classList
-        .remove('show')
+        .querySelectorAll('.user-menu-dropdown')
+        .forEach(menu => menu.classList.remove('show'))
 })
