@@ -2,21 +2,36 @@
 
 {% block content %}
 
-    <h2>Register</h2>
+    <div class="auth-container">
 
-    <form method="post">
+        <div class="auth-card">
 
-        {% csrf_token %}
+            <h2 class="auth-title">
+                Регистрация
+            </h2>
 
-        {{ form.as_p }}
+            <form method="post" class="auth-form">
 
-        <button type="submit"
-                class="btn btn-success">
+                {% csrf_token %}
 
-            Register
+                {{ form.as_p }}
 
-        </button>
+                <div class="auth-actions">
 
-    </form>
+                    <button type="submit"
+                            class="action-btn">
+
+                        Зарегистрироваться
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
 
 {% endblock %}
+
