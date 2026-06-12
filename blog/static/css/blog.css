@@ -1322,9 +1322,11 @@ body {
 
     .user-menu-dropdown {
 
+        display: none;
+
         position: absolute;
 
-        bottom: 60px;
+        top: 42px;
 
         right: 0;
 
@@ -1338,24 +1340,14 @@ body {
 
         overflow: hidden;
 
-        z-index: 9999;
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        transform: translateY(10px);
-
-        transition: 0.2s ease;
+        z-index: 100;
     }
+
+    /* Отображение меню */
 
     .user-menu-dropdown.show {
 
-        opacity: 1;
-
-        visibility: visible;
-
-        transform: translateY(0);
+        display: block;
     }
 
     /* Пункты меню */
