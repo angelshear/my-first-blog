@@ -128,13 +128,9 @@ body {
 .top-menu {
 
     color: white;
-
     text-decoration: none;
-
     font-size: 16px;
-
     font-weight: 600;
-
     border: 0;
     outline: 0;
 }
@@ -142,9 +138,7 @@ body {
 .top-menu:hover {
 
     color: white;
-
     opacity: .8;
-
     text-decoration: none;
 }
 
@@ -153,6 +147,10 @@ body {
     outline: none;
     border: none;
     box-shadow: none;
+}
+
+.top-menu a:focus {
+    color: #333
 }
 
 /* CONTENT */
@@ -1588,10 +1586,6 @@ body {
      МЕНЮ ПОЛЬЗОВАТЕЛЯ
 ========================= */
 
-/* =========================
-     МЕНЮ ПОЛЬЗОВАТЕЛЯ
-========================= */
-
 .user-menu {
 
     position: relative;
@@ -1609,7 +1603,7 @@ body {
 
     cursor: pointer;
 
-    font-weight: 500;
+    font-weight: 600;
 
     padding: 0;
 }
