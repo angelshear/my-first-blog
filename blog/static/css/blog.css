@@ -1252,19 +1252,29 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
+
         height: 50px;
 
         background: #ff9400;
 
-        border-top: 1px solid #ddd;
-
         display: flex;
 
-        justify-content: space-around;
+        justify-content: space-between;
 
         align-items: center;
 
-        z-index: 1000;
+        padding: 0 30px;
+    }
+
+    .mobile-add {
+
+        position: absolute;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        font-size: 24px;
     }
 
     .mobile-nav-item {
@@ -1379,7 +1389,6 @@ body {
     /* Наведение */
 
     .user-menu-dropdown a:hover,
-
     .user-menu-dropdown button:hover {
 
         background: #f2f2f2;
