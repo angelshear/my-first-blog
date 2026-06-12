@@ -1195,7 +1195,9 @@ body {
 }
 
 
-/* MOBILE */
+/* =========================
+     МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
 
 /* По умолчанию скрыта */
 
@@ -1278,9 +1280,18 @@ body {
 
     .mobile-nav-item:hover {
 
-        color: #ff9400;
-
+        color: white;
+        opacity: .8;
         text-decoration: none;
+    }
+
+    .mobile-nav-item:focus,
+    .mobile-nav-item:active {
+
+        outline: none;
+        border: none;
+        box-shadow: none;
+        color: white;
     }
 
     /* Чтобы контент не прятался под панелью */

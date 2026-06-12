@@ -152,12 +152,24 @@
 
     </a>
 
-    <button class="mobile-nav-item user-menu-btn"
-            onclick="toggleUserMenu(event)">
+    <div class="user-menu">
 
-        {{ user.username }}
+        <button class="mobile-nav-item user-menu-btn"
+                onclick="toggleUserMenu(event)">
 
-    </button>
+            {{ user.username }}
+
+        </button>
+
+        <div class="user-menu-dropdown">
+
+            <a href="{% url 'logout' %}">
+                Выйти
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
