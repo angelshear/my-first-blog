@@ -96,9 +96,19 @@
 
                 <div class="user-menu-dropdown">
 
-                    <a href="{% url 'logout' %}">
-                        Выйти
-                    </a>
+                    <form method="post"
+                          action="{% url 'logout' %}">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                class="logout-btn">
+
+                            Выйти
+
+                        </button>
+
+                    </form>
 
                 </div>
 
