@@ -1267,15 +1267,15 @@ body {
         z-index: 1000;
     }
 
-    .mobile-add {
+    .mobile-nav > * {
 
-        position: absolute;
+        flex: 1;
 
-        left: 50%;
+        display: flex;
 
-        transform: translateX(-50%);
+        justify-content: center;
 
-        font-size: 24px;
+        align-items: center;
     }
 
     .mobile-nav-item {
