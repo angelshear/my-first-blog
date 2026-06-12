@@ -1294,6 +1294,29 @@ body {
         color: white;
     }
 
+    .user-menu-dropdown {
+
+        position: absolute;
+
+        bottom: 60px; /* ВАЖНО: поднимаем над нижним меню */
+
+        right: 0;
+
+        min-width: 140px;
+
+        background: white;
+
+        border-radius: 12px;
+
+        box-shadow: 0 2px 12px rgba(0,0,0,.15);
+
+        overflow: hidden;
+
+        z-index: 9999;
+
+        display: none;
+    }
+
     /* Чтобы контент не прятался под панелью */
 
     body {
