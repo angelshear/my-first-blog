@@ -1311,12 +1311,26 @@ body {
 
         position: relative;
 
-        display: inline-block;
+        flex: 1;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
     }
 
     /* Кнопка с именем пользователя */
 
     .user-menu-btn {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        width: 100%;
 
         border: none;
 
@@ -1328,7 +1342,7 @@ body {
 
         font-weight: 600;
 
-        padding: 0;
+        color: white;
     }
 
     /* Выпадающее меню */
