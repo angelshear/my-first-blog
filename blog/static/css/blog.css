@@ -1588,51 +1588,94 @@ body {
      МЕНЮ ПОЛЬЗОВАТЕЛЯ
 ========================= */
 
+/* =========================
+     МЕНЮ ПОЛЬЗОВАТЕЛЯ
+========================= */
+
 .user-menu {
+
     position: relative;
+
     display: inline-block;
 }
 
+/* Кнопка с именем пользователя */
+
 .user-menu-btn {
+
     border: none;
+
     background: none;
+
     cursor: pointer;
+
     font-weight: 500;
+
+    padding: 0;
 }
 
+/* Выпадающее меню */
+
 .user-menu-dropdown {
+
     display: none;
 
     position: absolute;
-    right: 0;
-    top: 100%;
 
-    min-width: 150px;
+    top: 42px;
+
+    right: 0;
+
+    min-width: 140px;
 
     background: white;
 
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 12px;
 
-    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
 
-    z-index: 1000;
+    overflow: hidden;
+
+    z-index: 100;
 }
+
+/* Отображение меню */
 
 .user-menu-dropdown.show {
+
     display: block;
 }
 
-.user-menu-dropdown a {
+/* Пункты меню */
+
+.user-menu-dropdown a,
+
+.user-menu-dropdown button {
+
     display: block;
 
-    padding: 10px 15px;
+    width: 100%;
 
-    color: #333;
+    padding: 12px 16px;
+
+    border: none;
+
+    background: none;
+
+    text-align: left;
 
     text-decoration: none;
+
+    color: #000;
+
+    cursor: pointer;
 }
 
-.user-menu-dropdown a:hover {
-    background: #f5f5f5;
+/* Наведение */
+
+.user-menu-dropdown a:hover,
+
+.user-menu-dropdown button:hover {
+
+    background: #f2f2f2;
 }
