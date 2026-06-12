@@ -1317,6 +1317,18 @@ body {
         display: none;
     }
 
+    .user-menu {
+        position: relative;
+    }
+
+    .user-menu-dropdown.show {
+        display: block;
+    }
+
+    .mobile-nav {
+        overflow: visible;
+    }
+
     /* Чтобы контент не прятался под панелью */
 
     body {
