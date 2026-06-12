@@ -134,8 +134,6 @@
 
 <!-- HEADER FOR MOBILE -->
 
-{% if user.is_authenticated %}
-
 <div class="mobile-nav">
 
     <a href="{% url 'post_list' %}"
@@ -145,38 +143,63 @@
 
     </a>
 
-    <a href="{% url 'post_new' %}"
-       class="mobile-nav-item">
+    {% if user.is_authenticated %}
 
-        <i class="bi bi-plus-circle"></i>
+        <a href="{% url 'post_new' %}"
+           class="mobile-nav-item">
 
-    </a>
+            <i class="bi bi-plus-circle"></i>
 
-    <div class="user-menu">
+        </a>
 
-        <button class="mobile-nav-item user-menu-btn"
-                onclick="toggleUserMenu(event)">
+        <div class="user-menu">
 
-            {{ user.username }}
+            <button class="mobile-nav-item user-menu-btn"
+                    onclick="toggleUserMenu(event)">
 
-        </button>
+                {{ user.username }}
 
-        <div class="user-menu-dropdown">
+            </button>
 
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="logout-btn">
-                    Выйти
-                </button>
-            </form>
+            <div class="user-menu-dropdown">
+
+                <form method="post"
+                      action="{% url 'logout' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="logout-btn">
+
+                        Выйти
+
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
 
-    </div>
+    {% else %}
+
+        <a href="{% url 'register' %}"
+           class="mobile-nav-item">
+
+            Регистрация
+
+        </a>
+
+        <a href="{% url 'login' %}"
+           class="mobile-nav-item">
+
+            Войти
+
+        </a>
+
+    {% endif %}
 
 </div>
-
-{% endif %}
 
 <!-- MAIN CONTENT -->
 
