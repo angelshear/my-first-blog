@@ -132,6 +132,37 @@
 
 </div>
 
+<!-- HEADER FOR MOBILE -->
+
+{% if user.is_authenticated %}
+
+<div class="mobile-nav">
+
+    <a href="{% url 'post_list' %}"
+       class="mobile-nav-item">
+
+        <i class="bi bi-house"></i>
+
+    </a>
+
+    <a href="{% url 'post_new' %}"
+       class="mobile-nav-item">
+
+        <i class="bi bi-plus-circle"></i>
+
+    </a>
+
+    <button class="mobile-nav-item user-menu-btn"
+            onclick="toggleUserMenu(event)">
+
+        {{ user.username }}
+
+    </button>
+
+</div>
+
+{% endif %}
+
 <!-- MAIN CONTENT -->
 
 <div class="content container">
