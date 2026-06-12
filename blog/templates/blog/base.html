@@ -84,25 +84,36 @@
                 <i class="bi bi-plus-lg"></i>
             </a>
 
-            <a href="{% url 'logout' %}"
-               class="top-menu">
-                Logout
-            </a>
+            <div class="user-menu">
 
-            <span class="top-menu">
-                Hello, {{ user.username }}
-            </span>
+                <button class="user-menu-btn"
+                        onclick="toggleUserMenu(event)">
+
+                    {{ user.username }}
+                    <i class="bi bi-caret-down-fill"></i>
+
+                </button>
+
+                <div class="user-menu-dropdown">
+
+                    <a href="{% url 'logout' %}">
+                        Выйти
+                    </a>
+
+                </div>
+
+            </div>
 
         {% else %}
 
             <a href="{% url 'login' %}"
                class="top-menu">
-                Login
+                Войти
             </a>
 
             <a href="{% url 'register' %}"
                class="top-menu">
-                Register
+                Зарегистрироваться
             </a>
 
         {% endif %}
@@ -196,6 +207,8 @@
 <script src="{% static 'blog/js/ui/sort_menu.js' %}"></script>
 
 <script src="{% static 'blog/js/posts/post.js' %}"></script>
+
+<script src="{% static 'blog/js/header.js' %}"></script>
 
 </body>
 

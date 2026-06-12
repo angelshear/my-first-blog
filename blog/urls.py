@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
 
@@ -62,6 +63,13 @@ urlpatterns = [
         'register/',
         views.register,
         name='register'
+    ),
+
+    # Выход
+    path(
+        'logout/',
+        LogoutView.as_view(),
+        name='logout'
     ),
 
     # =====================================================
