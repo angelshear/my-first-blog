@@ -514,60 +514,6 @@ body {
     text-decoration: none;
 }
 
-.tags-editor {
-
-    margin-top: 20px;
-}
-
-#tags-container {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-bottom: 10px;
-}
-
-.tag-chip {
-
-    background: #f5f5f5;
-
-    border-radius: 999px;
-
-    padding: 6px 12px;
-}
-
-#add-tag-btn {
-
-    border: none;
-
-    background: none;
-
-    color: #888;
-
-    cursor: pointer;
-
-    padding: 0;
-}
-
-#add-tag-btn:hover {
-
-    color: #ff9400;
-}
-
-#tag-input {
-
-    display: none;
-
-    border: none;
-
-    outline: none;
-
-    margin-top: 5px;
-}
-
 /* ====================================
         МЕНЮ РЕДАКТИРОВАНЯ ПОСТА   
 ==================================== */
