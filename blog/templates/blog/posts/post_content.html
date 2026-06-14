@@ -62,6 +62,21 @@
 
     {% endif %}
 
+    <!-- IMAGE -->
+
+    {% if post.image %}
+
+        <img src="{{ post.image.url }}"
+             class="img-responsive img-rounded">
+
+        <br>
+
+    {% endif %}
+
+    <!-- POST TEXT -->
+
+    <p>{{ post.text|linebreaksbr }}</p>
+
     <!-- TAGS -->
 
     {% if post.tags.all %}
@@ -82,20 +97,5 @@
     </div>
 
     {% endif %}
-
-    <!-- IMAGE -->
-
-    {% if post.image %}
-
-        <img src="{{ post.image.url }}"
-             class="img-responsive img-rounded">
-
-        <br>
-
-    {% endif %}
-
-    <!-- POST TEXT -->
-
-    <p>{{ post.text|linebreaksbr }}</p>
 
 </div>
