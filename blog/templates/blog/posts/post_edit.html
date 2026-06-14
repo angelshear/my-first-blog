@@ -2,26 +2,67 @@
 
 {% block content %}
 
-    <h1 class="text-center page-title">{{ title }}</h1>
+<h1 class="text-center page-title">{{ title }}</h1>
 
-    <form method="POST"
-          class="post-form"
-          enctype="multipart/form-data">
+<form method="POST"
+      class="post-form"
+      enctype="multipart/form-data">
 
-        {% csrf_token %}
+    {% csrf_token %}
 
-        {{ form.as_p }}
+    {{ form.title.label_tag }}
+    {{ form.title }}
 
-        <div class="form-actions">
-            <button type="submit" class="action-btn">
-                {% if post %}
-                    Сохранить изменения
-                {% else %}
-                    Создать пост
-                {% endif %}
-            </button>
+    {{ form.text.label_tag }}
+    {{ form.text }}
+
+    {{ form.category.label_tag }}
+    {{ form.category }}
+
+    <!-- КАСТОМНЫЙ РЕДАКТОР ТЕГОВ -->
+
+    <label>Теги</label>
+
+    <div class="tags-editor">
+
+        <div id="tags-container">
         </div>
 
-    </form>
+        <button type="button"
+                id="add-tag-btn">
+
+            # добавьте теги
+
+        </button>
+
+        <input type="text"
+               id="tag-input"
+               placeholder="Введите тег">
+
+    </div>
+
+    <!-- Скрытое поле Django -->
+
+    {{ form.tags }}
+
+    {{ form.image.label_tag }}
+    {{ form.image }}
+
+    <div class="form-actions">
+
+        <button type="submit"
+                class="action-btn">
+
+            {% if post %}
+                Сохранить изменения
+            {% else %}
+                Создать пост
+            {% endif %}
+
+        </button>
+
+    </div>
+
+</form>
 
 {% endblock %}
