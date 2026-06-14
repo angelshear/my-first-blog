@@ -189,14 +189,24 @@ def post_new(request):
 
             post.save()
 
-            form.save_m2m()
+            tags_string = request.POST.get('tags', '')
+
+            for tag_name in tags_string.split(','):
+
+                tag_name = tag_name.strip()
+
+                if not tag_name:
+                    continue
+
+                tag, created = Tag.objects.get_or_create(
+                    name=tag_name
+                )
+
+                post.tags.add(tag)
 
             return redirect(
-
                 'post_detail',
-
                 pk=post.pk
-
             )
 
     else:
@@ -257,14 +267,26 @@ def post_edit(request, pk):
 
             post.save()
 
-            form.save_m2m()
+            tags_string = request.POST.get('tags', '')
+
+            post.tags.clear()
+
+            for tag_name in tags_string.split(','):
+
+                tag_name = tag_name.strip()
+
+                if not tag_name:
+                    continue
+
+                tag, created = Tag.objects.get_or_create(
+                    name=tag_name
+                )
+
+                post.tags.add(tag)
 
             return redirect(
-
                 'post_detail',
-
                 pk=post.pk
-
             )
 
     else:
