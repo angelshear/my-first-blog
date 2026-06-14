@@ -21,10 +21,6 @@ class PostForm(forms.ModelForm):
             'image',
         )
 
-        widgets = {
-            'tags': forms.HiddenInput()
-        }
-
 
 class CommentForm(forms.ModelForm):
 
