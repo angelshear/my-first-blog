@@ -8,12 +8,12 @@ from .models import (
 )
 
 
+# forms.py
+
 class PostForm(forms.ModelForm):
 
     class Meta:
-
         model = Post
-
         fields = (
             'title',
             'text',
@@ -21,6 +21,10 @@ class PostForm(forms.ModelForm):
             'tags',
             'image',
         )
+
+        widgets = {
+            'tags': forms.HiddenInput()
+        }
 
 
 class CommentForm(forms.ModelForm):

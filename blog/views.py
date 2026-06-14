@@ -189,6 +189,23 @@ def post_new(request):
 
             post.save()
 
+            tags_string = request.POST.get('tags', '')
+
+            post.tags.clear()
+
+            for tag_name in tags_string.split(' '):
+
+                tag_name = tag_name.strip()
+
+                if not tag_name:
+                    continue
+
+                tag, created = Tag.objects.get_or_create(
+                    name=tag_name
+                )
+
+                post.tags.add(tag)
+
             form.save_m2m()
 
             return redirect(
@@ -256,6 +273,23 @@ def post_edit(request, pk):
             post.published_date = timezone.now()
 
             post.save()
+
+            tags_string = request.POST.get('tags', '')
+
+            post.tags.clear()
+
+            for tag_name in tags_string.split(' '):
+
+                tag_name = tag_name.strip()
+
+                if not tag_name:
+                    continue
+
+                tag, created = Tag.objects.get_or_create(
+                    name=tag_name
+                )
+
+                post.tags.add(tag)
 
             form.save_m2m()
 
