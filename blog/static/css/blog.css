@@ -272,32 +272,24 @@ body {
     justify-content: flex-end;
 }
 
-/* BUTTONS */
+/* ЧИТАТЬ ДАЛЬШЕ */
 
-.btn {
+.read-more-link {
 
-    border-radius: 5px;
+    color: #000;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    display: inline-block;
 }
 
-.btn-default {
+.read-more-link:hover {
 
-    background-color: #ff9400;
+    color: #000;
 
-    color: white;
-
-    border: none;
-}
-
-.btn-default:hover {
-
-    background-color: #e67e00;
-
-    color: white;
-}
-
-.btn-danger {
-
-    margin-left: 10px;
+    text-decoration: underline;
 }
 
 /* =========================
