@@ -1178,7 +1178,9 @@ body {
     line-height: 1.8;
 }
 
-/* PAGINATION */
+/* =========================
+         ПАГИНАЦИЯ
+========================= */
 
 .custom-pagination {
 
@@ -1221,13 +1223,22 @@ body {
 
     margin: 0 5px;
 
-    font-size: 18px;
+    font-size: 20px;
 
     text-decoration: none;
 
     color: #ff9400;
 
     font-weight: bold;
+}
+
+.custom-pagination:focus,
+.custom-pagination:active {
+
+    color: #000;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
 }
 
 
