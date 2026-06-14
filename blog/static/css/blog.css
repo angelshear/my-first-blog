@@ -1180,38 +1180,40 @@ body {
 
 /* PAGINATION */
 
-.pagination {
+.custom-pagination {
 
-    position: relative;
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
 
     margin-top: 30px;
-
-    min-height: 30px;
-}
-
-.pagination-center {
-
-    text-align: center;
-
-    font-weight: bold;
 }
 
 .pagination-left {
 
-    position: absolute;
+    justify-self: end;
 
-    left: 0;
+    display: flex;
 
-    top: 0;
+    gap: 10px;
+}
+
+.pagination-center {
+
+    font-weight: bold;
+
+    padding: 0 20px;
 }
 
 .pagination-right {
 
-    position: absolute;
+    justify-self: start;
 
-    right: 0;
+    display: flex;
 
-    top: 0;
+    gap: 10px;
 }
 
 .pagination a {
