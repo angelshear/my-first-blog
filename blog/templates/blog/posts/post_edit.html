@@ -67,8 +67,7 @@
 </form>
 
 {% if post %}
-    {{ post.tags.all|values:"name"|json_script:"initial-tags" }}
+    {{ tags|json_script:"initial-tags" }}
 {% endif %}
 
 {% endblock %}
-

@@ -218,7 +218,8 @@ def post_new(request):
         'blog/posts/post_edit.html',
         {
             'form': form,
-            'title': 'Новый пост'
+            'title': 'Новый пост',
+            'tags': []
         }
     )
 
@@ -301,7 +302,8 @@ def post_edit(request, pk):
         {
             'form': form,
             'post': post,
-            'title': 'Редактирование поста'
+            'title': 'Редактирование поста',
+            'tags': list(post.tags.values_list('name', flat=True))
         }
     )
 
