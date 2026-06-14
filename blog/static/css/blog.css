@@ -480,12 +480,22 @@ body {
 .post-tags {
 
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 8px;
-
     margin-top: 20px;
+}
+
+/* кнопка "Ещё" */
+.tags-more-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #888;
+    padding: 6px 10px;
+}
+
+.tags-more-btn:hover {
+    color: #ff9400;
 }
 
 .tags-editor {
