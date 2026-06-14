@@ -154,7 +154,7 @@ def posts_by_tag(request, slug):
 
     return render(
         request,
-        'blog/post_list.html',
+        'blog/posts/post_list.html',
         {
             'page_obj': posts,
             'selected_tag': tag
