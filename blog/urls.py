@@ -49,7 +49,7 @@ urlpatterns = [
 
     # Теги
     path(
-        'tag/<slug:slug>/',
+        'tag/<str:slug>/',
         views.posts_by_tag,
         name='posts_by_tag'
     ),
