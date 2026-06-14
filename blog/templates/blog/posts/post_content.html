@@ -86,7 +86,7 @@
         {% for tag in post.tags.all %}
 
             <a href="{% url 'posts_by_tag' tag.slug %}"
-               class="post-tag">
+               class="tag">
 
                 #{{ tag.name }}
 
