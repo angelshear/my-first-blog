@@ -1216,7 +1216,7 @@ body {
     gap: 10px;
 }
 
-.pagination a {
+.custom-pagination a {
 
     margin: 0 5px;
 
