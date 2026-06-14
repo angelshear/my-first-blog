@@ -1232,8 +1232,8 @@ body {
     font-weight: bold;
 }
 
-.custom-pagination:focus,
-.custom-pagination:active {
+.custom-pagination a:focus,
+.custom-pagination a:active {
 
     color: #000;
     text-decoration: none;
