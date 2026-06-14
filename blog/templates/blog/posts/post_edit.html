@@ -25,14 +25,11 @@
 
     <div class="tags-editor">
 
-        <div id="tags-container">
-        </div>
+        <div id="tags-container"></div>
 
         <button type="button"
                 id="add-tag-btn">
-
             # добавьте теги
-
         </button>
 
         <input type="text"
@@ -69,4 +66,9 @@
 
 </form>
 
+{% if post %}
+    {{ post.tags.all|values:"name"|json_script:"initial-tags" }}
+{% endif %}
+
 {% endblock %}
+
