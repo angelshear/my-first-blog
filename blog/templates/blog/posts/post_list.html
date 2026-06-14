@@ -91,13 +91,19 @@
                 {% for tag in post.tags.all %}
 
                     <a href="{% url 'posts_by_tag' tag.slug %}"
-                       class="tag">
+                       class="tag tag-item">
 
                         #{{ tag.name }}
 
                     </a>
 
                 {% endfor %}
+
+                <button type="button"
+                        class="tags-more-btn"
+                        style="display: none;">
+                    Ещё...
+                </button>
 
             </div>
 
