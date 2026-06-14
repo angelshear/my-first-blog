@@ -1182,31 +1182,47 @@ body {
 
 .pagination {
 
+    position: relative;
+
     margin-top: 30px;
 
-    display: flex;
+    min-height: 30px;
+}
 
-    justify-content: center;
+.pagination-center {
 
-    align-items: center;
+    text-align: center;
 
-    gap: 10px;
+    font-weight: bold;
+}
+
+.pagination-left {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+}
+
+.pagination-right {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 0;
 }
 
 .pagination a {
 
-    margin: 0 10px;
+    margin: 0 5px;
 
     text-decoration: none;
 
     color: #ff9400;
 
     font-weight: bold;
-}
-
-.pagination span {
-
-    margin: 0 10px;
 }
 
 

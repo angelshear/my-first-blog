@@ -97,36 +97,42 @@
 
     <div class="pagination">
 
-        {% if page_obj.has_previous %}
+        <div class="pagination-left">
 
-            <a href="?page=1">
-                First
-            </a>
+            {% if page_obj.has_previous %}
 
-            <a href="?page={{ page_obj.previous_page_number }}">
-                Previous
-            </a>
+                <a href="?page=1">First</a>
 
-        {% endif %}
+                <a href="?page={{ page_obj.previous_page_number }}">
+                    Previous
+                </a>
 
-        <span>
+            {% endif %}
+
+        </div>
+
+        <div class="pagination-center">
 
             Page {{ page_obj.number }}
             of {{ page_obj.paginator.num_pages }}
 
-        </span>
+        </div>
 
-        {% if page_obj.has_next %}
+        <div class="pagination-right">
 
-            <a href="?page={{ page_obj.next_page_number }}">
-                Next
-            </a>
+            {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.paginator.num_pages }}">
-                Last
-            </a>
+                <a href="?page={{ page_obj.next_page_number }}">
+                    Next
+                </a>
 
-        {% endif %}
+                <a href="?page={{ page_obj.paginator.num_pages }}">
+                    Last
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </div>
 
