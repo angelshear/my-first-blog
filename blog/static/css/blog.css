@@ -539,6 +539,19 @@ body {
     padding: 6px 12px;
 }
 
+.tag-remove-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    color: #888;
+}
+
+.tag-remove-btn:hover {
+    color: red;
+}
+
 #add-tag-btn {
 
     border: none;

@@ -51,10 +51,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTags() {
         container.innerHTML = ''
 
-        tags.forEach(tag => {
+        tags.forEach((tag, index) => {
+
             const span = document.createElement('span')
             span.className = 'tag-chip'
-            span.textContent = '#' + tag
+
+            // текст тега
+            const text = document.createElement('span')
+            text.textContent = '#' + tag
+
+            // кнопка удаления
+            const removeBtn = document.createElement('button')
+            removeBtn.type = 'button'
+            removeBtn.textContent = '×'
+            removeBtn.className = 'tag-remove-btn'
+
+            // клик по удалению
+            removeBtn.addEventListener('click', () => {
+                tags.splice(index, 1)
+                renderTags()
+            })
+
+            span.appendChild(text)
+            span.appendChild(removeBtn)
             container.appendChild(span)
         })
 
