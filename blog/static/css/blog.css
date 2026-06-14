@@ -530,25 +530,49 @@ body {
     margin-bottom: 10px;
 }
 
-.tag-chip {
-
-    background: #f5f5f5;
-
-    border-radius: 999px;
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 
     padding: 6px 12px;
+    border-radius: 999px;
+
+    background: #f5f5f5;
+    color: #555;
+
+    text-decoration: none;
+    transition: .2s;
 }
 
-.tag-remove-btn {
+/* hover как у поста */
+.tag:hover {
+    background: #ff9400;
+    color: white;
+}
+
+/* кнопка удаления */
+
+.tag-remove {
     border: none;
     background: transparent;
     cursor: pointer;
+
     font-size: 16px;
     line-height: 1;
-    color: #888;
+
+    color: inherit;
+    opacity: 0.6;
+
+    transition: .2s;
 }
 
-.tag-remove-btn:hover {
+.tag:hover .tag-remove {
+    opacity: 1;
+    color: white;
+}
+
+.tag-remove:hover {
     color: red;
 }
 

@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tags.forEach((tag, index) => {
 
             const span = document.createElement('span')
-            span.className = 'tag-chip'
+            span.className = 'tag'
 
             // текст тега
             const text = document.createElement('span')
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const removeBtn = document.createElement('button')
             removeBtn.type = 'button'
             removeBtn.textContent = '×'
-            removeBtn.className = 'tag-remove-btn'
+            removeBtn.className = 'tag-remove'
 
             // клик по удалению
             removeBtn.addEventListener('click', () => {
