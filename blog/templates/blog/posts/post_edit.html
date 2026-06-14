@@ -43,7 +43,11 @@
 
     <!-- Скрытое поле Django -->
 
-    {{ form.tags }}
+    <!-- Скрытое поле для хранения тегов -->
+
+    <input type="hidden"
+           name="tags"
+           id="id_tags">
 
     {{ form.image.label_tag }}
     {{ form.image }}
