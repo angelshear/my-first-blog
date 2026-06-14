@@ -488,32 +488,6 @@ body {
     margin-top: 20px;
 }
 
-.post-tag {
-
-    display: inline-block;
-
-    padding: 6px 12px;
-
-    background: #f5f5f5;
-
-    border-radius: 999px;
-
-    color: #555;
-
-    text-decoration: none;
-
-    transition: .2s;
-}
-
-.post-tag:hover {
-
-    background: #ff9400;
-
-    color: white;
-
-    text-decoration: none;
-}
-
 .tags-editor {
 
     margin-bottom: 20px;
@@ -545,10 +519,17 @@ body {
     transition: .2s;
 }
 
-/* hover как у поста */
 .tag:hover {
     background: #ff9400;
     color: white;
+    text-decoration: none;
+}
+
+.tag:focus,
+.tag:active {
+    color: inherit;
+    outline: none;
+    text-decoration: none;
 }
 
 /* кнопка удаления */
