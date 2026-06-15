@@ -193,7 +193,7 @@ def post_new(request):
 
             for tag_name in tags_string.split(','):
 
-                tag_name = tag_name.strip()
+                tag_name = tag_name.strip().lower()
 
                 if not tag_name:
                     continue
@@ -274,7 +274,7 @@ def post_edit(request, pk):
 
             for tag_name in tags_string.split(','):
 
-                tag_name = tag_name.strip()
+                tag_name = tag_name.strip().lower()
 
                 if not tag_name:
                     continue
