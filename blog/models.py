@@ -28,10 +28,19 @@ class Tag(models.Model):
 
         if not self.slug:
 
-            self.slug = slugify(
+            base_slug = slugify(
                 self.name,
                 allow_unicode=True
             )
+
+            slug = base_slug
+            counter = 1
+
+            while Tag.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            self.slug = slug
 
         super().save(*args, **kwargs)
 
