@@ -601,17 +601,13 @@ body {
 ==================================== */
 
 .post-category {
-    color: #555;
+    color: #000;
     text-decoration: none;
 }
 
-.post-category:hover {
+.post-category a:hover {
     color: #ff9400;
-    text-decoration: none;
-}
 
-.post-category:visited {
-    color: #555;
 }
 
 .post-category:focus,
