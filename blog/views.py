@@ -50,12 +50,11 @@ def post_list(request):
     if query:
 
         posts = posts.filter(
-
             Q(title__icontains=query) |
-
-            Q(text__icontains=query)
-
-        )
+            Q(text__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
 
     # SORT POSTS
 
