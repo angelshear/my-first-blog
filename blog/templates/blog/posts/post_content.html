@@ -57,7 +57,9 @@
 
         <p>
             <strong>Категория:</strong>
-            <a href="{% url 'posts_by_category' post.category.id %}">
+            
+            <a href="{% url 'posts_by_category' post.category.id %}"
+               class="post-category">
                 {{ post.category }}
             </a>
         </p>
