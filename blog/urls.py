@@ -54,6 +54,12 @@ urlpatterns = [
         name='posts_by_tag'
     ),
 
+    path(
+        'category/<int:category_id>/',
+        views.posts_by_category,
+        name='posts_by_category'
+    ),
+
     # =====================================================
     # AUTH
     # =====================================================

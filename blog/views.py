@@ -134,6 +134,30 @@ def post_detail(request, pk):
         'current_sort': sort,
     })
 
+# =========================================================
+# CATEGORY
+# =========================================================
+
+def posts_by_category(request, category_id):
+
+    category = get_object_or_404(
+        Category,
+        id=category_id
+    )
+
+    posts = Post.objects.filter(
+        category=category,
+        published_date__isnull=False
+    ).order_by('-published_date')
+
+    return render(
+        request,
+        'blog/posts/post_list.html',
+        {
+            'page_obj': posts,
+            'selected_category': category,
+        }
+    )
 
 # =========================================================
 # SEARCH BY TAG

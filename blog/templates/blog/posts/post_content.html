@@ -56,8 +56,10 @@
     {% if post.category %}
 
         <p>
-            <strong>Category:</strong>
-            {{ post.category }}
+            <strong>Категория:</strong>
+            <a href="{% url 'posts_by_category' post.category.id %}">
+                {{ post.category }}
+            </a>
         </p>
 
     {% endif %}
