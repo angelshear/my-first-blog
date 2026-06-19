@@ -23,7 +23,8 @@ from django.template.loader import render_to_string
 from .models import (
     Post,
     Comment,
-    Tag
+    Tag,
+    Category
 )
 
 from .forms import (

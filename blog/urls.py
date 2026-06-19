@@ -54,6 +54,7 @@ urlpatterns = [
         name='posts_by_tag'
     ),
 
+    # Категории
     path(
         'category/<int:category_id>/',
         views.posts_by_category,
