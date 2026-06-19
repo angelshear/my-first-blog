@@ -605,9 +605,8 @@ body {
     text-decoration: none;
 }
 
-.post-category a:hover {
+.post-category:hover {
     color: #ff9400;
-
 }
 
 .post-category:focus,
