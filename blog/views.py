@@ -282,32 +282,29 @@ def post_edit(request, pk):
 
         if form.is_valid():
 
+            old_image = post.image.name if post.image else None
+
             post = form.save(commit=False)
 
             remove_image = request.POST.get('remove_image') == '1'
             new_image = request.FILES.get('image')
 
-            # удалить без замены
             if remove_image and not new_image:
-
-                if post.image:
-                    post.image.delete(save=False)
-
                 post.image = None
 
-            # заменить изображение
-            elif new_image:
-
-                if post.image:
-                    post.image.delete(save=False)
-
-                post.image = new_image
-
-            post.author = request.user
-
-            post.published_date = timezone.now()
-
             post.save()
+
+            if remove_image and not new_image and old_image:
+                from django.core.files.storage import default_storage
+
+                if default_storage.exists(old_image):
+                    default_storage.delete(old_image)
+
+            if new_image and old_image and old_image != post.image.name:
+                from django.core.files.storage import default_storage
+
+                if default_storage.exists(old_image):
+                    default_storage.delete(old_image)
 
             tags_string = request.POST.get('tags', '')
 
