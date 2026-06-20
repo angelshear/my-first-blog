@@ -53,7 +53,7 @@
     <div class="current-image">
 
         <span id="image-name">
-            {{ post.image.name }}
+            {{ post.image.name|cut:"posts/" }}
         </span>
 
         <button type="button"
