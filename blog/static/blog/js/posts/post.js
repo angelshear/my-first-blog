@@ -37,9 +37,12 @@ document.addEventListener('click', function() {
 
 // ИЗОБРАЖЕНИЕ
 
-const removeBtn = document.getElementById('remove-image-btn')
+document.addEventListener('DOMContentLoaded', () => {
 
-if (removeBtn) {
+    const removeBtn =
+        document.getElementById('remove-image-btn')
+
+    if (!removeBtn) return
 
     removeBtn.addEventListener('click', () => {
 
@@ -49,7 +52,8 @@ if (removeBtn) {
 
         document.getElementById('id_image').style.display = 'block'
     })
-}
+
+})
 
 // МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ ПОСТА
 
