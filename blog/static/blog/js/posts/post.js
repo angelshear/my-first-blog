@@ -35,7 +35,23 @@ document.addEventListener('click', function() {
 
 })
 
-// МОДАЛЬНОЕ  ОКНО УДАЛЕНИЯ ПОСТА
+// ИЗОБРАЖЕНИЕ
+
+const removeBtn = document.getElementById('remove-image-btn')
+
+if (removeBtn) {
+
+    removeBtn.addEventListener('click', () => {
+
+        document.getElementById('remove_image').value = '1'
+
+        document.querySelector('.current-image').style.display = 'none'
+
+        document.getElementById('id_image').style.display = 'block'
+    })
+}
+
+// МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ ПОСТА
 
 const modal =
     document.getElementById('deletePostModal')

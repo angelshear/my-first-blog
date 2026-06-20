@@ -38,16 +38,48 @@
 
     </div>
 
-    <!-- Скрытое поле Django -->
-
     <!-- Скрытое поле для хранения тегов -->
 
     <input type="hidden"
            name="tags"
            id="id_tags">
 
-    {{ form.image.label_tag }}
-    {{ form.image }}
+    <!-- ИЗОБРАЖЕНИЕ -->
+
+    <label>Изображение:</label>
+
+    {% if post and post.image %}
+
+    <div class="current-image">
+
+        <span id="image-name">
+            {{ post.image.name }}
+        </span>
+
+        <button type="button"
+                id="remove-image-btn">
+            ×
+        </button>
+
+    </div>
+
+    <input type="hidden"
+           name="remove_image"
+           id="remove_image"
+           value="0">
+
+    <input type="file"
+           name="image"
+           id="id_image"
+           style="display:none;">
+
+    {% else %}
+
+    <input type="file"
+           name="image"
+           id="id_image">
+
+    {% endif %}
 
     <div class="form-actions">
 

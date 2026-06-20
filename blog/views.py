@@ -286,6 +286,13 @@ def post_edit(request, pk):
                 commit=False
             )
 
+            if request.POST.get('remove_image') == '1':
+
+                if post.image:
+                    post.image.delete(save=False)
+
+                post.image = None
+
             post.author = request.user
 
             post.published_date = timezone.now()

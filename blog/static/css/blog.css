@@ -212,7 +212,9 @@ body {
 }
 
 
-/* IMAGES */
+/* ==========================
+        ИЗОБРАЖЕНИЕ
+========================== */
 
 .post img {
 
@@ -223,6 +225,24 @@ body {
     margin-bottom: 20px;
 }
 
+.current-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#remove-image-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    font-size: 20px;
+    color: #888;
+}
+
+#remove-image-btn:hover {
+    color: red;
+}
 
 /* FORMS */
 
@@ -1558,6 +1578,7 @@ body {
 /*========================
    YOUTUBE LIKE BUTTONS
 =========================*/
+
 .yt-like-btn {
 
     display: inline-flex;
