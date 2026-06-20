@@ -282,16 +282,26 @@ def post_edit(request, pk):
 
         if form.is_valid():
 
-            post = form.save(
-                commit=False
-            )
+            post = form.save(commit=False)
 
-            if request.POST.get('remove_image') == '1':
+            remove_image = request.POST.get('remove_image') == '1'
+            new_image = request.FILES.get('image')
+
+            # удалить без замены
+            if remove_image and not new_image:
 
                 if post.image:
                     post.image.delete(save=False)
 
                 post.image = None
+
+            # заменить изображение
+            elif new_image:
+
+                if post.image:
+                    post.image.delete(save=False)
+
+                post.image = new_image
 
             post.author = request.user
 
